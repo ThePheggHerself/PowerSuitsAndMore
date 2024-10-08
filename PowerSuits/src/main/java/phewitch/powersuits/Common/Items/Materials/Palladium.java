@@ -26,5 +26,8 @@ public class Palladium {
     public static final RegistryObject<Item> PALLADIUM_POWER_CORE = ItemManager.ITEMS.register("palladium_power_core", () ->
             new Item(new Item.Properties().tab(PowerSuits.CreativeTab)));
 
+    public static final RegistryObject<Item> ADVANCED_PALLADIUM_POWER_CORE = ItemManager.ITEMS.register("advanced_palladium_power_core", () ->
+            new Item(new Item.Properties().tab(PowerSuits.CreativeTab)));
+
 
 }

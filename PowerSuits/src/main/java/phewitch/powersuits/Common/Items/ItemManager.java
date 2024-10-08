@@ -9,9 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import phewitch.powersuits.Common.Items.Armor.Suits;
-import phewitch.powersuits.Common.Items.Materials.Palladium;
-import phewitch.powersuits.Common.Items.Materials.Steel;
-import phewitch.powersuits.Common.Items.Materials.Titanium;
+import phewitch.powersuits.Common.Items.Materials.*;
 import phewitch.powersuits.PowerSuits;
 
 import java.util.function.Supplier;
@@ -36,6 +34,8 @@ public class ItemManager {
         Steel.register(eventBus);
         Titanium.register(eventBus);
         Palladium.register(eventBus);
+        Circuits.register(eventBus);
+        Misc.register(eventBus);
 
 
         BLOCKS.register(eventBus);

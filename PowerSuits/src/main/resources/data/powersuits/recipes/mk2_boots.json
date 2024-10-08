@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "X X",
+    "GCG"
+  ],
+  "key": {
+    "X": {
+      "item": "powersuits:titanium_ingot"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "C": {
+      "item": "powersuits:basic_circuit"
+    }
+  },
+  "result": {
+    "item": "powersuits:mk2_boots"
+  }
+}

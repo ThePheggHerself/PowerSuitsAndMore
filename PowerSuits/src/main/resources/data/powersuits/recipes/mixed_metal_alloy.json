@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TST",
+    "TST"
+  ],
+  "key": {
+    "T": {
+      "item": "powersuits:titanium_ingot"
+    },
+    "S": {
+      "item": "powersuits:steel_ingot"
+    }
+  },
+  "result": {
+    "item": "powersuits:mixed_metal_alloy",
+    "count": 6
+  }
+}

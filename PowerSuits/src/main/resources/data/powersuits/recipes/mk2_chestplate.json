@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "CYC",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "powersuits:titanium_ingot"
+    },
+    "Y": {
+      "item": "powersuits:palladium_power_core"
+    },
+    "C": {
+      "item": "powersuits:basic_circuit"
+    }
+  },
+  "result": {
+    "item": "powersuits:mk2_chestplate"
+  }
+}

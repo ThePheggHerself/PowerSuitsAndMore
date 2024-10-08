@@ -4,6 +4,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegistryObject;
+import phewitch.powersuits.Common.Items.Armor.MK3.Mark3Armor;
 import phewitch.powersuits.Common.Items.Armor.Mk1.Mark1Armor;
 import phewitch.powersuits.Common.Items.Armor.Mk2.Mark2Armor;
 import phewitch.powersuits.Common.Items.ItemManager;
@@ -31,4 +32,13 @@ public class Suits {
             new Mark2Armor(ArmorMaterials.MARK2, EquipmentSlot.CHEST, new Item.Properties().tab(PowerSuits.CreativeTab)));
     public static final RegistryObject<Item> MK2_HELM = ItemManager.ITEMS.register("mk2_helmet", () ->
             new Mark2Armor(ArmorMaterials.MARK2, EquipmentSlot.HEAD, new Item.Properties().tab(PowerSuits.CreativeTab)));
+
+    public static final RegistryObject<Item> MK3_BOOTS = ItemManager.ITEMS.register("mk3_boots", () ->
+            new Mark3Armor(ArmorMaterials.MARK3, EquipmentSlot.FEET, new Item.Properties().tab(PowerSuits.CreativeTab)));
+    public static final RegistryObject<Item> MK3_LEGS = ItemManager.ITEMS.register("mk3_leggings", () ->
+            new Mark3Armor(ArmorMaterials.MARK3, EquipmentSlot.LEGS, new Item.Properties().tab(PowerSuits.CreativeTab)));
+    public static final RegistryObject<Item> MK3_CHEST = ItemManager.ITEMS.register("mk3_chestplate", () ->
+            new Mark3Armor(ArmorMaterials.MARK3, EquipmentSlot.CHEST, new Item.Properties().tab(PowerSuits.CreativeTab)));
+    public static final RegistryObject<Item> MK3_HELM = ItemManager.ITEMS.register("mk3_helmet", () ->
+            new Mark3Armor(ArmorMaterials.MARK3, EquipmentSlot.HEAD, new Item.Properties().tab(PowerSuits.CreativeTab)));
 }

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ACA",
+    "A A"
+  ],
+  "key": {
+    "A": {
+      "item": "powersuits:mixed_metal_alloy"
+    },
+    "C": {
+      "item": "powersuits:basic_circuit"
+    }
+  },
+  "result": {
+    "item": "powersuits:mk3_leggings"
+  }
+}

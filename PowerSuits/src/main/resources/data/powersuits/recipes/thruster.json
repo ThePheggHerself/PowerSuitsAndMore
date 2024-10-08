@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TAT",
+    "AFA",
+    "TAT"
+  ],
+  "key": {
+    "T": {
+      "item": "powersuits:titanium_ingot"
+    },
+    "A": {
+      "item": "powersuits:mixed_metal_alloy"
+    },
+    "F": {
+      "item": "powersuits:focusing_crystal"
+    }
+  },
+  "result": {
+    "item": "powersuits:thruster"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A A",
+    "A A",
+    "TCT"
+  ],
+  "key": {
+    "A": {
+      "item": "powersuits:mixed_metal_alloy"
+    },
+    "T": {
+      "item": "powersuits:thruster"
+    },
+    "C": {
+      "item": "powersuits:basic_circuit"
+    }
+  },
+  "result": {
+    "item": "powersuits:mk3_boots"
+  }
+}

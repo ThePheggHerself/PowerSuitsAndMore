@@ -1,13 +1,10 @@
-package phewitch.powersuits.Common.Items.Armor.Mk2;
+package phewitch.powersuits.Common.Items.Armor.MK3;
 
-import phewitch.powersuits.Common.Items.Armor.Mk1.Mark1Armor;
-import phewitch.powersuits.Common.Items.Armor.Mk1.Mark1ArmorModel;
-//Dragon's socks
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
-public class Mark2Renderer extends GeoArmorRenderer<Mark2Armor> {
-    public Mark2Renderer() {
-        super(new Mark2ArmorModel());
+public class Mark3Renderer extends GeoArmorRenderer<Mark3Armor> {
+    public Mark3Renderer() {
+        super(new Mark3ArmorModel());
 
         this.headBone = "armorHead";
         this.bodyBone = "armorBody";
