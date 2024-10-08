@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "palladium_ingot",
+  "ingredient": {
+    "item": "powersuits:deepslate_palladium_ore"
+  },
+  "result": "powersuits:palladium_ingot",
+  "experience": 0.7,
+  "cookingtime": 100
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "powersuits:block/palladium_ore"
+  }
+}

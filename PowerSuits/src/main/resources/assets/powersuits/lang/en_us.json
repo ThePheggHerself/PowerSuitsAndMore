@@ -1,0 +1,57 @@
+{
+  "itemGroup.powersuitstab": "Power Suits",
+
+  "item.powersuits.raw_titanium": "Raw Titanium",
+  "block.powersuits.titanium_ore": "Titanium Ore",
+  "block.powersuits.deepslate_titanium_ore": "Deepslate Titanium Ore",
+  "item.powersuits.titanium_ingot": "Titanium Ingot",
+  "item.powersuits.titanium_nugget": "Titanium Nugget",
+  "block.powersuits.titanium_block": "Titanium Block",
+  "item.powersuits.titanium_sword": "Titanium Sword",
+  "item.powersuits.titanium_shovel": "Titanium Shovel",
+  "item.powersuits.titanium_axe": "Titanium Axe",
+  "item.powersuits.titanium_pickaxe": "Titanium Pickaxe",
+  "item.powersuits.titanium_hoe": "Titanium Hoe",
+  "item.powersuits.titanium_helmet": "Titanium Helmet",
+  "item.powersuits.titanium_chestplate": "Titanium Chestplate",
+  "item.powersuits.titanium_leggings": "Titanium Leggings",
+  "item.powersuits.titanium_boots": "Titanium Boots",
+
+  "item.powersuits.raw_palladium": "Raw Palladium",
+  "block.powersuits.palladium_ore": "Palladium Ore",
+  "block.powersuits.deepslate_palladium_ore": "Deepslate Palladium Ore",
+  "item.powersuits.palladium_ingot": "Palladium Ingot",
+  "item.powersuits.palladium_power_core": "Palladium Power Core",
+
+  "block.powersuits.steel_block": "Steel Block",
+  "item.powersuits.steel_ingot": "Steel Ingot",
+  "item.powersuits.steel_boots": "Steel Boots",
+
+  "tooltip.powersuits.mk1.identifier": "Mark 1",
+  "tooltip.powersuits.mk1.extra": "Minimal flight capabilities",
+  "item.powersuits.mk1_helmet": "Prototype Helmet",
+  "item.powersuits.mk1_chestplate": "Prototype Chestplate",
+  "item.powersuits.mk1_leggings": "Prototype Leggings",
+  "item.powersuits.mk1_boots": "Prototype Boots",
+
+  "tooltip.powersuits.mk2.identifier": "Mark 2",
+  "tooltip.powersuits.mk2.extra": "Limited flight capabilities",
+  "item.powersuits.mk2_helmet": "Prototype Helmet",
+  "item.powersuits.mk2_chestplate": "Prototype Chestplate",
+  "item.powersuits.mk2_leggings": "Prototype Leggings",
+  "item.powersuits.mk2_boots": "Prototype Boots",
+
+  "tooltip.powersuits.mk3.identifier": "Mark 3",
+  "tooltip.powersuits.mk3.extra": "Expanded flight capabilities",
+  "item.powersuits.mk3_helmet": "Prototype Helmet",
+  "item.powersuits.mk3_chestplate": "Prototype Chestplate",
+  "item.powersuits.mk3_leggings": "Prototype Leggings",
+  "item.powersuits.mk3_boots": "Prototype Boots",
+
+  "tooltip.powersuits.mk4.identifier": "Mark 4",
+  "tooltip.powersuits.mk4.extra": "Full flight capabilities",
+  "item.powersuits.mk4_helmet": "Power Suit Helmet",
+  "item.powersuits.mk4_chestplate": "Power Suit Chestplate",
+  "item.powersuits.mk4_leggings": "Power Suit Leggings",
+  "item.powersuits.mk4_boots": "Power Suit Boots"
+}

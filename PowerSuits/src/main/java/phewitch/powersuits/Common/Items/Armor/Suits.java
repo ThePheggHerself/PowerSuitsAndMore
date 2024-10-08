@@ -1,0 +1,34 @@
+package phewitch.powersuits.Common.Items.Armor;
+
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.RegistryObject;
+import phewitch.powersuits.Common.Items.Armor.Mk1.Mark1Armor;
+import phewitch.powersuits.Common.Items.Armor.Mk2.Mark2Armor;
+import phewitch.powersuits.Common.Items.ItemManager;
+import phewitch.powersuits.PowerSuits;
+
+public class Suits {
+    public static void register(IEventBus eventBus){
+
+    }
+
+    public static final RegistryObject<Item> MK1_BOOTS = ItemManager.ITEMS.register("mk1_boots", () ->
+            new Mark1Armor(ArmorMaterials.MARK1, EquipmentSlot.FEET, new Item.Properties().tab(PowerSuits.CreativeTab)));
+    public static final RegistryObject<Item> MK1_LEGS = ItemManager.ITEMS.register("mk1_leggings", () ->
+            new Mark1Armor(ArmorMaterials.MARK1, EquipmentSlot.LEGS, new Item.Properties().tab(PowerSuits.CreativeTab)));
+    public static final RegistryObject<Item> MK1_CHEST = ItemManager.ITEMS.register("mk1_chestplate", () ->
+            new Mark1Armor(ArmorMaterials.MARK1, EquipmentSlot.CHEST, new Item.Properties().tab(PowerSuits.CreativeTab)));
+    public static final RegistryObject<Item> MK1_HELM = ItemManager.ITEMS.register("mk1_helmet", () ->
+            new Mark1Armor(ArmorMaterials.MARK1, EquipmentSlot.HEAD, new Item.Properties().tab(PowerSuits.CreativeTab)));
+
+    public static final RegistryObject<Item> MK2_BOOTS = ItemManager.ITEMS.register("mk2_boots", () ->
+            new Mark2Armor(ArmorMaterials.MARK2, EquipmentSlot.FEET, new Item.Properties().tab(PowerSuits.CreativeTab)));
+    public static final RegistryObject<Item> MK2_LEGS = ItemManager.ITEMS.register("mk2_leggings", () ->
+            new Mark2Armor(ArmorMaterials.MARK2, EquipmentSlot.LEGS, new Item.Properties().tab(PowerSuits.CreativeTab)));
+    public static final RegistryObject<Item> MK2_CHEST = ItemManager.ITEMS.register("mk2_chestplate", () ->
+            new Mark2Armor(ArmorMaterials.MARK2, EquipmentSlot.CHEST, new Item.Properties().tab(PowerSuits.CreativeTab)));
+    public static final RegistryObject<Item> MK2_HELM = ItemManager.ITEMS.register("mk2_helmet", () ->
+            new Mark2Armor(ArmorMaterials.MARK2, EquipmentSlot.HEAD, new Item.Properties().tab(PowerSuits.CreativeTab)));
+}

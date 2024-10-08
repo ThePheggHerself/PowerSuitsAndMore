@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "X X",
+    "G G"
+  ],
+  "key": {
+    "X": {
+      "item": "powersuits:steel_ingot"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "result": {
+    "item": "powersuits:mk1_boots"
+  }
+}

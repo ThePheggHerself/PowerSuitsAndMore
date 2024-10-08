@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TGT",
+    "TPT",
+    "TRT"
+  ],
+  "key": {
+    "T": {
+      "item": "powersuits:titanium_ingot"
+    },
+    "P": {
+      "item": "powersuits:palladium_ingot"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "powersuits:palladium_power_core"
+  }
+}
