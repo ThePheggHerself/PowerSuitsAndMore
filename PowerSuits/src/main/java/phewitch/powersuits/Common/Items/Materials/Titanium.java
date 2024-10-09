@@ -26,11 +26,12 @@ public class Titanium {
             new Item(new Item.Properties().tab(PowerSuits.CreativeTab)));
     public static final RegistryObject<Item> TITANIUM_INGOT = ItemManager.ITEMS.register("titanium_ingot", () ->
             new Item(new Item.Properties().tab(PowerSuits.CreativeTab)));
-    public static final RegistryObject<Item> TITANIUM_NUGGET = ItemManager.ITEMS.register("titanium_nugget", () ->
+    public static final RegistryObject<Item> TITANIUM_PLATE = ItemManager.ITEMS.register("titanium_plate", () ->
             new Item(new Item.Properties().tab(PowerSuits.CreativeTab)));
-
-    public static final RegistryObject<Block> TITANIUM_BLOCK = ItemManager.registerBlock("titanium_block", () ->
-            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), PowerSuits.CreativeTab);
+//    public static final RegistryObject<Item> TITANIUM_NUGGET = ItemManager.ITEMS.register("titanium_nugget", () ->
+//            new Item(new Item.Properties().tab(PowerSuits.CreativeTab)));
+//    public static final RegistryObject<Block> TITANIUM_BLOCK = ItemManager.registerBlock("titanium_block", () ->
+//            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), PowerSuits.CreativeTab);
 
     public static final RegistryObject<Item> TITANIUM_SWORD = ItemManager.ITEMS.register("titanium_sword", () ->
             new SwordItem(ToolTiers.Titanium, 2, 3, new Item.Properties().tab(PowerSuits.CreativeTab)));

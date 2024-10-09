@@ -100,6 +100,10 @@ public class SuitArmourBase extends GeoArmorItem implements IAnimatable, IHUDIte
         return hasBoots(player) && hasLegs(player) && hasChestplate(player) && hasHelmet(player);
     }
 
+    public boolean hasBootsOrChestplate(Player player){
+        return hasBoots(player) || hasChestplate(player);
+    }
+
     @Override
     public void renderGUI(TickEvent.RenderTickEvent event, PoseStack matrix) {
 

@@ -18,6 +18,7 @@
   "item.powersuits.titanium_chestplate": "Titanium Chestplate",
   "item.powersuits.titanium_leggings": "Titanium Leggings",
   "item.powersuits.titanium_boots": "Titanium Boots",
+  "item.powersuits.titanium_plate": "Titanium Plate",
 
   "item.powersuits.raw_palladium": "Raw Palladium",
   "block.powersuits.palladium_ore": "Palladium Ore",
@@ -36,6 +37,7 @@
   "block.powersuits.steel_block": "Steel Block",
   "item.powersuits.steel_ingot": "Steel Ingot",
   "item.powersuits.steel_boots": "Steel Boots",
+  "item.powersuits.steel_plate": "Steel Plate",
 
   "tooltip.powersuits.mk1.identifier": "Mark I",
   "tooltip.powersuits.mk1.extra": "Minimal flight capabilities",

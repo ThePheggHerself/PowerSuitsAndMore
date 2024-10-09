@@ -35,7 +35,7 @@ public class Mark2Armor extends SuitArmourBase {
             if (Minecraft.getInstance().options.keyJump.isDown() && this.flightTime > 0) {
                 var motion = player.getDeltaMovement();
                 var upwardsVelocity = motion.get(Direction.Axis.Y);
-                upwardsVelocity += 0.2d;
+                upwardsVelocity += 0.1d;
 
                 if (upwardsVelocity > 1)
                     upwardsVelocity = 1;
@@ -82,7 +82,6 @@ public class Mark2Armor extends SuitArmourBase {
     public void appendHoverText(ItemStack item, @Nullable Level p_41422_, List<Component> components, TooltipFlag p_41424_) {
         components.add(new TranslatableComponent("tooltip.powersuits." + name + ".identifier"));
 
-        if(item.getItem() == Suits.MK2_BOOTS.get())
         components.add(new TranslatableComponent("tooltip.powersuits." + name + ".extra"));
     }
 }

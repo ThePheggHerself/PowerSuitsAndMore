@@ -10,6 +10,8 @@ import phewitch.powersuits.Common.Items.Armor.Mk2.Mark2Armor;
 import phewitch.powersuits.Common.Items.Armor.Mk2.Mark2Renderer;
 import phewitch.powersuits.Common.Items.Armor.MK3.Mark3Armor;
 import phewitch.powersuits.Common.Items.Armor.MK3.Mark3Renderer;
+import phewitch.powersuits.Common.Items.Armor.Mk4.Mark4Armor;
+import phewitch.powersuits.Common.Items.Armor.Mk4.Mark4Renderer;
 import phewitch.powersuits.PowerSuits;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
@@ -22,6 +24,7 @@ public class RendererEvents {
         GeoArmorRenderer.registerArmorRenderer(Mark1Armor.class, new Mark1Renderer());
         GeoArmorRenderer.registerArmorRenderer(Mark2Armor.class, new Mark2Renderer());
         GeoArmorRenderer.registerArmorRenderer(Mark3Armor.class, new Mark3Renderer());
+        GeoArmorRenderer.registerArmorRenderer(Mark4Armor.class, new Mark4Renderer());
     }
 
 }

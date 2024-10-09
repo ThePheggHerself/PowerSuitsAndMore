@@ -1,6 +1,7 @@
-package phewitch.powersuits.Common.Items.Armor.MK3;
+package phewitch.powersuits.Common.Items.Armor.Mk4;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -18,9 +19,9 @@ import phewitch.powersuits.Common.Items.Armor.Suits;
 
 import java.util.List;
 
-public class Mark3Armor extends SuitArmourBase {
-    public Mark3Armor(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
-        super(materialIn, slot, builder, "mk3");
+public class Mark4Armor extends SuitArmourBase {
+    public Mark4Armor(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
+        super(materialIn, slot, builder, "mk4");
         this.fallDamageMultiplier = 0;
         projectileDamage = 5;
         shootsLasers = false;
@@ -29,20 +30,28 @@ public class Mark3Armor extends SuitArmourBase {
 
     @Override
     public void onArmorTick(ItemStack item, Level level, Player player) {
-        if(hasHelmet(player) && item.getItem() == Suits.MK3_HELM.get()){
+        if(hasHelmet(player) && item.getItem() == Suits.MK4_HELM.get()){
             player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 5));
+            player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 5));
         }
 
-        if(hasBoots(player) && item.getItem() == Suits.MK3_BOOTS.get()) {
-            if (Minecraft.getInstance().options.keyJump.isDown()) {
-                var motion = player.getDeltaMovement();
-                var upwardsVelocity = motion.get(Direction.Axis.Y);
-                upwardsVelocity += 0.2d;
+        if(hasFullSet(player)){
+            player.getAbilities().mayfly = true;
+        }
+        else {
+            player.getAbilities().mayfly = false;
 
-                if (upwardsVelocity > 1)
-                    upwardsVelocity = 1;
+            if(hasBootsOrChestplate(player)) {
+                if (Minecraft.getInstance().options.keyJump.isDown()) {
+                    var motion = player.getDeltaMovement();
+                    var upwardsVelocity = motion.get(Direction.Axis.Y);
+                    upwardsVelocity += 0.1d;
 
-                player.setDeltaMovement(motion.get(Direction.Axis.X), upwardsVelocity, motion.get(Direction.Axis.Z));
+                    if (upwardsVelocity > 1)
+                        upwardsVelocity = 1;
+
+                    player.setDeltaMovement(motion.get(Direction.Axis.X), upwardsVelocity, motion.get(Direction.Axis.Z));
+                }
             }
         }
     }

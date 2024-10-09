@@ -28,8 +28,12 @@ public enum ArmorMaterials implements ArmorMaterial {
             0.4F, () -> { return Ingredient.of(Blocks.BEDROCK);
     }),
 
-    MARK3("mark3", 15, new int[]{7, 10, 11, 8}, 0, SoundEvents.ARMOR_EQUIP_DIAMOND, 0.0f,
-            0.4F, () -> { return Ingredient.of(Blocks.BEDROCK);
+    MARK3("mark3", 15, new int[]{7, 10, 11, 8}, 0, SoundEvents.ARMOR_EQUIP_DIAMOND, 0.1f,
+            0.5F, () -> { return Ingredient.of(Blocks.BEDROCK);
+    }),
+
+    MARK4("mark4", 15, new int[]{10, 13, 14, 11}, 0, SoundEvents.ARMOR_EQUIP_DIAMOND, 0.2f,
+            0.7F, () -> { return Ingredient.of(Blocks.BEDROCK);
     });
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
