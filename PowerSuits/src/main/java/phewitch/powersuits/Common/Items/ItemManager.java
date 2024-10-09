@@ -30,12 +30,22 @@ public class ItemManager {
     }
 
     public static void register(IEventBus eventBus){
-        Suits.register(eventBus);
-        Steel.register(eventBus);
         Titanium.register(eventBus);
+
         Palladium.register(eventBus);
+
+        Steel.register(eventBus);
+
         Circuits.register(eventBus);
+
         Misc.register(eventBus);
+
+        Suits.register(eventBus);
+
+
+
+
+
 
 
         BLOCKS.register(eventBus);

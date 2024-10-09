@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import phewitch.powersuits.Client.ClientEvents;
 import phewitch.powersuits.Common.CommonEvents;
 import phewitch.powersuits.Common.Items.ItemManager;
+import phewitch.powersuits.Common.Items.Materials.Palladium;
 import phewitch.powersuits.Common.networking.ModMessages;
 
 import java.util.stream.Collectors;
@@ -42,7 +43,7 @@ public class PowerSuits {
     public static CreativeModeTab CreativeTab = new CreativeModeTab("powersuitstab") {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(Items.DIAMOND_CHESTPLATE);
+            return new ItemStack(Palladium.PALLADIUM_POWER_CORE.get());
         }
     };
 
