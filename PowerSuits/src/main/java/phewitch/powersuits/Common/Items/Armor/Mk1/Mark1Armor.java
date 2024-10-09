@@ -24,6 +24,7 @@ public class Mark1Armor extends SuitArmourBase {
     public Mark1Armor(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
         super(materialIn, slot, builder, "mk1");
         this.fallDamageMultiplier = 0.6f;
+        shootsLasers = false;
     }
 
     @Override

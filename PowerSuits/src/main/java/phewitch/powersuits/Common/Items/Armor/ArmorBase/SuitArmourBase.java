@@ -7,15 +7,16 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.jetbrains.annotations.Nullable;
 import phewitch.powersuits.Client.GUI.GUIManager;
 import phewitch.powersuits.Client.GUI.IHUDItem;
+import phewitch.powersuits.Client.KeyBinding;
 import phewitch.powersuits.Common.Items.Armor.Mk1.Mark1Armor;
 import phewitch.powersuits.Common.Items.Armor.Suits;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -34,6 +35,11 @@ public class SuitArmourBase extends GeoArmorItem implements IAnimatable, IHUDIte
     public String name = "BLANK NAME";
     //The fall damage multiplier. 0 = no damage, 1 = 100% damage, 2 = 200% damage
     public float fallDamageMultiplier = 0.1f;
+    public boolean shootsArrows = false;
+    public boolean shootsLasers = true;
+    public int projectileDamage = 7;
+
+
     public final Minecraft minecraft = Minecraft.getInstance();
     public SuitArmourBase(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder, String name) {
         super(materialIn, slot, builder);

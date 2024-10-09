@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import phewitch.powersuits.Client.ClientEvents;
 import phewitch.powersuits.Common.CommonEvents;
 import phewitch.powersuits.Common.Items.ItemManager;
+import phewitch.powersuits.Common.networking.ModMessages;
 
 import java.util.stream.Collectors;
 
@@ -50,10 +51,14 @@ public class PowerSuits {
         var eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         new CommonEvents(eventBus);
 
-        if(Dist.CLIENT.isClient())
+        if(Dist.CLIENT.isClient()) {
             new ClientEvents(eventBus);
+
+        }
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        ModMessages.register();
     }
 }

@@ -24,6 +24,9 @@ public class Mark2Armor extends SuitArmourBase {
     public Mark2Armor(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
         super(materialIn, slot, builder, "mk2");
         this.fallDamageMultiplier = 0.3f;
+        projectileDamage = 3;
+        shootsLasers = false;
+        shootsArrows = true;
     }
 
     @Override
@@ -64,7 +67,6 @@ public class Mark2Armor extends SuitArmourBase {
             return;
 
         if(hasBoots(player)) {
-
             var instance = Minecraft.getInstance();
             var window = Minecraft.getInstance().getWindow();
 
