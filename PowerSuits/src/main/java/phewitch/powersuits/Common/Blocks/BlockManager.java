@@ -9,9 +9,9 @@ public class BlockManager {
 //            new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()), PowerSuits.CreativeTab);
 //
 //    public static final RegistryObject<Item> RAW_PALADIUM_ORE = ITEMS.register("raw_paladium_ore", () ->
-//            new Item(new Item.Properties().tab(PowerSuits.CreativeTab)));
+//            new Item(new Item.Properties()));
 //    public static final RegistryObject<Item> PALADIUM_INGOT = ITEMS.register("paladium_ingot", () ->
-//            new Item(new Item.Properties().tab(PowerSuits.CreativeTab)));
+//            new Item(new Item.Properties()));
 //
 //    public static final List<OreConfiguration.TargetBlockState> PALADIUM_ORES = List.of(
 //            OreConfiguration.target(OreFeatures.STONE_ORE_REPLACEABLES, PALADIUM_ORE.get().defaultBlockState()),

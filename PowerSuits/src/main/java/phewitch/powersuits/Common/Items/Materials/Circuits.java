@@ -14,7 +14,7 @@ public class Circuits {
 
     }
     public static final RegistryObject<Item> BASIC_CIRCUIT = ItemManager.ITEMS.register("basic_circuit", () ->
-            new Item(new Item.Properties().tab(PowerSuits.CreativeTab)));
+            new Item(new Item.Properties()));
     public static final RegistryObject<Item> ADVANCED_CIRCUIT = ItemManager.ITEMS.register("advanced_circuit", () ->
-            new Item(new Item.Properties().tab(PowerSuits.CreativeTab)));
+            new Item(new Item.Properties()));
 }

@@ -18,15 +18,15 @@ public class ItemManager {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, PowerSuits.MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PowerSuits.MODID);
 
-    public static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab){
+    public static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         PowerSuits.LOGGER.info("Registering block: " + name);
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
-        registerBlockItem(name, toReturn, tab);
+        registerBlockItem(name, toReturn);
         return toReturn;
     }
-    public static <T extends Block>RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab){
+    public static <T extends Block>RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block){
         PowerSuits.LOGGER.info("Registering item: " + name);
-        return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
+        return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     public static void register(IEventBus eventBus){

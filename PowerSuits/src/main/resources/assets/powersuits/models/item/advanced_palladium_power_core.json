@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "powersuits:item/advanced_palladium_power_core"
-  }
-}

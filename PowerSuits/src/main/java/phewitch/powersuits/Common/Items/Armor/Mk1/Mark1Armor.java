@@ -2,27 +2,27 @@ package phewitch.powersuits.Common.Items.Armor.Mk1;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.TickEvent;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourBase;
 import phewitch.powersuits.Common.Items.Armor.Suits;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class Mark1Armor extends SuitArmourBase {
     public float flightTime = 50;
     public float maxFuel = 50;
-    public Mark1Armor(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
-        super(materialIn, slot, builder, "mk1");
+    public Mark1Armor(ArmorMaterial materialIn, Type type, Properties properties) {
+        super(materialIn, type, properties, "mk1");
         this.fallDamageMultiplier = 0.6f;
         shootsLasers = false;
     }
@@ -43,7 +43,7 @@ public class Mark1Armor extends SuitArmourBase {
                 flightTime -= 1;
                 if (flightTime < 0)
                     flightTime = 0;
-            } else if (player.isOnGround() && flightTime < maxFuel) {
+            } else if (player.onGround() && flightTime < maxFuel) {
                 flightTime += 2;
 
                 if (flightTime > maxFuel)
@@ -61,7 +61,7 @@ public class Mark1Armor extends SuitArmourBase {
     public void renderGUI(TickEvent.RenderTickEvent event, PoseStack matrix) {
         var player = minecraft.player;
 
-        if (minecraft.isPaused() || player == null || player.level == null || minecraft.options.hideGui)
+        if (minecraft.isPaused() || player == null || player.level() == null || minecraft.options.hideGui)
             return;
 
         if(hasBoots(player)) {
@@ -73,14 +73,24 @@ public class Mark1Armor extends SuitArmourBase {
             int y = window.getGuiScaledHeight();
             int color = Integer.parseInt("33AA66", 16);
 
-            instance.font.draw(matrix, "Fuel: " + flightTime, x - 75, y - 25, color);
+            //instance.font.draw(matrix, "Fuel: " + flightTime, x - 75, y - 25, color);
         }
     }
 
     @Override
-    public void appendHoverText(ItemStack item, @Nullable Level p_41422_, List<Component> components, TooltipFlag p_41424_) {
-        components.add(new TranslatableComponent("tooltip.powersuits." + name + ".identifier"));
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
+            private Mark1Renderer renderer;
 
-        components.add(new TranslatableComponent("tooltip.powersuits." + name + ".extra"));
+            @Override
+            public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                if(this.renderer == null){
+                    this.renderer = new Mark1Renderer();
+                }
+
+                this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
+                return this.renderer;
+            }
+        });
     }
 }

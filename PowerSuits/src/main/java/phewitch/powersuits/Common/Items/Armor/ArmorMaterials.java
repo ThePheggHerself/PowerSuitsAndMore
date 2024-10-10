@@ -4,6 +4,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
@@ -12,13 +13,21 @@ import phewitch.powersuits.Common.Items.Materials.Steel;
 import phewitch.powersuits.PowerSuits;
 
 import java.util.function.Supplier;
+import net.minecraft.Util;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.LazyLoadedValue;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import java.util.EnumMap;
+import java.util.function.Supplier;
 
 public enum ArmorMaterials implements ArmorMaterial {
     TITANIUM("titanium", 24, new int[]{3, 5, 7, 3}, 9, SoundEvents.ARMOR_EQUIP_IRON, 1.0F,
             0.0F, () -> { return Ingredient.of(Titanium.TITANIUM_INGOT.get());
-    }),
-    STEEL("steel", 15, new int[]{2, 5, 6, 3}, 9, SoundEvents.ARMOR_EQUIP_IRON, 0.0f,
-            0.0F, () -> { return Ingredient.of(Steel.STEEL_INGOT.get());
     }),
     MARK1("mark1", 15, new int[]{4, 7, 8, 5}, 0, SoundEvents.ARMOR_EQUIP_DIAMOND, 0.0f,
             0.3F, () -> { return Ingredient.of(Blocks.BEDROCK);
@@ -37,58 +46,65 @@ public enum ArmorMaterials implements ArmorMaterial {
     });
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
-    private String name;
-    private int durabilityMultiplier;
-    private int[] slotProtections;
-    private int enchantmentValue;
-    private SoundEvent sound;
-    private float toughness;
-    private float knockbackResistance;
-    private LazyLoadedValue<Ingredient> repairIngredient;
+    private final String name;
+    private final int durabilityMultiplier;
+    private final int[] protectionAmounts;
+    private final int enchantmentValue;
+    private final SoundEvent equipSound;
+    private final float toughness;
+    private final float knockbackResistance;
+    private final Supplier<Ingredient> repairIngredient;
 
-    ArmorMaterials(String name, int durabilityMultiplier, int[] slotProtection, int enchantValue, SoundEvent soundEvent, float toughness,
-                   float knockbackResistance, Supplier<Ingredient> repairIngrediant) {
+    private static final int[] BASE_DURABILITY = { 11, 16, 16, 13 };
+
+    ArmorMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantmentValue, SoundEvent equipSound,
+                      float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;
-        this.slotProtections = slotProtection;
-        this.enchantmentValue = enchantValue;
-        this.sound = soundEvent;
+        this.protectionAmounts = protectionAmounts;
+        this.enchantmentValue = enchantmentValue;
+        this.equipSound = equipSound;
         this.toughness = toughness;
         this.knockbackResistance = knockbackResistance;
-        this.repairIngredient = new LazyLoadedValue<>(repairIngrediant);
+        this.repairIngredient = repairIngredient;
     }
 
-    ArmorMaterials() {
+    @Override
+    public int getDurabilityForType(ArmorItem.Type pType) {
+        return BASE_DURABILITY[pType.ordinal()] * this.durabilityMultiplier;
     }
 
-    public int getDurabilityForSlot(EquipmentSlot pSlot) {
-        return HEALTH_PER_SLOT[pSlot.getIndex()] * this.durabilityMultiplier;
+    @Override
+    public int getDefenseForType(ArmorItem.Type pType) {
+        return this.protectionAmounts[pType.ordinal()];
     }
 
-    public int getDefenseForSlot(EquipmentSlot pSlot) {
-        return this.slotProtections[pSlot.getIndex()];
-    }
-
+    @Override
     public int getEnchantmentValue() {
-        return this.enchantmentValue;
+        return enchantmentValue;
     }
 
+    @Override
     public SoundEvent getEquipSound() {
-        return this.sound;
+        return this.equipSound;
     }
 
+    @Override
     public Ingredient getRepairIngredient() {
         return this.repairIngredient.get();
     }
 
+    @Override
     public String getName() {
         return PowerSuits.MODID + ":" + this.name;
     }
 
+    @Override
     public float getToughness() {
         return this.toughness;
     }
 
+    @Override
     public float getKnockbackResistance() {
         return this.knockbackResistance;
     }

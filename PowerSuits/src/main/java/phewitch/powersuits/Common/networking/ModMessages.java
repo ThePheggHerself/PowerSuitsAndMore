@@ -29,7 +29,7 @@ public class ModMessages {
         net.messageBuilder(C2SSuitShootArrow.class, id(), NetworkDirection.PLAY_TO_SERVER)
                 .decoder(C2SSuitShootArrow::new)
                 .encoder(C2SSuitShootArrow::toBytes)
-                .consumer(C2SSuitShootArrow::handle)
+                .consumerMainThread(C2SSuitShootArrow::handle)
                 .add();
     }
 

@@ -1,26 +1,27 @@
 package phewitch.powersuits.Common.Items.Armor.MK3;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import org.jetbrains.annotations.NotNull;
 import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourBase;
+import phewitch.powersuits.Common.Items.Armor.Mk1.Mark1Renderer;
 import phewitch.powersuits.Common.Items.Armor.Suits;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class Mark3Armor extends SuitArmourBase {
-    public Mark3Armor(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
-        super(materialIn, slot, builder, "mk3");
+    public Mark3Armor(ArmorMaterial materialIn, Type type, Properties properties) {
+        super(materialIn, type, properties, "mk3");
         this.fallDamageMultiplier = 0;
         projectileDamage = 5;
         shootsLasers = false;
@@ -53,9 +54,19 @@ public class Mark3Armor extends SuitArmourBase {
     }
 
     @Override
-    public void appendHoverText(ItemStack item, @Nullable Level p_41422_, List<Component> components, TooltipFlag p_41424_) {
-        components.add(new TranslatableComponent("tooltip.powersuits." + name + ".identifier"));
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
+            private Mark3Renderer renderer;
 
-        components.add(new TranslatableComponent("tooltip.powersuits." + name + ".extra"));
+            @Override
+            public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+                if(this.renderer == null){
+                    this.renderer = new Mark3Renderer();
+                }
+
+                this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
+                return this.renderer;
+            }
+        });
     }
 }

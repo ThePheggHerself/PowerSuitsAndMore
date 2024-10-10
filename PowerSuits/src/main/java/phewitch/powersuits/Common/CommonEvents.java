@@ -24,7 +24,7 @@ public class CommonEvents {
 
     @SubscribeEvent
     public void PlayerFallEvent(LivingFallEvent ev){
-        if(ev.getEntityLiving() instanceof Player plr){
+        if(ev.getEntity() instanceof Player plr){
             if(plr.getInventory().getArmor(0).getItem() instanceof SuitArmourBase sAB){
 
                 if(sAB.name == "mk1")

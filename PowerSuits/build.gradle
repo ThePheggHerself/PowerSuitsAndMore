@@ -2,6 +2,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 
@@ -138,6 +139,15 @@ repositories {
     }
 
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+
+    maven {
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroupByRegex("software\\.bernie.*")
+            includeGroup("com.eliotlash.mclib")
+        }
+    }
 }
 
 dependencies {
@@ -151,12 +161,13 @@ dependencies {
     /* other minecraft dependencies are here */
 
     // compile against the JEI API but do not include it at runtime
-    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:10.2.1.1005"))
-    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:10.2.1.1005"))
+    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:15.20.0.104"))
+    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:15.20.0.104"))
     // at runtime, use the full JEI jar for Forge
-    runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:10.2.1.1005"))
+    runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:15.20.0.104"))
 
-    implementation fg.deobf('software.bernie.geckolib:geckolib-1.18-forge:3.0.13')
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:4.4.9")
+    implementation("com.eliotlash.mclib:mclib:20")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
