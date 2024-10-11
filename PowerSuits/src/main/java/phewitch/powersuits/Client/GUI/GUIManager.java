@@ -2,6 +2,7 @@ package phewitch.powersuits.Client.GUI;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,7 +23,7 @@ public class GUIManager {
             HudItems.put(name, item);
     }
 
-    public static void renderHUDItems(TickEvent.RenderTickEvent event){
+    public static void renderHUDItems(RenderGuiEvent event){
         PoseStack matrix = new PoseStack();
 
         for (var item : HudItems.entrySet()){

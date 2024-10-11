@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XYX"
+  ],
+  "key": {
+    "X": {
+      "item": "powersuits:steel_plate"
+    },
+    "Y": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "powersuits:mark1_helmet"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ACA",
+    "TPT",
+    "LLL"
+  ],
+  "key": {
+    "A": {
+      "item": "powersuits:mixed_metal_plate"
+    },
+    "T": {
+      "item": "powersuits:thruster"
+    },
+    "C": {
+      "item": "powersuits:basic_circuit"
+    },
+    "P": {
+      "item": "powersuits:palladium_power_core"
+    },
+    "L": {
+      "item": "powersuits:titanium_plate"
+    }
+  },
+  "result": {
+    "item": "powersuits:mark3_chestplate"
+  }
+}

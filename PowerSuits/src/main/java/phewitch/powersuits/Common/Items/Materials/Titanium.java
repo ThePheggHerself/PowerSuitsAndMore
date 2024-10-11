@@ -8,7 +8,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import phewitch.powersuits.Common.Items.Armor.ArmorMaterials;
+import phewitch.powersuits.Common.Items.Armor.ArmorBase.ArmorMaterials;
 import phewitch.powersuits.Common.Items.ItemManager;
 import phewitch.powersuits.Common.Items.Tools.ToolTiers;
 import phewitch.powersuits.PowerSuits;

@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -61,7 +62,7 @@ public class ClientEvents {
         }
 
         @SubscribeEvent
-        public void onRenderGui(TickEvent.RenderTickEvent event){
+        public void onRenderGui(RenderGuiEvent event){
             GUIManager.renderHUDItems(event);
         }
     }

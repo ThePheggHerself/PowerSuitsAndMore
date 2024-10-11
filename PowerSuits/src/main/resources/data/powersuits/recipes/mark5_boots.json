@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A A",
+    "A A",
+    "TCT"
+  ],
+  "key": {
+    "A": {
+      "item": "powersuits:advanced_metal_plate"
+    },
+    "T": {
+      "item": "powersuits:thruster"
+    },
+    "C": {
+      "item": "powersuits:advanced_circuit"
+    }
+  },
+  "result": {
+    "item": "powersuits:mark5_boots"
+  }
+}
