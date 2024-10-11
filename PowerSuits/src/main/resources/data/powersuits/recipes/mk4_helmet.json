@@ -1,25 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "A A",
-    "P P",
-    "TCT"
+    "ACA",
+    "AGA"
   ],
   "key": {
     "A": {
       "item": "powersuits:mixed_metal_plate"
     },
-    "P": {
-      "item": "powersuits:titanium_plate"
-    },
-    "T": {
-      "item": "powersuits:thruster"
-    },
     "C": {
       "item": "powersuits:basic_circuit"
+    },
+    "G": {
+      "item": "minecraft:glass"
     }
   },
   "result": {
-    "item": "powersuits:mk3_boots"
+    "item": "powersuits:mk4_helmet"
   }
 }

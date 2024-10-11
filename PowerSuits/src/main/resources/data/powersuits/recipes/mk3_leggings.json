@@ -2,15 +2,18 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "AAA",
-    "ACA",
-    "A A"
+    "TCT",
+    "T T"
   ],
   "key": {
     "A": {
-      "item": "powersuits:mixed_metal_alloy"
+      "item": "powersuits:mixed_metal_plate"
     },
     "C": {
       "item": "powersuits:basic_circuit"
+    },
+    "T": {
+      "item": "powersuits:titanium_plate"
     }
   },
   "result": {

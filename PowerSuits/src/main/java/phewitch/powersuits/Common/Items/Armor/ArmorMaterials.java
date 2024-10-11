@@ -29,22 +29,24 @@ public enum ArmorMaterials implements ArmorMaterial {
     TITANIUM("titanium", 24, new int[]{3, 5, 7, 3}, 9, SoundEvents.ARMOR_EQUIP_IRON, 1.0F,
             0.0F, () -> { return Ingredient.of(Titanium.TITANIUM_INGOT.get());
     }),
-    MARK1("mark1", 15, new int[]{4, 7, 8, 5}, 0, SoundEvents.ARMOR_EQUIP_DIAMOND, 0.0f,
+    MARK1("mark1", 15, new int[]{4, 7, 8, 5}, 0, SoundEvents.ARMOR_EQUIP_NETHERITE, 0.0f,
             0.3F, () -> { return Ingredient.of(Blocks.BEDROCK);
     }),
 
-    MARK2("mark2", 15, new int[]{5, 8, 9, 6}, 0, SoundEvents.ARMOR_EQUIP_DIAMOND, 0.0f,
+    MARK2("mark2", 15, new int[]{5, 8, 9, 6}, 0, SoundEvents.ARMOR_EQUIP_NETHERITE, 0.1f,
             0.4F, () -> { return Ingredient.of(Blocks.BEDROCK);
     }),
 
-    MARK3("mark3", 15, new int[]{7, 10, 11, 8}, 0, SoundEvents.ARMOR_EQUIP_DIAMOND, 0.1f,
+    MARK3("mark3", 15, new int[]{7, 10, 11, 8}, 0, SoundEvents.ARMOR_EQUIP_NETHERITE, 0.2f,
             0.5F, () -> { return Ingredient.of(Blocks.BEDROCK);
     }),
 
-    MARK4("mark4", 15, new int[]{10, 13, 14, 11}, 0, SoundEvents.ARMOR_EQUIP_DIAMOND, 0.2f,
+    MARK4("mark4", 15, new int[]{10, 13, 14, 11}, 0, SoundEvents.ARMOR_EQUIP_NETHERITE, 0.4f,
             0.7F, () -> { return Ingredient.of(Blocks.BEDROCK);
+    }),
+    MARK5("mark5", 15, new int[]{14, 17, 18, 15}, 0, SoundEvents.ARMOR_EQUIP_NETHERITE, 0.8f,
+            1F, () -> { return Ingredient.of(Blocks.BEDROCK);
     });
-
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
     private final String name;
     private final int durabilityMultiplier;

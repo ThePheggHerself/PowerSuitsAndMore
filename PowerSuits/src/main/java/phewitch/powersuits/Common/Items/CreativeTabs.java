@@ -28,9 +28,28 @@ public class CreativeTabs {
 
                         pOutput.accept(Titanium.STONE_TITANIUM_ORE.get());
                         pOutput.accept(Titanium.DEEPSLATE_TITANIUM_ORE.get());
+                        pOutput.accept(Palladium.STONE_PALLADIUM_ORE.get());
+                        pOutput.accept(Palladium.DEEPSLATE_PALLADIUM_ORE.get());
+
+                        pOutput.accept(Palladium.RAW_PALLADIUM.get());
                         pOutput.accept(Titanium.RAW_TITANIUM.get());
                         pOutput.accept(Titanium.TITANIUM_INGOT.get());
+                        pOutput.accept(Steel.STEEL_INGOT.get());
+                        pOutput.accept(Misc.MIXED_METAL_ALLOY.get());
+                        pOutput.accept(Misc.ADVANCED_METAL_ALLOY.get());
                         pOutput.accept(Titanium.TITANIUM_PLATE.get());
+                        pOutput.accept(Steel.STEEL_PLATE.get());
+                        pOutput.accept(Misc.MIXED_METAL_PLATE.get());
+                        pOutput.accept(Misc.ADVANCED_METAL_PLATE.get());
+
+                        pOutput.accept(Circuits.BASIC_CIRCUIT.get());
+                        pOutput.accept(Circuits.ADVANCED_CIRCUIT.get());
+                        pOutput.accept(Palladium.PALLADIUM_POWER_CORE.get());
+                        pOutput.accept(Palladium.ADVANCED_PALLADIUM_POWER_CORE.get());
+                        pOutput.accept(Misc.FOCUSING_CRYSTAL.get());
+                        pOutput.accept(Misc.PHOTONIC_BEAM_GENERATOR.get());
+                        pOutput.accept(Misc.THRUSTER.get());
+                        pOutput.accept(Misc.MICRO_CANNON.get());
 
                         pOutput.accept(Titanium.TITANIUM_SWORD.get());
                         pOutput.accept(Titanium.TITANIUM_PICKAXE.get());
@@ -41,26 +60,6 @@ public class CreativeTabs {
                         pOutput.accept(Titanium.TITANIUM_CHESTPLATE.get());
                         pOutput.accept(Titanium.TITANIUM_LEGGINGS.get());
                         pOutput.accept(Titanium.TITANIUM_BOOTS.get());
-
-
-
-                        pOutput.accept(Palladium.STONE_PALLADIUM_ORE.get());
-                        pOutput.accept(Palladium.DEEPSLATE_PALLADIUM_ORE.get());
-                        pOutput.accept(Palladium.RAW_PALLADIUM.get());
-                        pOutput.accept(Palladium.PALLADIUM_POWER_CORE.get());
-
-                        pOutput.accept(Steel.STEEL_INGOT.get());
-                        pOutput.accept(Steel.STEEL_PLATE.get());
-
-                        pOutput.accept(Circuits.BASIC_CIRCUIT.get());
-                        pOutput.accept(Circuits.ADVANCED_CIRCUIT.get());
-
-                        pOutput.accept(Misc.MIXED_METAL_ALLOY.get());
-                        pOutput.accept(Misc.MIXED_METAL_PLATE.get());
-                        pOutput.accept(Misc.FOCUSING_CRYSTAL.get());
-                        pOutput.accept(Misc.THRUSTER.get());
-
-
 
 
 
@@ -84,7 +83,10 @@ public class CreativeTabs {
                         pOutput.accept(Suits.MK4_CHEST.get());
                         pOutput.accept(Suits.MK4_HELM.get());
 
-
+                        pOutput.accept(Suits.MK5_BOOTS.get());
+                        pOutput.accept(Suits.MK5_LEGS.get());
+                        pOutput.accept(Suits.MK5_CHEST.get());
+                        pOutput.accept(Suits.MK5_HELM.get());
 
 
                     })

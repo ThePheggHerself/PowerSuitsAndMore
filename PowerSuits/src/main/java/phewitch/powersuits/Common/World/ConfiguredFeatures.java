@@ -35,12 +35,12 @@ public class ConfiguredFeatures {
         List<OreConfiguration.TargetBlockState> titaniumOres = List.of(
                 OreConfiguration.target(stoneReplaceable, Titanium.STONE_TITANIUM_ORE.get().defaultBlockState()),
                 OreConfiguration.target(deepslateReplaceables, Titanium.DEEPSLATE_TITANIUM_ORE.get().defaultBlockState()));
-        register(context, TITANIUM_ORE_KEY, Feature.ORE, new OreConfiguration(titaniumOres, 9));
+        register(context, TITANIUM_ORE_KEY, Feature.ORE, new OreConfiguration(titaniumOres, 4));
 
         List<OreConfiguration.TargetBlockState> palladiumOres = List.of(
                 OreConfiguration.target(stoneReplaceable, Palladium.STONE_PALLADIUM_ORE.get().defaultBlockState()),
                 OreConfiguration.target(deepslateReplaceables, Palladium.DEEPSLATE_PALLADIUM_ORE.get().defaultBlockState()));
-        register(context, PALLADIUM_ORE_KEY, Feature.ORE, new OreConfiguration(palladiumOres, 9));
+        register(context, PALLADIUM_ORE_KEY, Feature.ORE, new OreConfiguration(palladiumOres, 6));
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

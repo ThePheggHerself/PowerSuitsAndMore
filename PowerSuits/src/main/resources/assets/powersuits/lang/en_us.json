@@ -2,6 +2,7 @@
   "itemGroup.powersuitstab": "Power Suits",
   "key.category.powersuits": "Power Suits",
   "key.powersuits.suit.shootarrow": "Shoot Arrow",
+  "msg.powersuits.suit.noarrows": "No arrows detected",
 
   "item.powersuits.raw_titanium": "Raw Titanium",
   "block.powersuits.titanium_ore": "Titanium Ore",
@@ -32,6 +33,9 @@
   "item.powersuits.mixed_metal_alloy": "Mixed Metal Alloy",
   "item.powersuits.mixed_metal_plate": "Mixed Metal Plate",
   "item.powersuits.advanced_metal_alloy": "Advanced Metal Alloy",
+  "item.powersuits.advanced_metal_plate": "Advanced Metal Plate",
+  "item.powersuits.photonic_beam_generator": "Photonic Beam Generator",
+  "item.powersuits.micro_cannon": "Micro Cannon",
   "item.powersuits.focusing_crystal": "Focusing Crystal",
   "item.powersuits.thruster": "Thruster",
 
@@ -66,5 +70,12 @@
   "item.powersuits.mk4_helmet": "Power Suit Helmet",
   "item.powersuits.mk4_chestplate": "Power Suit Chestplate",
   "item.powersuits.mk4_leggings": "Power Suit Leggings",
-  "item.powersuits.mk4_boots": "Power Suit Boots"
+  "item.powersuits.mk4_boots": "Power Suit Boots",
+
+  "tooltip.powersuits.mk5.identifier": "Mark V",
+  "tooltip.powersuits.mk5.extra": "Full flight capabilities",
+  "item.powersuits.mk5_helmet": "Power Suit Helmet",
+  "item.powersuits.mk5_chestplate": "Power Suit Chestplate",
+  "item.powersuits.mk5_leggings": "Power Suit Leggings",
+  "item.powersuits.mk5_boots": "Power Suit Boots"
 }

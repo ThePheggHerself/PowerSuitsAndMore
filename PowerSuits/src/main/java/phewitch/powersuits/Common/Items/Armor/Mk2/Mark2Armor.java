@@ -24,35 +24,14 @@ public class Mark2Armor extends SuitArmourBase {
     public float maxFuel = 300;
     public Mark2Armor(ArmorMaterial materialIn, Type type, Properties properties) {
         super(materialIn, type, properties, "mk2");
-        this.fallDamageMultiplier = 0.3f;
+        fallDamageMultiplier = 0.3f;
         projectileDamage = 3;
         shootsLasers = false;
         shootsArrows = true;
-    }
 
-    @Override
-    public void onArmorTick(ItemStack item, Level level, Player player) {
-        if(hasBoots(player) && item.getItem() == Suits.MK2_BOOTS.get()) {
-            if (Minecraft.getInstance().options.keyJump.isDown() && this.flightTime > 0) {
-                var motion = player.getDeltaMovement();
-                var upwardsVelocity = motion.get(Direction.Axis.Y);
-                upwardsVelocity += 0.1d;
-
-                if (upwardsVelocity > 1)
-                    upwardsVelocity = 1;
-
-                player.setDeltaMovement(motion.get(Direction.Axis.X), upwardsVelocity, motion.get(Direction.Axis.Z));
-
-                flightTime -= 1;
-                if (flightTime < 0)
-                    flightTime = 0;
-            } else if (player.onGround() && flightTime < maxFuel) {
-                flightTime += 2;
-
-                if (flightTime > maxFuel)
-                    flightTime = maxFuel;
-            }
-        }
+        fullFlightOnFullArmour = false;
+        lfMaxfuel = 200f;
+        lfVelocity = 0.15d;
     }
 
     @Override

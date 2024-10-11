@@ -17,35 +17,21 @@ import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourBase;
 import phewitch.powersuits.Common.Items.Armor.Mk1.Mark1Renderer;
 import phewitch.powersuits.Common.Items.Armor.Suits;
 
+import java.util.ArrayList;
 import java.util.function.Consumer;
 
 public class Mark3Armor extends SuitArmourBase {
     public Mark3Armor(ArmorMaterial materialIn, Type type, Properties properties) {
         super(materialIn, type, properties, "mk3");
-        this.fallDamageMultiplier = 0;
+        fallDamageMultiplier = 0;
+
         projectileDamage = 5;
         shootsLasers = false;
         shootsArrows = true;
-    }
 
-    @Override
-    public void onArmorTick(ItemStack item, Level level, Player player) {
-        if(hasHelmet(player) && item.getItem() == Suits.MK3_HELM.get()){
-            player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 5));
-        }
+        fullFlightOnFullArmour = false;
 
-        if(hasBoots(player) && item.getItem() == Suits.MK3_BOOTS.get()) {
-            if (Minecraft.getInstance().options.keyJump.isDown()) {
-                var motion = player.getDeltaMovement();
-                var upwardsVelocity = motion.get(Direction.Axis.Y);
-                upwardsVelocity += 0.2d;
-
-                if (upwardsVelocity > 1)
-                    upwardsVelocity = 1;
-
-                player.setDeltaMovement(motion.get(Direction.Axis.X), upwardsVelocity, motion.get(Direction.Axis.Z));
-            }
-        }
+        this.fullArmourEffects.add(new MobEffectInstance(MobEffects.NIGHT_VISION, 300));
     }
 
     @Override

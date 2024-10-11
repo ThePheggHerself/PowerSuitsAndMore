@@ -49,6 +49,7 @@ public class ItemModelGenerator extends ItemModelProvider {
         simpleItem(Palladium.RAW_PALLADIUM);
         simpleItem(Palladium.PALLADIUM_INGOT);
         simpleItem(Palladium.PALLADIUM_POWER_CORE);
+        simpleItem(Palladium.ADVANCED_PALLADIUM_POWER_CORE);
 
         simpleItem(Steel.STEEL_INGOT);
         simpleItem(Steel.STEEL_PLATE);
@@ -58,8 +59,12 @@ public class ItemModelGenerator extends ItemModelProvider {
 
         simpleItem(Misc.MIXED_METAL_ALLOY);
         simpleItem(Misc.MIXED_METAL_PLATE);
+        simpleItem(Misc.ADVANCED_METAL_ALLOY);
+        simpleItem(Misc.ADVANCED_METAL_PLATE);
         simpleItem(Misc.THRUSTER);
         simpleItem(Misc.FOCUSING_CRYSTAL);
+        simpleItem(Misc.PHOTONIC_BEAM_GENERATOR);
+        simpleItem(Misc.MICRO_CANNON);
 
         handheldItem(Titanium.TITANIUM_SWORD);
         handheldItem(Titanium.TITANIUM_PICKAXE);
@@ -91,6 +96,11 @@ public class ItemModelGenerator extends ItemModelProvider {
         handheldItem(Suits.MK4_LEGS);
         handheldItem(Suits.MK4_CHEST);
         handheldItem(Suits.MK4_HELM);
+
+        handheldItem(Suits.MK5_BOOTS);
+        handheldItem(Suits.MK5_LEGS);
+        handheldItem(Suits.MK5_CHEST);
+        handheldItem(Suits.MK5_HELM);
     }
 
     private void trimmedArmorItem(RegistryObject<Item> itemRegistryObject) {

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TNT",
+    "TCT",
+    "TAT"
+  ],
+  "key": {
+    "T": {
+      "item": "powersuits:mixed_metal_alloy"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    },
+    "C": {
+      "item": "powersuits:palladium_power_core"
+    },
+    "A": {
+      "item": "powersuits:advanced_circuit"
+    }
+  },
+  "result": {
+    "item": "powersuits:advanced_palladium_power_core"
+  }
+}

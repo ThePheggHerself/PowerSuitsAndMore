@@ -3,11 +3,11 @@
   "pattern": [
     "ACA",
     "TPT",
-    "AAA"
+    "LLL"
   ],
   "key": {
     "A": {
-      "item": "powersuits:mixed_metal_alloy"
+      "item": "powersuits:mixed_metal_plate"
     },
     "T": {
       "item": "powersuits:thruster"
@@ -17,6 +17,9 @@
     },
     "P": {
       "item": "powersuits:palladium_power_core"
+    },
+    "L": {
+      "item": "powersuits:titanium_plate"
     }
   },
   "result": {

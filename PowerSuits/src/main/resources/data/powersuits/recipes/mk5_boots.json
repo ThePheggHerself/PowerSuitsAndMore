@@ -2,24 +2,21 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "A A",
-    "P P",
+    "A A",
     "TCT"
   ],
   "key": {
     "A": {
-      "item": "powersuits:mixed_metal_plate"
-    },
-    "P": {
-      "item": "powersuits:titanium_plate"
+      "item": "powersuits:advanced_metal_plate"
     },
     "T": {
       "item": "powersuits:thruster"
     },
     "C": {
-      "item": "powersuits:basic_circuit"
+      "item": "powersuits:advanced_circuit"
     }
   },
   "result": {
-    "item": "powersuits:mk3_boots"
+    "item": "powersuits:mk5_boots"
   }
 }

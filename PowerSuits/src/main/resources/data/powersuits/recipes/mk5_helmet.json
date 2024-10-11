@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ACA",
+    "AGA"
+  ],
+  "key": {
+    "A": {
+      "item": "powersuits:advanced_metal_plate"
+    },
+    "C": {
+      "item": "powersuits:advanced_circuit"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "powersuits:mk5_helmet"
+  }
+}

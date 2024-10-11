@@ -23,11 +23,11 @@ public class PlacedFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, TITANIUM_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ConfiguredFeatures.TITANIUM_ORE_KEY),
-                OrePlacement.commonOrePlacement(12,
+                OrePlacement.commonOrePlacement(4,
                         HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(4), VerticalAnchor.aboveBottom(64))));
 
         register(context, PALLADIUM_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ConfiguredFeatures.PALLADIUM_ORE_KEY),
-                OrePlacement.commonOrePlacement(12,
+                OrePlacement.commonOrePlacement(6,
                         HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(2), VerticalAnchor.aboveBottom(32))));
     }
 

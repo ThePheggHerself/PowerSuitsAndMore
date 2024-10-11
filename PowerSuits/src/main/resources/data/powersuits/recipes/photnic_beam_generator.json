@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "TCT",
-    "CBC",
-    "TFT"
+    "RCR",
+    "TLT",
+    "TGT"
   ],
   "key": {
     "T": {
@@ -12,14 +12,17 @@
     "C": {
       "item": "powersuits:advanced_circuit"
     },
-    "F": {
-      "item": "powersuits:focusing_crystal"
+    "G": {
+      "item": "minecraft:glass"
     },
-    "B": {
-      "item": "powersuits:photonic_beam_generator"
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "L": {
+      "item": "minecraft:lightning_rod"
     }
   },
   "result": {
-    "item": "powersuits:thruster"
+    "item": "powersuits:photonic_beam_generator"
   }
 }

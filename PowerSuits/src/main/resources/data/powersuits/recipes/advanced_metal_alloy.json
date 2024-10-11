@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ANG",
+    "ANG"
+  ],
+  "key": {
+    "A": {
+      "item": "powersuits:mixed_metal_alloy"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "powersuits:advanced_metal_alloy",
+    "count": 4
+  }
+}

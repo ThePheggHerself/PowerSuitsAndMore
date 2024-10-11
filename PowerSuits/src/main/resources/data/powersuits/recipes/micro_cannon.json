@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SRS",
+    "RDR",
+    "SCS"
+  ],
+  "key": {
+    "C": {
+      "item": "powersuits:basic_circuit"
+    },
+    "S": {
+      "item": "powersuits:steel_plate"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "D": {
+      "item": "minecraft:dispenser"
+    }
+  },
+  "result": {
+    "item": "powersuits:micro_cannon"
+  }
+}

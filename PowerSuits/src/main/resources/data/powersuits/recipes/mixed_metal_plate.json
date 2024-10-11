@@ -6,10 +6,10 @@
   ],
   "key": {
     "S": {
-      "item": "powersuits:titanium_ingot"
+      "item": "powersuits:mixed_metal_alloy"
     }
   },
   "result": {
-    "item": "powersuits:titanium_plate"
+    "item": "powersuits:mixed_metal_plate"
   }
 }

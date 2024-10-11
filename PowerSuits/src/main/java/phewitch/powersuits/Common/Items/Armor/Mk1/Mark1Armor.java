@@ -25,31 +25,8 @@ public class Mark1Armor extends SuitArmourBase {
         super(materialIn, type, properties, "mk1");
         this.fallDamageMultiplier = 0.6f;
         shootsLasers = false;
-    }
 
-    @Override
-    public void onArmorTick(ItemStack item, Level level, Player player) {
-        if(hasBoots(player) && item.getItem() == Suits.MK1_BOOTS.get()) {
-            if (Minecraft.getInstance().options.keyJump.isDown() && this.flightTime > 0) {
-                var motion = player.getDeltaMovement();
-                var upwardsVelocity = motion.get(Direction.Axis.Y);
-                upwardsVelocity += 0.05d;
-
-                if (upwardsVelocity > 1)
-                    upwardsVelocity = 1;
-
-                player.setDeltaMovement(motion.get(Direction.Axis.X), upwardsVelocity, motion.get(Direction.Axis.Z));
-
-                flightTime -= 1;
-                if (flightTime < 0)
-                    flightTime = 0;
-            } else if (player.onGround() && flightTime < maxFuel) {
-                flightTime += 2;
-
-                if (flightTime > maxFuel)
-                    flightTime = maxFuel;
-            }
-        }
+        lfMaxfuel = 30f;
     }
 
     @Override

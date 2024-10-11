@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "X X",
-    "X X",
-    "GCG"
+    "P P",
+    "P P",
+    "TCT"
   ],
   "key": {
-    "X": {
+    "P": {
       "item": "powersuits:titanium_plate"
     },
-    "G": {
-      "item": "minecraft:gunpowder"
+    "T": {
+      "item": "powersuits:thruster"
     },
     "C": {
       "item": "powersuits:basic_circuit"

@@ -9,6 +9,7 @@ import phewitch.powersuits.Common.Items.Armor.Mk1.Mark1Armor;
 import phewitch.powersuits.Common.Items.Armor.Mk2.Mark2Armor;
 import phewitch.powersuits.Common.Items.Armor.MK3.Mark3Armor;
 import phewitch.powersuits.Common.Items.Armor.Mk4.Mark4Armor;
+import phewitch.powersuits.Common.Items.Armor.Mk5.Mark5Armor;
 import phewitch.powersuits.Common.Items.ItemManager;
 import phewitch.powersuits.PowerSuits;
 
@@ -52,4 +53,13 @@ public class Suits {
             new Mark4Armor(ArmorMaterials.MARK4, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> MK4_HELM = ItemManager.ITEMS.register("mk4_helmet", () ->
             new Mark4Armor(ArmorMaterials.MARK4, ArmorItem.Type.HELMET, new Item.Properties()));
+
+    public static final RegistryObject<Item> MK5_BOOTS = ItemManager.ITEMS.register("mk5_boots", () ->
+            new Mark5Armor(ArmorMaterials.MARK5, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final RegistryObject<Item> MK5_LEGS = ItemManager.ITEMS.register("mk5_leggings", () ->
+            new Mark5Armor(ArmorMaterials.MARK5, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<Item> MK5_CHEST = ItemManager.ITEMS.register("mk5_chestplate", () ->
+            new Mark5Armor(ArmorMaterials.MARK5, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> MK5_HELM = ItemManager.ITEMS.register("mk5_helmet", () ->
+            new Mark5Armor(ArmorMaterials.MARK5, ArmorItem.Type.HELMET, new Item.Properties()));
 }
