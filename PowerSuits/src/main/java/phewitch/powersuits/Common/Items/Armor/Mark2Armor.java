@@ -4,15 +4,15 @@ import net.minecraft.world.item.ArmorMaterial;
 import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourBase;
 import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitFeatures;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Mark2Armor extends SuitArmourBase {
     public Mark2Armor(ArmorMaterial materialIn, Type type, Properties properties) {
-        super(materialIn, type, properties, "mark2");
-
-        features.add(SuitFeatures.LIMITED_FLIGHT);
-        features.add(SuitFeatures.SHOOT_ARROWS);
-        fallDamageMultiplier = 0.3f;
-        projectileDamage = 3;
-        lfMaxfuel = 200f;
-        lfVelocity = 0.15d;
+        super(materialIn, type, properties, "mark1",
+                new SuitFeatures(50, 0.6f, 0.6f, 9, 0.15f, 1f,
+                        new ArrayList<SuitFeatures.ABILITIES>(
+                                List.of(SuitFeatures.ABILITIES.LIMITED_FLIGHT,
+                                        SuitFeatures.ABILITIES.SHOOT_ARROWS))));
     }
 }

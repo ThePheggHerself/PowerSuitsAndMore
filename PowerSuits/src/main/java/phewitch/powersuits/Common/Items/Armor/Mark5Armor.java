@@ -6,22 +6,23 @@ import net.minecraft.world.item.ArmorMaterial;
 import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourBase;
 import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitFeatures;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Mark5Armor extends SuitArmourBase {
     public Mark5Armor(ArmorMaterial materialIn, Type type, Properties properties) {
-        super(materialIn, type, properties, "mark5");
-
-        features.add(SuitFeatures.LIMITED_FLIGHT);
-        features.add(SuitFeatures.FULL_FLIGHT);
-        features.add(SuitFeatures.SHOOT_ARROWS);
-        features.add(SuitFeatures.SHOOT_LASERS);
-        features.add(SuitFeatures.SHOOT_CHEST_LASER);
-
-        this.fallDamageMultiplier = 0;
-        projectileDamage = 5;
-
-        this.fullArmourEffects.add(new MobEffectInstance(MobEffects.NIGHT_VISION, 300));
-        this.fullArmourEffects.add(new MobEffectInstance(MobEffects.WATER_BREATHING, 300));
-        this.fullArmourEffects.add(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 300));
-        this.fullArmourEffects.add(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300));
+        super(materialIn, type, properties, "mark5",
+                new SuitFeatures(250, 5,
+                        new ArrayList<SuitFeatures.ABILITIES>(
+                                List.of(SuitFeatures.ABILITIES.LIMITED_FLIGHT,
+                                        SuitFeatures.ABILITIES.FULL_FLIGHT,
+                                        SuitFeatures.ABILITIES.SHOOT_ARROWS,
+                                        SuitFeatures.ABILITIES.SHOOT_LASERS,
+                                        SuitFeatures.ABILITIES.SHOOT_CHEST_LASER)),
+                        new ArrayList<>(
+                                List.of(new MobEffectInstance(MobEffects.NIGHT_VISION, 600),
+                                        new MobEffectInstance(MobEffects.WATER_BREATHING, 600),
+                                        new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600),
+                                        new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600)))));
     }
 }

@@ -6,9 +6,7 @@ import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
-import phewitch.powersuits.Common.networking.Packets.C2SSuitShootArrow;
-import phewitch.powersuits.Common.networking.Packets.C2SSuitShootChestLaser;
-import phewitch.powersuits.Common.networking.Packets.C2SSuitShootLaser;
+import phewitch.powersuits.Common.networking.Packets.*;
 import phewitch.powersuits.PowerSuits;
 
 import java.util.Map;

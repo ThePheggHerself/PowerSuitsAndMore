@@ -60,7 +60,7 @@ public class ClientEvents {
                 return;
 
             if(player.getInventory().getArmor(0).getItem() instanceof SuitArmourBase sAB){
-                sAB.handleFeatures(ev, player);
+                sAB.handleClientFeatures(ev, player);
             }
         }
 
