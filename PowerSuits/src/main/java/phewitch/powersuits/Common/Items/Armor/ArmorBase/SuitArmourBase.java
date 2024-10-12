@@ -132,7 +132,12 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
 
         if (hasFullSet(ev.player)) {
             if (features.abilities.contains(SuitFeatures.ABILITIES.FULL_FLIGHT)) {
-                ev.player.getAbilities().mayfly = true;
+                if(features.currentPower > 0)
+                    ev.player.getAbilities().mayfly = true;
+                else {
+                    ev.player.getAbilities().flying = false;
+                    ev.player.getAbilities().mayfly = false;
+                }
             }
             if (features.canLimitedFlight() && hasBootsOrChestplate(ev.player)) {
 
