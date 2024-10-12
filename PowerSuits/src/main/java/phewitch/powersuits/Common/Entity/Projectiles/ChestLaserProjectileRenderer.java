@@ -12,6 +12,6 @@ public class ChestLaserProjectileRenderer extends ArrowRenderer<ChestLaserProjec
 
     @Override
     public ResourceLocation getTextureLocation(ChestLaserProjectile abstractArrow) {
-        return new ResourceLocation(PowerSuits.MODID, "textures/item/chest_laser_projectile.png");
+        return new ResourceLocation(PowerSuits.MODID, "textures/entity/chest_laser_projectile.png");
     }
 }

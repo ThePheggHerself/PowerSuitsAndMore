@@ -51,8 +51,6 @@ public class ChestLaserProjectile extends AbstractArrow {
     @Override
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         try {
-
-
             return NetworkHooks.getEntitySpawningPacket(this);
         }
         catch (Exception e){

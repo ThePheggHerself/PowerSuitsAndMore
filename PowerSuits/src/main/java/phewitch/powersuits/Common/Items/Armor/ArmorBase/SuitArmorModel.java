@@ -1,7 +1,6 @@
 package phewitch.powersuits.Common.Items.Armor.ArmorBase;
 
 import net.minecraft.resources.ResourceLocation;
-import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourBase;
 import phewitch.powersuits.PowerSuits;
 import software.bernie.geckolib.model.GeoModel;
 

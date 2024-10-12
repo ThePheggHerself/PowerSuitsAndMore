@@ -35,7 +35,6 @@ import java.util.function.Consumer;
 
 public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
     public ArrayList<SuitFeatures> features = new ArrayList<>();
-
     public ArrayList<MobEffectInstance> fullArmourEffects = new ArrayList<>();
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public String name;
@@ -45,17 +44,12 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
     public double lfFuelRecharge = 2f;
     public float lfMaxfuel = -1;
     public float lfCurrentFuel = 0;
-
     long lastLaserShot = 0;
     long lastChestLaserShot = 0;
-
-    public boolean hasFlightFuel() {
-        return lfMaxfuel == -1 || lfCurrentFuel > 0;
-    }
     public int projectileDamage = 7;
 
-
     public final Minecraft minecraft = Minecraft.getInstance();
+
     public SuitArmourBase(ArmorMaterial materialIn, Type type, Properties properties, String name ) {
         super(materialIn, type, properties);
         this.name = name;
@@ -63,21 +57,87 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         GUIManager.registerHUDItem(name + "_armor", this);
     }
 
-    private PlayState predicate(AnimationState animationState) {
-        animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
+
+    public boolean hasFlightFuel() {
+        return lfMaxfuel == -1 || lfCurrentFuel > 0;
     }
 
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<SuitArmourBase>(this, "controller",
-                20, this::predicate));
+    public Boolean hasBoots(Player player){
+        if(player == null)
+            return false;
+
+        return (player.getInventory().getArmor(0).getItem() instanceof ArmorItem ai) && ai.getMaterial() == material;
     }
+
+    public Boolean hasLegs(Player player){
+        if(player == null)
+            return false;
+
+        return (player.getInventory().getArmor(1).getItem() instanceof ArmorItem ai) && ai.getMaterial() == material;
+    }
+
+    public Boolean hasChestplate(Player player){
+        if(player == null)
+            return false;
+
+        return (player.getInventory().getArmor(2).getItem() instanceof ArmorItem ai) && ai.getMaterial() == material;
+    }
+
+    public Boolean hasHelmet(Player player){
+        if(player == null)
+            return false;
+
+        return (player.getInventory().getArmor(3).getItem() instanceof ArmorItem ai) && ai.getMaterial() == material;
+    }
+
+    public Boolean hasFullSet(Player player){
+        if(player == null)
+            return false;
+
+        return hasBoots(player) && hasLegs(player) && hasChestplate(player) && hasHelmet(player);
+    }
+
+    public boolean hasBootsOrChestplate(Player player){
+        return hasBoots(player) || hasChestplate(player);
+    }
+
+    public void handleFeatures(TickEvent.ClientTickEvent ev, Player player){
+
+        if(features.contains(SuitFeatures.SHOOT_ARROWS) && KeyBinding.SHOOT_ARROW_KEY.consumeClick()){
+            if(player.getInventory().contains(new ItemStack(Items.ARROW))){
+                ModMessages.sendToServer(new C2SSuitShootArrow());
+            }
+            else {
+                player.displayClientMessage(Component.translatable ("msg." + PowerSuits.MODID + ".suit.noarrows"), true);
+            }
+        }
+        else if(features.contains(SuitFeatures.SHOOT_LASERS) && KeyBinding.SHOOT_LASER_KEY.consumeClick()){
+            var curTime = System.currentTimeMillis();
+            if(lastLaserShot < 1 || curTime - lastLaserShot > 500){
+                ModMessages.sendToServer(new C2SSuitShootLaser());
+                player.displayClientMessage(Component.literal ("PEW PEW"), true);
+
+                lastLaserShot = curTime;
+            }
+        }
+        else if(features.contains(SuitFeatures.SHOOT_CHEST_LASER) && KeyBinding.SHOOT_CHEST_LASER_KEY.consumeClick()){
+            var curTime = System.currentTimeMillis();
+            if(lastChestLaserShot < 1 || curTime - lastChestLaserShot > 5000){
+                ModMessages.sendToServer(new C2SSuitShootChestLaser());
+                player.displayClientMessage(Component.literal ("BEEG PEW PEW"), true);
+
+                lastChestLaserShot = curTime;
+            }
+        }
+    }
+
+
 
     @Override
     public boolean isDamageable(ItemStack stack) {
         return false;
     }
+
 
     @SuppressWarnings("removal")
     @Override
@@ -128,49 +188,6 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         }
     }
 
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
-
-    public Boolean hasBoots(Player player){
-        if(player == null)
-            return false;
-
-        return (player.getInventory().getArmor(0).getItem() instanceof ArmorItem ai) && ai.getMaterial() == material;
-    }
-
-    public Boolean hasLegs(Player player){
-        if(player == null)
-            return false;
-
-        return (player.getInventory().getArmor(1).getItem() instanceof ArmorItem ai) && ai.getMaterial() == material;
-    }
-
-    public Boolean hasChestplate(Player player){
-        if(player == null)
-            return false;
-
-        return (player.getInventory().getArmor(2).getItem() instanceof ArmorItem ai) && ai.getMaterial() == material;
-    }
-
-    public Boolean hasHelmet(Player player){
-        if(player == null)
-            return false;
-
-        return (player.getInventory().getArmor(3).getItem() instanceof ArmorItem ai) && ai.getMaterial() == material;
-    }
-
-    public Boolean hasFullSet(Player player){
-        if(player == null)
-            return false;
-
-        return hasBoots(player) && hasLegs(player) && hasChestplate(player) && hasHelmet(player);
-    }
-
-    public boolean hasBootsOrChestplate(Player player){
-        return hasBoots(player) || hasChestplate(player);
-    }
 
     @Override
     public void renderGUI(RenderGuiEvent event, PoseStack matrix) {
@@ -178,7 +195,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         var player = instance.player;
 
 
-        if (instance.isPaused() || player == null || player.level() == null || instance.options.hideGui)
+        if (instance.isPaused() || player == null || instance.options.hideGui)
             return;
 
         if(features.contains(SuitFeatures.LIMITED_FLIGHT) && lfMaxfuel > 0){
@@ -213,33 +230,19 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         });
     }
 
-    public void handleFeatures(TickEvent.ClientTickEvent ev, Player player){
-
-        if(features.contains(SuitFeatures.SHOOT_ARROWS) && KeyBinding.SHOOT_ARROW_KEY.consumeClick()){
-            if(player.getInventory().contains(new ItemStack(Items.ARROW))){
-                ModMessages.sendToServer(new C2SSuitShootArrow());
-            }
-            else {
-                player.displayClientMessage(Component.translatable ("msg." + PowerSuits.MODID + ".suit.noarrows"), true);
-            }
-        }
-        else if(features.contains(SuitFeatures.SHOOT_LASERS) && KeyBinding.SHOOT_LASER_KEY.consumeClick()){
-            var curTime = System.currentTimeMillis();
-            if(lastLaserShot < 1 || curTime - lastLaserShot > 500){
-                ModMessages.sendToServer(new C2SSuitShootLaser());
-                player.displayClientMessage(Component.literal ("PEW PEW"), true);
-
-                lastLaserShot = curTime;
-            }
-        }
-        else if(features.contains(SuitFeatures.SHOOT_CHEST_LASER) && KeyBinding.SHOOT_CHEST_LASER_KEY.consumeClick()){
-            var curTime = System.currentTimeMillis();
-            if(lastChestLaserShot < 1 || curTime - lastChestLaserShot > 5000){
-                ModMessages.sendToServer(new C2SSuitShootChestLaser());
-                player.displayClientMessage(Component.literal ("BEEG PEW PEW"), true);
-
-                lastChestLaserShot = curTime;
-            }
-        }
+    private PlayState predicate(AnimationState animationState) {
+        animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
     }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController(this, "controller", 0, this::predicate));
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
+
 }
