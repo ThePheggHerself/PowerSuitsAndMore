@@ -56,6 +56,7 @@ public class ItemModelGenerator extends ItemModelProvider {
 
         simpleItem(Circuits.BASIC_CIRCUIT);
         simpleItem(Circuits.ADVANCED_CIRCUIT);
+        simpleItem(Misc.LASER_PROJECTILE);
 
         simpleItem(Misc.MIXED_METAL_ALLOY);
         simpleItem(Misc.MIXED_METAL_PLATE);

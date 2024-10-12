@@ -7,7 +7,12 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import phewitch.powersuits.Common.networking.Packets.C2SSuitShootArrow;
+import phewitch.powersuits.Common.networking.Packets.C2SSuitShootChestLaser;
+import phewitch.powersuits.Common.networking.Packets.C2SSuitShootLaser;
 import phewitch.powersuits.PowerSuits;
+
+import java.util.Map;
+import java.util.UUID;
 
 public class ModMessages {
     private static SimpleChannel Instance;
@@ -15,7 +20,7 @@ public class ModMessages {
     private static int id(){
         return packetId++;
     }
-
+    
     public static void register(){
         SimpleChannel net = NetworkRegistry.ChannelBuilder.named(
                 new ResourceLocation(PowerSuits.MODID, "messages"))
@@ -30,6 +35,18 @@ public class ModMessages {
                 .decoder(C2SSuitShootArrow::new)
                 .encoder(C2SSuitShootArrow::toBytes)
                 .consumerMainThread(C2SSuitShootArrow::handle)
+                .add();
+
+        net.messageBuilder(C2SSuitShootLaser.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(C2SSuitShootLaser::new)
+                .encoder(C2SSuitShootLaser::toBytes)
+                .consumerMainThread(C2SSuitShootLaser::handle)
+                .add();
+
+        net.messageBuilder(C2SSuitShootChestLaser.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(C2SSuitShootChestLaser::new)
+                .encoder(C2SSuitShootChestLaser::toBytes)
+                .consumerMainThread(C2SSuitShootChestLaser::handle)
                 .add();
     }
 

@@ -32,4 +32,6 @@ public class Misc {
     public static final RegistryObject<Item> MICRO_CANNON = ItemManager.ITEMS.register("micro_cannon", () ->
             new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> LASER_PROJECTILE = ItemManager.ITEMS.register("laser_projectile", () ->
+            new Item(new Item.Properties()));
 }

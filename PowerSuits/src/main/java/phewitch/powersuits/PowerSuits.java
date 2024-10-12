@@ -1,8 +1,6 @@
 package phewitch.powersuits;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -11,7 +9,6 @@ import org.slf4j.Logger;
 import phewitch.powersuits.Client.ClientEvents;
 import phewitch.powersuits.Common.CommonEvents;
 import phewitch.powersuits.Common.Items.CreativeTabs;
-import phewitch.powersuits.Common.Items.Materials.Palladium;
 import phewitch.powersuits.Common.networking.ModMessages;
 
 // The value here should match an entry in the META-INF/mods.toml file

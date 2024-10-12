@@ -8,6 +8,7 @@ import net.minecraftforge.event.entity.player.PlayerFlyableFallEvent;
 import net.minecraftforge.eventbus.EventBus;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import phewitch.powersuits.Common.Entity.EntityManager;
 import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourBase;
 import phewitch.powersuits.Common.Items.ItemManager;
 
@@ -18,6 +19,7 @@ public class CommonEvents {
         Instance = this;
 
         ItemManager.register(eventBus);
+        EntityManager.register(eventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

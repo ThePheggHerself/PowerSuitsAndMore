@@ -9,6 +9,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourBase;
 import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourRenderer;
+import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitFeatures;
 
 import java.util.function.Consumer;
 
@@ -18,8 +19,8 @@ public class Mark1Armor extends SuitArmourBase {
     public Mark1Armor(ArmorMaterial materialIn, Type type, Properties properties) {
         super(materialIn, type, properties, "mark1");
         this.fallDamageMultiplier = 0.6f;
-        shootsLasers = false;
 
+        features.add(SuitFeatures.LIMITED_FLIGHT);
         lfMaxfuel = 30f;
     }
 

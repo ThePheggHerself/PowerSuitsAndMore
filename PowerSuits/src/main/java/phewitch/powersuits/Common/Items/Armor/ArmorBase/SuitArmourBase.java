@@ -17,6 +17,12 @@ import net.minecraftforge.event.TickEvent;
 import org.jetbrains.annotations.NotNull;
 import phewitch.powersuits.Client.GUI.GUIManager;
 import phewitch.powersuits.Client.GUI.IHUDItem;
+import phewitch.powersuits.Client.KeyBinding;
+import phewitch.powersuits.Common.networking.ModMessages;
+import phewitch.powersuits.Common.networking.Packets.C2SSuitShootArrow;
+import phewitch.powersuits.Common.networking.Packets.C2SSuitShootChestLaser;
+import phewitch.powersuits.Common.networking.Packets.C2SSuitShootLaser;
+import phewitch.powersuits.PowerSuits;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.core.animation.*;
@@ -28,26 +34,24 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
+    public ArrayList<SuitFeatures> features = new ArrayList<>();
 
     public ArrayList<MobEffectInstance> fullArmourEffects = new ArrayList<>();
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public String name;
     //The fall damage multiplier. 0 = no damage, 1 = 100% damage, 2 = 200% damage
     public float fallDamageMultiplier = 0.1f;
-
-    public boolean fullFlightOnFullArmour = true;
-    public boolean lfOnBootsOrChestplate = true;
     public double lfVelocity = 0.1d;
     public double lfFuelRecharge = 2f;
     public float lfMaxfuel = -1;
     public float lfCurrentFuel = 0;
 
+    long lastLaserShot = 0;
+    long lastChestLaserShot = 0;
+
     public boolean hasFlightFuel() {
         return lfMaxfuel == -1 || lfCurrentFuel > 0;
     }
-
-    public boolean shootsArrows = false;
-    public boolean shootsLasers = true;
     public int projectileDamage = 7;
 
 
@@ -86,7 +90,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
             }
 
             if(ai.getEquipmentSlot() == EquipmentSlot.HEAD) {
-                if (fullFlightOnFullArmour && hasFullSet(player))
+                if (features.contains(SuitFeatures.FULL_FLIGHT) && hasFullSet(player))
                     player.getAbilities().mayfly = true;
             }
 
@@ -95,7 +99,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
             }
 
             if(ai.getEquipmentSlot() == EquipmentSlot.FEET || ai.getEquipmentSlot() == getEquipmentSlot().CHEST){
-                if (lfOnBootsOrChestplate && hasBootsOrChestplate(player)){
+                if (features.contains(SuitFeatures.LIMITED_FLIGHT) && hasBootsOrChestplate(player)){
                     if(Minecraft.getInstance().options.keyJump.isDown() && hasFlightFuel()){
                         var motion = player.getDeltaMovement();
                         var upwardsVelocity = motion.get(Direction.Axis.Y);
@@ -177,7 +181,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         if (instance.isPaused() || player == null || player.level() == null || instance.options.hideGui)
             return;
 
-        if(lfOnBootsOrChestplate && lfMaxfuel > 0){
+        if(features.contains(SuitFeatures.LIMITED_FLIGHT) && lfMaxfuel > 0){
             int x = event.getGuiGraphics().guiWidth();
             int y = event.getGuiGraphics().guiHeight();
             int color = Integer.parseInt("33AA66", 16);
@@ -207,5 +211,35 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
                 return this.renderer;
             }
         });
+    }
+
+    public void handleFeatures(TickEvent.ClientTickEvent ev, Player player){
+
+        if(features.contains(SuitFeatures.SHOOT_ARROWS) && KeyBinding.SHOOT_ARROW_KEY.consumeClick()){
+            if(player.getInventory().contains(new ItemStack(Items.ARROW))){
+                ModMessages.sendToServer(new C2SSuitShootArrow());
+            }
+            else {
+                player.displayClientMessage(Component.translatable ("msg." + PowerSuits.MODID + ".suit.noarrows"), true);
+            }
+        }
+        else if(features.contains(SuitFeatures.SHOOT_LASERS) && KeyBinding.SHOOT_LASER_KEY.consumeClick()){
+            var curTime = System.currentTimeMillis();
+            if(lastLaserShot < 1 || curTime - lastLaserShot > 500){
+                ModMessages.sendToServer(new C2SSuitShootLaser());
+                player.displayClientMessage(Component.literal ("PEW PEW"), true);
+
+                lastLaserShot = curTime;
+            }
+        }
+        else if(features.contains(SuitFeatures.SHOOT_CHEST_LASER) && KeyBinding.SHOOT_CHEST_LASER_KEY.consumeClick()){
+            var curTime = System.currentTimeMillis();
+            if(lastChestLaserShot < 1 || curTime - lastChestLaserShot > 5000){
+                ModMessages.sendToServer(new C2SSuitShootChestLaser());
+                player.displayClientMessage(Component.literal ("BEEG PEW PEW"), true);
+
+                lastChestLaserShot = curTime;
+            }
+        }
     }
 }
