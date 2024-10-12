@@ -1,9 +1,9 @@
-package phewitch.powersuits.Common.Items.Armor;
+package phewitch.powersuits.Common.Items.Suits;
 
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
-import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourBase;
-import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitFeatures;
+import phewitch.powersuits.Common.Items.Suits.ArmorBase.SuitArmourBase;
+import phewitch.powersuits.Common.Items.Suits.ArmorBase.SuitFeatures;
 
 import java.util.ArrayList;
 import java.util.List;

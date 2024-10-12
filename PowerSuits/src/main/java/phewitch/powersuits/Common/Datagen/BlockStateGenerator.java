@@ -5,8 +5,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
-import phewitch.powersuits.Common.Items.Materials.Palladium;
-import phewitch.powersuits.Common.Items.Materials.Titanium;
+import phewitch.powersuits.Common.Items.BlocksManager;
 import phewitch.powersuits.PowerSuits;
 
 public class BlockStateGenerator extends BlockStateProvider {
@@ -16,11 +15,10 @@ public class BlockStateGenerator extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        blockWithItem(Titanium.STONE_TITANIUM_ORE);
-        blockWithItem(Titanium.DEEPSLATE_TITANIUM_ORE);
-
-        blockWithItem(Palladium.STONE_PALLADIUM_ORE);
-        blockWithItem(Palladium.DEEPSLATE_PALLADIUM_ORE);
+        blockWithItem(BlocksManager.STONE_TITANIUM_ORE);
+        blockWithItem(BlocksManager.DEEPSLATE_TITANIUM_ORE);
+        blockWithItem(BlocksManager.STONE_PALLADIUM_ORE);
+        blockWithItem(BlocksManager.DEEPSLATE_PALLADIUM_ORE);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

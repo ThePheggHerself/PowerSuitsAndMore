@@ -1,4 +1,4 @@
-package phewitch.powersuits.Common.Items.Armor.ArmorBase;
+package phewitch.powersuits.Common.Items.Suits.ArmorBase;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -42,11 +42,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
     public final Minecraft minecraft = Minecraft.getInstance();
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public String name;
-    public int projectileDamage = 7;
     SuitFeatures features;
-    //The fall damage multiplier. 0 = no damage, 1 = 100% damage, 2 = 200% damage
-    long lastLaserShot = 0;
-    long lastChestLaserShot = 0;
 
     public SuitArmourBase(ArmorMaterial materialIn, Type type, Properties properties, String name, SuitFeatures features) {
         super(materialIn, type, properties);
@@ -103,19 +99,19 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
 
             if (features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_LASERS) && KeyBinding.SHOOT_LASER_KEY.consumeClick()) {
                 var curTime = System.currentTimeMillis();
-                if (lastLaserShot < 1 || curTime - lastLaserShot > 500) {
+                if (features.lastLaserShot < 1 || curTime - features.lastLaserShot > 500) {
                     ModMessages.sendToServer(new C2SSuitShootLaser());
 
-                    lastLaserShot = curTime;
+                    features.lastLaserShot = curTime;
                 }
             }
 
             if (features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_ARROWS) && KeyBinding.SHOOT_CHEST_LASER_KEY.consumeClick()) {
                 var curTime = System.currentTimeMillis();
-                if (lastChestLaserShot < 1 || curTime - lastChestLaserShot > 5000) {
+                if (features.lastChestLaserShot < 1 || curTime - features.lastChestLaserShot > 5000) {
                     ModMessages.sendToServer(new C2SSuitShootChestLaser());
 
-                    lastChestLaserShot = curTime;
+                    features.lastChestLaserShot = curTime;
                 }
             }
         }
@@ -188,7 +184,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
     }
 
     public void shootLaser(Level lvl, ServerPlayer plr){
-        if(!features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_LASERS))
+        if(!features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_LASERS) || !features.hasPower(features.laserShotCost))
             return;
 
         try {
@@ -206,7 +202,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
     }
 
     public void shootChestLaser(Level lvl, ServerPlayer plr){
-        if(!features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_CHEST_LASER))
+        if(!features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_CHEST_LASER) || !features.hasPower(features.chestLaserShotCost))
             return;
 
         try {

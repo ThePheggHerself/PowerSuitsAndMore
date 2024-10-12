@@ -1,11 +1,7 @@
 package phewitch.powersuits.Client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RenderGuiEvent;
@@ -19,11 +15,7 @@ import phewitch.powersuits.Client.GUI.GUIManager;
 import phewitch.powersuits.Common.Entity.EntityManager;
 import phewitch.powersuits.Common.Entity.Projectiles.ChestLaserProjectileRenderer;
 import phewitch.powersuits.Common.Entity.Projectiles.LaserProjectileRenderer;
-import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourBase;
-import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitFeatures;
-import phewitch.powersuits.Common.networking.ModMessages;
-import phewitch.powersuits.Common.networking.Packets.C2SSuitShootArrow;
-import phewitch.powersuits.Common.networking.Packets.C2SSuitShootLaser;
+import phewitch.powersuits.Common.Items.Suits.ArmorBase.SuitArmourBase;
 import phewitch.powersuits.PowerSuits;
 
 public class ClientEvents {

@@ -6,7 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.network.NetworkEvent;
 import phewitch.powersuits.Common.CommonCore;
-import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourBase;
+import phewitch.powersuits.Common.Items.Suits.ArmorBase.SuitArmourBase;
 
 import java.util.function.Supplier;
 
@@ -29,7 +29,7 @@ public class C2SSuitShootArrow {
                 CommonCore.RemoveItemFromInventory(plr, Items.ARROW, 1);
                 var proj = new Arrow(lvl, plr);
                 proj.setPos(plr.getX(), plr.getY() + 1.5, plr.getZ());
-                proj.setBaseDamage(sAB.projectileDamage);
+                proj.setBaseDamage(5);
                 proj.shootFromRotation(plr, plr.getXRot(), plr.getYRot(), 0f, 1f * 3f, 1f);
                 proj.tickCount = 50;
                 proj.setNoGravity(true);

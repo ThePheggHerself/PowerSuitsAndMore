@@ -10,8 +10,8 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import phewitch.powersuits.Common.Items.Materials.Palladium;
-import phewitch.powersuits.Common.Items.Materials.Titanium;
+import phewitch.powersuits.Common.Items.BlocksManager;
+import phewitch.powersuits.Common.Items.ItemsManager;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -23,19 +23,19 @@ public class BlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        this.dropSelf(Titanium.STONE_TITANIUM_ORE.get());
-        this.dropSelf(Titanium.DEEPSLATE_TITANIUM_ORE.get());
-        this.dropSelf(Palladium.STONE_PALLADIUM_ORE.get());
-        this.dropSelf(Palladium.DEEPSLATE_PALLADIUM_ORE.get());
+        this.dropSelf(BlocksManager.STONE_TITANIUM_ORE.get());
+        this.dropSelf(BlocksManager.DEEPSLATE_TITANIUM_ORE.get());
+        this.dropSelf(BlocksManager.STONE_PALLADIUM_ORE.get());
+        this.dropSelf(BlocksManager.DEEPSLATE_PALLADIUM_ORE.get());
 
-        this.add(Titanium.STONE_TITANIUM_ORE.get(),
-                block -> createSingleOreDrops(Titanium.STONE_TITANIUM_ORE.get(), Titanium.RAW_TITANIUM.get()));
-        this.add(Titanium.DEEPSLATE_TITANIUM_ORE.get(),
-                block -> createSingleOreDrops(Titanium.DEEPSLATE_TITANIUM_ORE.get(), Titanium.RAW_TITANIUM.get()));
-        this.add(Palladium.STONE_PALLADIUM_ORE.get(),
-                block -> createSingleOreDrops(Palladium.STONE_PALLADIUM_ORE.get(), Palladium.RAW_PALLADIUM.get()));
-        this.add(Palladium.DEEPSLATE_PALLADIUM_ORE.get(),
-                block -> createSingleOreDrops(Palladium.DEEPSLATE_PALLADIUM_ORE.get(), Palladium.RAW_PALLADIUM.get()));
+        this.add(BlocksManager.STONE_TITANIUM_ORE.get(),
+                block -> createSingleOreDrops(BlocksManager.STONE_TITANIUM_ORE.get(), ItemsManager.RAW_TITANIUM.get()));
+        this.add(BlocksManager.DEEPSLATE_TITANIUM_ORE.get(),
+                block -> createSingleOreDrops(BlocksManager.DEEPSLATE_TITANIUM_ORE.get(), ItemsManager.RAW_TITANIUM.get()));
+        this.add(BlocksManager.STONE_PALLADIUM_ORE.get(),
+                block -> createSingleOreDrops(BlocksManager.STONE_PALLADIUM_ORE.get(), ItemsManager.RAW_PALLADIUM.get()));
+        this.add(BlocksManager.DEEPSLATE_PALLADIUM_ORE.get(),
+                block -> createSingleOreDrops(BlocksManager.DEEPSLATE_PALLADIUM_ORE.get(), ItemsManager.RAW_PALLADIUM.get()));
 
     }
 
@@ -50,10 +50,10 @@ public class BlockLootTables extends BlockLootSubProvider {
     @Override
     protected Iterable<Block> getKnownBlocks() {
         var list = new ArrayList<Block>();
-        list.add(Titanium.STONE_TITANIUM_ORE.get());
-        list.add(Titanium.DEEPSLATE_TITANIUM_ORE.get());
-        list.add(Palladium.STONE_PALLADIUM_ORE.get());
-        list.add(Palladium.DEEPSLATE_PALLADIUM_ORE.get());
+        list.add(BlocksManager.STONE_TITANIUM_ORE.get());
+        list.add(BlocksManager.DEEPSLATE_TITANIUM_ORE.get());
+        list.add(BlocksManager.STONE_PALLADIUM_ORE.get());
+        list.add(BlocksManager.DEEPSLATE_PALLADIUM_ORE.get());
 
         return list::iterator;
     }

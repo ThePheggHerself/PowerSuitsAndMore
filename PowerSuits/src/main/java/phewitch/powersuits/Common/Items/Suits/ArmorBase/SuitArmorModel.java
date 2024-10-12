@@ -1,4 +1,4 @@
-package phewitch.powersuits.Common.Items.Armor.ArmorBase;
+package phewitch.powersuits.Common.Items.Suits.ArmorBase;
 
 import net.minecraft.resources.ResourceLocation;
 import phewitch.powersuits.PowerSuits;

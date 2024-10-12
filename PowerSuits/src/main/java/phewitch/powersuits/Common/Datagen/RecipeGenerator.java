@@ -1,14 +1,17 @@
 package phewitch.powersuits.Common.Datagen;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
-import phewitch.powersuits.Common.Items.Materials.Palladium;
-import phewitch.powersuits.Common.Items.Materials.Titanium;
+import phewitch.powersuits.Common.Items.BlocksManager;
+import phewitch.powersuits.Common.Items.ItemsManager;
 import phewitch.powersuits.PowerSuits;
 
 import java.util.List;
@@ -16,11 +19,11 @@ import java.util.function.Consumer;
 
 
 public class RecipeGenerator extends RecipeProvider implements IConditionBuilder {
-    private static final List<ItemLike> TITANIUM_SMELTABLES = List.of(Titanium.RAW_TITANIUM.get(),
-            Titanium.STONE_TITANIUM_ORE.get(), Titanium.DEEPSLATE_TITANIUM_ORE.get());
+    private static final List<ItemLike> TITANIUM_SMELTABLES = List.of(ItemsManager.RAW_TITANIUM.get(),
+            BlocksManager.STONE_TITANIUM_ORE.get(), BlocksManager.DEEPSLATE_TITANIUM_ORE.get());
 
-    private static final List<ItemLike> PALLADIUM_SMELTABLES = List.of(Palladium.RAW_PALLADIUM.get(),
-            Palladium.STONE_PALLADIUM_ORE.get(), Palladium.DEEPSLATE_PALLADIUM_ORE.get());
+    private static final List<ItemLike> PALLADIUM_SMELTABLES = List.of(ItemsManager.RAW_PALLADIUM.get(),
+            BlocksManager.STONE_PALLADIUM_ORE.get(), BlocksManager.DEEPSLATE_PALLADIUM_ORE.get());
 
 
 

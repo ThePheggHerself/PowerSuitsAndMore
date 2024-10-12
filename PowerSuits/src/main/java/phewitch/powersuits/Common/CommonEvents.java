@@ -7,10 +7,9 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.openjdk.nashorn.internal.runtime.logging.Logger;
 import phewitch.powersuits.Common.Entity.EntityManager;
-import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourBase;
-import phewitch.powersuits.Common.Items.ItemManager;
+import phewitch.powersuits.Common.Items.ItemsManager;
+import phewitch.powersuits.Common.Items.Suits.ArmorBase.SuitArmourBase;
 
 public class CommonEvents {
     public static CommonEvents Instance;
@@ -18,7 +17,7 @@ public class CommonEvents {
     public CommonEvents(IEventBus eventBus){
         Instance = this;
 
-        ItemManager.register(eventBus);
+        ItemsManager.register(eventBus);
         EntityManager.register(eventBus);
 
         MinecraftForge.EVENT_BUS.register(this);

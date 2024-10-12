@@ -1,4 +1,4 @@
-package phewitch.powersuits.Common.Items.Armor.ArmorBase;
+package phewitch.powersuits.Common.Items.Suits.ArmorBase;
 
 import net.minecraft.world.effect.MobEffectInstance;
 
@@ -31,7 +31,7 @@ public class SuitFeatures{
     }
 
     public float maxPower;
-    public float currentPower;
+    float currentPower;
     public boolean overchargeAllowed = false;
     public float powerRechargePerSecond;
     public float fallDamageMultiplier;
@@ -41,18 +41,27 @@ public class SuitFeatures{
     public ArrayList<ABILITIES> abilities;
     public ArrayList<MobEffectInstance> fullArmourEffects;
 
-    public void addPower(float add){
-        currentPower += add;
+    public long lastLaserShot = 0;
+    public float laserShotCost = 15f;
+    public long lastChestLaserShot = 0;
+    public float chestLaserShotCost = 50f;
+
+    public void addPower(float value){
+        currentPower += value;
         if(currentPower > maxPower && !overchargeAllowed){
             currentPower = maxPower;
         }
     }
 
-    public void removePower(float add){
-        currentPower -= add;
+    public void removePower(float value){
+        currentPower -= value;
         if(currentPower < 0){
             currentPower = 0;
         }
+    }
+
+    public boolean hasPower(float value){
+        return currentPower >= value;
     }
 
     public void setPower(float power){

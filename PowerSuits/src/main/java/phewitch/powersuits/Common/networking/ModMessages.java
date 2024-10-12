@@ -9,9 +9,6 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import phewitch.powersuits.Common.networking.Packets.*;
 import phewitch.powersuits.PowerSuits;
 
-import java.util.Map;
-import java.util.UUID;
-
 public class ModMessages {
     private static SimpleChannel Instance;
     private static int packetId = 0;

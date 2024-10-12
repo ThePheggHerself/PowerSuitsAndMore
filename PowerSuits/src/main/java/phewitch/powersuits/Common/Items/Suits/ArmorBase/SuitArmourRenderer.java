@@ -1,4 +1,4 @@
-package phewitch.powersuits.Common.Items.Armor.ArmorBase;
+package phewitch.powersuits.Common.Items.Suits.ArmorBase;
 
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 

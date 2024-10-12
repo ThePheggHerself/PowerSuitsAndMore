@@ -27,6 +27,7 @@ public class PowerSuits {
         var eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         new CommonEvents(eventBus);
 
+
         if(Dist.CLIENT.isClient()) {
             new ClientEvents(eventBus);
         }
@@ -34,7 +35,6 @@ public class PowerSuits {
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         CreativeTabs.register(eventBus);
-
         ModMessages.register();
     }
 }

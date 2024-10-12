@@ -2,22 +2,24 @@ package phewitch.powersuits.Common.Datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.armortrim.TrimMaterial;
 import net.minecraft.world.item.armortrim.TrimMaterials;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import phewitch.powersuits.Common.Items.Armor.Suits;
-import phewitch.powersuits.Common.Items.Materials.*;
-import phewitch.powersuits.PowerSuits;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.RegistryObject;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+import phewitch.powersuits.Common.Items.ArmorManager;
+import phewitch.powersuits.Common.Items.ItemsManager;
+import phewitch.powersuits.Common.Items.Suits.Suits;
+import phewitch.powersuits.Common.Items.ToolsManager;
+import phewitch.powersuits.PowerSuits;
 
 import java.util.LinkedHashMap;
 
@@ -42,41 +44,41 @@ public class ItemModelGenerator extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleItem(Titanium.RAW_TITANIUM);
-        simpleItem(Titanium.TITANIUM_INGOT);
-        simpleItem(Titanium.TITANIUM_PLATE);
+        simpleItem(ItemsManager.RAW_TITANIUM);
+        simpleItem(ItemsManager.TITANIUM_INGOT);
+        simpleItem(ItemsManager.TITANIUM_PLATE);
 
-        simpleItem(Palladium.RAW_PALLADIUM);
-        simpleItem(Palladium.PALLADIUM_INGOT);
-        simpleItem(Palladium.PALLADIUM_POWER_CORE);
-        simpleItem(Palladium.ADVANCED_PALLADIUM_POWER_CORE);
+        simpleItem(ItemsManager.RAW_PALLADIUM);
+        simpleItem(ItemsManager.PALLADIUM_INGOT);
+        simpleItem(ItemsManager.PALLADIUM_POWER_CORE);
+        simpleItem(ItemsManager.ADVANCED_PALLADIUM_POWER_CORE);
 
-        simpleItem(Steel.STEEL_INGOT);
-        simpleItem(Steel.STEEL_PLATE);
+        simpleItem(ItemsManager.STEEL_INGOT);
+        simpleItem(ItemsManager.STEEL_PLATE);
 
-        simpleItem(Circuits.BASIC_CIRCUIT);
-        simpleItem(Circuits.ADVANCED_CIRCUIT);
-        simpleItem(Misc.LASER_PROJECTILE);
+        simpleItem(ItemsManager.BASIC_CIRCUIT);
+        simpleItem(ItemsManager.ADVANCED_CIRCUIT);
+        simpleItem(ItemsManager.LASER_PROJECTILE);
 
-        simpleItem(Misc.MIXED_METAL_ALLOY);
-        simpleItem(Misc.MIXED_METAL_PLATE);
-        simpleItem(Misc.ADVANCED_METAL_ALLOY);
-        simpleItem(Misc.ADVANCED_METAL_PLATE);
-        simpleItem(Misc.THRUSTER);
-        simpleItem(Misc.FOCUSING_CRYSTAL);
-        simpleItem(Misc.PHOTONIC_BEAM_GENERATOR);
-        simpleItem(Misc.MICRO_CANNON);
+        simpleItem(ItemsManager.MIXED_METAL_ALLOY);
+        simpleItem(ItemsManager.MIXED_METAL_PLATE);
+        simpleItem(ItemsManager.ADVANCED_METAL_ALLOY);
+        simpleItem(ItemsManager.ADVANCED_METAL_PLATE);
+        simpleItem(ItemsManager.THRUSTER);
+        simpleItem(ItemsManager.FOCUSING_CRYSTAL);
+        simpleItem(ItemsManager.PHOTONIC_BEAM_GENERATOR);
+        simpleItem(ItemsManager.MICRO_CANNON);
 
-        handheldItem(Titanium.TITANIUM_SWORD);
-        handheldItem(Titanium.TITANIUM_PICKAXE);
-        handheldItem(Titanium.TITANIUM_AXE);
-        handheldItem(Titanium.TITANIUM_SHOVEL);
-        handheldItem(Titanium.TITANIUM_HOE);
+        handheldItem(ToolsManager.TITANIUM_SWORD);
+        handheldItem(ToolsManager.TITANIUM_PICKAXE);
+        handheldItem(ToolsManager.TITANIUM_AXE);
+        handheldItem(ToolsManager.TITANIUM_SHOVEL);
+        handheldItem(ToolsManager.TITANIUM_HOE);
 
-        trimmedArmorItem(Titanium.TITANIUM_HELMET);
-        trimmedArmorItem(Titanium.TITANIUM_CHESTPLATE);
-        trimmedArmorItem(Titanium.TITANIUM_LEGGINGS);
-        trimmedArmorItem(Titanium.TITANIUM_BOOTS);
+        trimmedArmorItem(ArmorManager.TITANIUM_HELMET);
+        trimmedArmorItem(ArmorManager.TITANIUM_CHESTPLATE);
+        trimmedArmorItem(ArmorManager.TITANIUM_LEGGINGS);
+        trimmedArmorItem(ArmorManager.TITANIUM_BOOTS);
 
         handheldItem(Suits.MK1_BOOTS);
         handheldItem(Suits.MK1_LEGS);

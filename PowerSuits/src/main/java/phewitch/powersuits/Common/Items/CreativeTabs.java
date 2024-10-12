@@ -1,15 +1,13 @@
 package phewitch.powersuits.Common.Items;
 
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
-import phewitch.powersuits.Common.Items.Armor.Suits;
-import phewitch.powersuits.Common.Items.Materials.*;
+import phewitch.powersuits.Common.Items.Suits.Suits;
 import phewitch.powersuits.PowerSuits;
 
 public class CreativeTabs {
@@ -22,44 +20,44 @@ public class CreativeTabs {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, PowerSuits.MODID);
 
     public static final RegistryObject<CreativeModeTab> TUTORIAL_TAB = CREATIVE_MODE_TABS.register("powersuits_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Palladium.PALLADIUM_POWER_CORE.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ItemsManager.PALLADIUM_POWER_CORE.get()))
                     .title(Component.translatable("itemGroup.powersuitstab"))
                     .displayItems((pParameters, pOutput) -> {
 
-                        pOutput.accept(Titanium.STONE_TITANIUM_ORE.get());
-                        pOutput.accept(Titanium.DEEPSLATE_TITANIUM_ORE.get());
-                        pOutput.accept(Palladium.STONE_PALLADIUM_ORE.get());
-                        pOutput.accept(Palladium.DEEPSLATE_PALLADIUM_ORE.get());
+                        pOutput.accept(BlocksManager.STONE_TITANIUM_ORE.get());
+                        pOutput.accept(BlocksManager.DEEPSLATE_TITANIUM_ORE.get());
+                        pOutput.accept(BlocksManager.STONE_PALLADIUM_ORE.get());
+                        pOutput.accept(BlocksManager.DEEPSLATE_PALLADIUM_ORE.get());
 
-                        pOutput.accept(Palladium.RAW_PALLADIUM.get());
-                        pOutput.accept(Titanium.RAW_TITANIUM.get());
-                        pOutput.accept(Titanium.TITANIUM_INGOT.get());
-                        pOutput.accept(Steel.STEEL_INGOT.get());
-                        pOutput.accept(Misc.MIXED_METAL_ALLOY.get());
-                        pOutput.accept(Misc.ADVANCED_METAL_ALLOY.get());
-                        pOutput.accept(Titanium.TITANIUM_PLATE.get());
-                        pOutput.accept(Steel.STEEL_PLATE.get());
-                        pOutput.accept(Misc.MIXED_METAL_PLATE.get());
-                        pOutput.accept(Misc.ADVANCED_METAL_PLATE.get());
+                        pOutput.accept(ItemsManager.RAW_PALLADIUM.get());
+                        pOutput.accept(ItemsManager.RAW_TITANIUM.get());
+                        pOutput.accept(ItemsManager.TITANIUM_INGOT.get());
+                        pOutput.accept(ItemsManager.STEEL_INGOT.get());
+                        pOutput.accept(ItemsManager.MIXED_METAL_ALLOY.get());
+                        pOutput.accept(ItemsManager.ADVANCED_METAL_ALLOY.get());
+                        pOutput.accept(ItemsManager.TITANIUM_PLATE.get());
+                        pOutput.accept(ItemsManager.STEEL_PLATE.get());
+                        pOutput.accept(ItemsManager.MIXED_METAL_PLATE.get());
+                        pOutput.accept(ItemsManager.ADVANCED_METAL_PLATE.get());
 
-                        pOutput.accept(Circuits.BASIC_CIRCUIT.get());
-                        pOutput.accept(Circuits.ADVANCED_CIRCUIT.get());
-                        pOutput.accept(Palladium.PALLADIUM_POWER_CORE.get());
-                        pOutput.accept(Palladium.ADVANCED_PALLADIUM_POWER_CORE.get());
-                        pOutput.accept(Misc.FOCUSING_CRYSTAL.get());
-                        pOutput.accept(Misc.PHOTONIC_BEAM_GENERATOR.get());
-                        pOutput.accept(Misc.THRUSTER.get());
-                        pOutput.accept(Misc.MICRO_CANNON.get());
+                        pOutput.accept(ItemsManager.BASIC_CIRCUIT.get());
+                        pOutput.accept(ItemsManager.ADVANCED_CIRCUIT.get());
+                        pOutput.accept(ItemsManager.PALLADIUM_POWER_CORE.get());
+                        pOutput.accept(ItemsManager.ADVANCED_PALLADIUM_POWER_CORE.get());
+                        pOutput.accept(ItemsManager.FOCUSING_CRYSTAL.get());
+                        pOutput.accept(ItemsManager.PHOTONIC_BEAM_GENERATOR.get());
+                        pOutput.accept(ItemsManager.THRUSTER.get());
+                        pOutput.accept(ItemsManager.MICRO_CANNON.get());
 
-                        pOutput.accept(Titanium.TITANIUM_SWORD.get());
-                        pOutput.accept(Titanium.TITANIUM_PICKAXE.get());
-                        pOutput.accept(Titanium.TITANIUM_AXE.get());
-                        pOutput.accept(Titanium.TITANIUM_SHOVEL.get());
-                        pOutput.accept(Titanium.TITANIUM_HOE.get());
-                        pOutput.accept(Titanium.TITANIUM_HELMET.get());
-                        pOutput.accept(Titanium.TITANIUM_CHESTPLATE.get());
-                        pOutput.accept(Titanium.TITANIUM_LEGGINGS.get());
-                        pOutput.accept(Titanium.TITANIUM_BOOTS.get());
+                        pOutput.accept(ToolsManager.TITANIUM_SWORD.get());
+                        pOutput.accept(ToolsManager.TITANIUM_PICKAXE.get());
+                        pOutput.accept(ToolsManager.TITANIUM_AXE.get());
+                        pOutput.accept(ToolsManager.TITANIUM_SHOVEL.get());
+                        pOutput.accept(ToolsManager.TITANIUM_HOE.get());
+                        pOutput.accept(ArmorManager.TITANIUM_HELMET.get());
+                        pOutput.accept(ArmorManager.TITANIUM_CHESTPLATE.get());
+                        pOutput.accept(ArmorManager.TITANIUM_LEGGINGS.get());
+                        pOutput.accept(ArmorManager.TITANIUM_BOOTS.get());
 
 
 

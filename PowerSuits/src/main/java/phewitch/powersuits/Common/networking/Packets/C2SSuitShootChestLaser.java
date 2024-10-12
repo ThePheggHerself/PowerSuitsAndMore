@@ -1,12 +1,8 @@
 package phewitch.powersuits.Common.networking.Packets;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraftforge.network.NetworkEvent;
-import phewitch.powersuits.Common.Entity.EntityManager;
-import phewitch.powersuits.Common.Entity.Projectiles.ChestLaserProjectile;
-import phewitch.powersuits.Common.Entity.Projectiles.LaserProjectile;
-import phewitch.powersuits.Common.Items.Armor.ArmorBase.SuitArmourBase;
+import phewitch.powersuits.Common.Items.Suits.ArmorBase.SuitArmourBase;
 
 import java.util.function.Supplier;
 
