@@ -18,7 +18,8 @@ public class Mark5Armor extends SuitArmourBase {
                                         SuitFeatures.ABILITIES.FULL_FLIGHT,
                                         SuitFeatures.ABILITIES.SHOOT_ARROWS,
                                         SuitFeatures.ABILITIES.SHOOT_LASERS,
-                                        SuitFeatures.ABILITIES.SHOOT_CHEST_LASER)),
+                                        SuitFeatures.ABILITIES.SHOOT_CHEST_LASER,
+                                        SuitFeatures.ABILITIES.SENTRY_MODE)),
                         new ArrayList<>(
                                 List.of(new MobEffectInstance(MobEffects.NIGHT_VISION, 600),
                                         new MobEffectInstance(MobEffects.WATER_BREATHING, 600),

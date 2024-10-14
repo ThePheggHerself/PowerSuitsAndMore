@@ -1,5 +1,6 @@
 package phewitch.powersuits.common;
 
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -22,5 +23,10 @@ public class CommonCore {
                 }
             }
         }
+    }
+
+    public static boolean hasAnyArmour(Player plr){
+        return !plr.getItemBySlot(EquipmentSlot.HEAD).isEmpty() || !plr.getItemBySlot(EquipmentSlot.CHEST).isEmpty() ||
+                !plr.getItemBySlot(EquipmentSlot.LEGS).isEmpty() || !plr.getItemBySlot(EquipmentSlot.FEET).isEmpty();
     }
 }

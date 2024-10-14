@@ -15,7 +15,7 @@ public class SuitArmorModel extends GeoModel<SuitArmourBase> {
 
     @Override
     public ResourceLocation getModelResource(SuitArmourBase object) {
-        return new ResourceLocation(PowerSuits.MODID, "geo/"+ name +"_armor.geo.json");
+        return new ResourceLocation(PowerSuits.MODID, "geo/suits/"+ name +"_armor.geo.json");
     }
 
     @Override

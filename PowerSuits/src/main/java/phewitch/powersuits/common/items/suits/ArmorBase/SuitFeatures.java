@@ -73,11 +73,21 @@ public class SuitFeatures{
     }
 
     public enum ABILITIES {
-        LIMITED_FLIGHT,
-        FULL_FLIGHT,
-        SHOOT_ARROWS,
-        SHOOT_LASERS,
-        SHOOT_CHEST_LASER
+        LIMITED_FLIGHT(0),
+        FULL_FLIGHT(1),
+        SHOOT_ARROWS(2),
+        SHOOT_LASERS(3),
+        SHOOT_CHEST_LASER(4),
+        SENTRY_MODE(5);
+
+        private final int value;
+        private ABILITIES(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 }
 

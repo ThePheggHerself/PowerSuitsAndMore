@@ -22,9 +22,11 @@ import phewitch.powersuits.client.gui.GUIManager;
 import phewitch.powersuits.client.gui.IHUDItem;
 import phewitch.powersuits.client.KeyBinding;
 import phewitch.powersuits.common.entity.EntityManager;
+import phewitch.powersuits.common.entity.mobs.SuitSentry;
 import phewitch.powersuits.common.entity.projectiles.ChestLaserProjectile;
 import phewitch.powersuits.common.entity.projectiles.LaserProjectile;
 import phewitch.powersuits.common.networking.ModMessages;
+import phewitch.powersuits.common.networking.packets.C2SSuitSentryMode;
 import phewitch.powersuits.common.networking.packets.C2SSuitShootArrow;
 import phewitch.powersuits.common.networking.packets.C2SSuitShootChestLaser;
 import phewitch.powersuits.common.networking.packets.C2SSuitShootLaser;
@@ -35,6 +37,7 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -86,6 +89,15 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         return hasBoots(player) || hasChestplate(player);
     }
 
+    public ArrayList<Integer> getsuitAbilities(){
+        ArrayList<Integer> aList = new ArrayList<>();
+        for(var a : features.abilities){
+            aList.add(a.getValue());
+        }
+
+        return aList;
+    }
+
 
     public void handleClientFeatures(TickEvent.ClientTickEvent ev, Player player) {
         if (hasFullSet(player)) {
@@ -106,13 +118,17 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
                 }
             }
 
-            if (features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_ARROWS) && KeyBinding.SHOOT_CHEST_LASER_KEY.consumeClick()) {
+            if (features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_CHEST_LASER) && KeyBinding.SHOOT_CHEST_LASER_KEY.consumeClick()) {
                 var curTime = System.currentTimeMillis();
                 if (features.lastChestLaserShot < 1 || curTime - features.lastChestLaserShot > 5000) {
                     ModMessages.sendToServer(new C2SSuitShootChestLaser());
 
                     features.lastChestLaserShot = curTime;
                 }
+            }
+
+            if (features.abilities.contains(SuitFeatures.ABILITIES.SENTRY_MODE) && KeyBinding.SENTRY_MODE_KEY.consumeClick()) {
+                ModMessages.sendToServer(new C2SSuitSentryMode());
             }
         }
     }
@@ -170,7 +186,6 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
 
         ev.setDamageMultiplier(features.fallDamageMultiplier);
     }
-
     public void handleHurt(LivingHurtEvent ev){
         var damage = ev.getAmount();
         if(features.currentPower > damage * 2){
@@ -200,7 +215,6 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
             plr.server.sendSystemMessage(Component.literal(e.getMessage()));
         }
     }
-
     public void shootChestLaser(Level lvl, ServerPlayer plr){
         if(!features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_CHEST_LASER) || !features.hasPower(features.chestLaserShotCost))
             return;
@@ -213,6 +227,23 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
             lvl.addFreshEntity(proj);
 
             features.removePower(50f);
+        }
+        catch (Exception e){
+            plr.server.sendSystemMessage(Component.literal(e.getMessage()));
+        }
+    }
+    public void sentryMode(Level lvl, ServerPlayer plr){
+        if(!features.abilities.contains(SuitFeatures.ABILITIES.SENTRY_MODE))
+            return;
+
+        try {
+            var proj = new SuitSentry(EntityManager.MARK5_SENTRY.get(), plr.level(), plr, this);
+            proj.setPos(plr.getX(), plr.getY() + 1.5, plr.getZ());
+            proj.setXRot(plr.getXRot());
+            proj.setYRot(plr.getYRot());
+            lvl.addFreshEntity(proj);
+
+            plr.getInventory().armor.clear();
         }
         catch (Exception e){
             plr.server.sendSystemMessage(Component.literal(e.getMessage()));

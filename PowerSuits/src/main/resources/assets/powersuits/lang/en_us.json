@@ -2,6 +2,8 @@
   "itemGroup.powersuitstab": "Power Suits",
   "key.category.powersuits": "Power Suits",
   "key.powersuits.suit.shootarrow": "Shoot Arrow",
+  "key.powersuits.suit.shootlaser": "Shoot Laser",
+  "key.powersuits.suit.shootchestlaser": "Shoot Chest Laser",
   "msg.powersuits.suit.noarrows": "No arrows detected",
 
   "item.powersuits.raw_titanium": "Raw Titanium",

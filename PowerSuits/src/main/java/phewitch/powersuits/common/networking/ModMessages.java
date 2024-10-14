@@ -43,6 +43,12 @@ public class ModMessages {
                 .encoder(C2SSuitShootChestLaser::toBytes)
                 .consumerMainThread(C2SSuitShootChestLaser::handle)
                 .add();
+
+        net.messageBuilder(C2SSuitSentryMode.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(C2SSuitSentryMode::new)
+                .encoder(C2SSuitSentryMode::toBytes)
+                .consumerMainThread(C2SSuitSentryMode::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message){

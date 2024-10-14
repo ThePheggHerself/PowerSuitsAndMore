@@ -6,6 +6,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import phewitch.powersuits.common.entity.mobs.SuitSentry;
 import phewitch.powersuits.common.entity.projectiles.ChestLaserProjectile;
 import phewitch.powersuits.common.entity.projectiles.LaserProjectile;
 import phewitch.powersuits.PowerSuits;
@@ -21,6 +22,10 @@ public class EntityManager {
     public static final RegistryObject<EntityType<ChestLaserProjectile>> CHEST_LASER_PROJECTILE =
             ENTITY_TYPES.register("chest_laser_projectile", () -> EntityType.Builder.<ChestLaserProjectile>of(ChestLaserProjectile::new, MobCategory.MISC)
                     .sized(1f, 1f).build("chest_laser_projectile"));
+
+    public static final RegistryObject<EntityType<SuitSentry>> MARK5_SENTRY =
+            ENTITY_TYPES.register("mar5_sentry", () -> EntityType.Builder.<SuitSentry>of(SuitSentry::new, MobCategory.MISC)
+                    .sized(1f, 1f).build("sentry"));
 
     public static void register(IEventBus eventBus){
         ENTITY_TYPES.register(eventBus);
