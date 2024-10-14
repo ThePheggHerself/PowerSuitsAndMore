@@ -6,12 +6,12 @@ import net.minecraft.world.entity.ai.goal.target.TargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import phewitch.powersuits.common.entity.mobs.SuitSentry;
 
-public class AttackOwnerGoal extends TargetGoal {
+public class OwnerAttackedGoal extends TargetGoal {
     private SuitSentry sentry;
     private LivingEntity ownerLastHurtBy;
     private int timestamp;
 
-    public AttackOwnerGoal(Mob pMob, SuitSentry sentry) {
+    public OwnerAttackedGoal(Mob pMob, SuitSentry sentry) {
         super(pMob, false);
 
         this.sentry = sentry;

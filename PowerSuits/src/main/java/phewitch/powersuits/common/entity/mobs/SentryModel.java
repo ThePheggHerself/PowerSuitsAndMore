@@ -18,6 +18,6 @@ public class SentryModel extends GeoModel<SuitSentry> {
 
     @Override
     public ResourceLocation getAnimationResource(SuitSentry animatable) {
-        return new ResourceLocation(PowerSuits.MODID, "animations/sentry.json");
+        return new ResourceLocation(PowerSuits.MODID, "animations/sentry.animation.json");
     }
 }
