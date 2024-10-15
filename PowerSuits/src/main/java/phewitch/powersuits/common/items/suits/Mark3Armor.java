@@ -16,6 +16,6 @@ public class Mark3Armor extends SuitArmourBase {
                         new ArrayList<SuitFeatures.ABILITIES>(
                                 List.of(SuitFeatures.ABILITIES.LIMITED_FLIGHT,
                                         SuitFeatures.ABILITIES.SHOOT_ARROWS)),
-                        new ArrayList<>(List.of(new MobEffectInstance(MobEffects.NIGHT_VISION, 600)))));
+                        new ArrayList<>(List.of(MobEffects.NIGHT_VISION))));
     }
 }

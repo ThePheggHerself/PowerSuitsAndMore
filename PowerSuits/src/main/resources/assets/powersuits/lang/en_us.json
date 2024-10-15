@@ -4,7 +4,10 @@
   "key.powersuits.suit.shootarrow": "Shoot Arrow",
   "key.powersuits.suit.shootlaser": "Shoot Laser",
   "key.powersuits.suit.shootchestlaser": "Shoot Chest Laser",
+
   "msg.powersuits.suit.noarrows": "No arrows detected",
+  "msg.powersuits.suit.notfollow.true": "Will No Longer Follow",
+  "msg.powersuits.suit.notfollow.false": "Will Now Follow",
 
   "item.powersuits.raw_titanium": "Raw Titanium",
   "block.powersuits.titanium_ore": "Titanium Ore",

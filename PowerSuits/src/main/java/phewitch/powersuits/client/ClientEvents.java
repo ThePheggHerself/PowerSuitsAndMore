@@ -34,7 +34,7 @@ public class ClientEvents {
 
         @SubscribeEvent
         public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
-            event.put(EntityManager.MARK5_SENTRY.get(), SuitSentry.setAttributes());
+            event.put(EntityManager.SENTRY.get(), SuitSentry.setAttributes());
         }
 
         @SubscribeEvent
@@ -47,8 +47,7 @@ public class ClientEvents {
 
         @SubscribeEvent
         public static void setupClient(FMLClientSetupEvent event) {
-            EntityRenderers.register(EntityManager.MARK5_SENTRY.get(), SentryRenderer::new);
-
+            EntityRenderers.register(EntityManager.SENTRY.get(), context ->  new SentryRenderer(context));
             EntityRenderers.register(EntityManager.LASER_PROJECTILE.get(), context -> new LaserProjectileRenderer(context));
             EntityRenderers.register(EntityManager.CHEST_LASER_PROJECTILE.get(), context -> new ChestLaserProjectileRenderer(context));
         }

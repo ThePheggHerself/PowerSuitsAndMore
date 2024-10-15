@@ -23,8 +23,8 @@ public class EntityManager {
             ENTITY_TYPES.register("chest_laser_projectile", () -> EntityType.Builder.<ChestLaserProjectile>of(ChestLaserProjectile::new, MobCategory.MISC)
                     .sized(1f, 1f).build("chest_laser_projectile"));
 
-    public static final RegistryObject<EntityType<SuitSentry>> MARK5_SENTRY =
-            ENTITY_TYPES.register("mar5_sentry", () -> EntityType.Builder.<SuitSentry>of(SuitSentry::new, MobCategory.MISC)
+    public static final RegistryObject<EntityType<SuitSentry>> SENTRY =
+            ENTITY_TYPES.register("sentry", () -> EntityType.Builder.<SuitSentry>of(SuitSentry::new, MobCategory.MISC)
                     .sized(1f, 1f).build("sentry"));
 
     public static void register(IEventBus eventBus){

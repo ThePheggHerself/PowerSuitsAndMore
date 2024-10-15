@@ -1,12 +1,14 @@
 package phewitch.powersuits.common.items.suits.ArmorBase;
 
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 
 import java.util.ArrayList;
 
 public class SuitFeatures{
 
-    public SuitFeatures(float maxPower, float rechargePerSecond, ArrayList<ABILITIES> abilities, ArrayList<MobEffectInstance> effects){
+    public SuitFeatures(float maxPower, float rechargePerSecond, ArrayList<ABILITIES> abilities, ArrayList<MobEffect> effects){
         this(maxPower, rechargePerSecond, 0, 10, 0.1d, 0, abilities, effects);
     }
 
@@ -18,9 +20,10 @@ public class SuitFeatures{
         this(maxPower, rechargePerSecond, fallDamageMultiplier, fallDamageCancellationDistance, flightVelocity, flightCost, abilities, new ArrayList<>());
     }
 
-    public SuitFeatures(float maxPower, float rechargePerSecond, float fallDamageMultiplier, float fallDamageCancellationDistance, double flightVelocity, float flightCost, ArrayList<ABILITIES> abilities, ArrayList<MobEffectInstance> effects){
+    public SuitFeatures(float maxPower, float rechargePerSecond, float fallDamageMultiplier, float fallDamageCancellationDistance, double flightVelocity, float flightCost,
+                        ArrayList<ABILITIES> abilities, ArrayList<MobEffect> effects){
         this.maxPower = maxPower;
-        this.currentPower = maxPower;
+        this.currentPower = maxPower / 4;
         this.powerRechargePerSecond = rechargePerSecond;
         this.fallDamageMultiplier = fallDamageMultiplier;
         this.fallDamageCancellationDistance = fallDamageCancellationDistance;
@@ -32,14 +35,13 @@ public class SuitFeatures{
 
     public float maxPower;
     float currentPower;
-    public boolean overchargeAllowed = false;
     public float powerRechargePerSecond;
     public float fallDamageMultiplier;
     public float fallDamageCancellationDistance;
     public double flightVelocity;
     public float flightCost;
     public ArrayList<ABILITIES> abilities;
-    public ArrayList<MobEffectInstance> fullArmourEffects;
+    public ArrayList<MobEffect> fullArmourEffects;
 
     public long lastLaserShot = 0;
     public float laserShotCost = 15f;
@@ -47,17 +49,11 @@ public class SuitFeatures{
     public float chestLaserShotCost = 50f;
 
     public void addPower(float value){
-        currentPower += value;
-        if(currentPower > maxPower && !overchargeAllowed){
-            currentPower = maxPower;
-        }
+        currentPower = Math.min(currentPower + value, maxPower);
     }
 
     public void removePower(float value){
-        currentPower -= value;
-        if(currentPower < 0){
-            currentPower = 0;
-        }
+        currentPower = Math.max(currentPower - value, 0);
     }
 
     public boolean hasPower(float value){

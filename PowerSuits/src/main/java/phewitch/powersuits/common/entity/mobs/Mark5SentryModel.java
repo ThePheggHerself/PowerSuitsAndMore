@@ -4,7 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import phewitch.powersuits.PowerSuits;
 import software.bernie.geckolib.model.GeoModel;
 
-public class SentryModel extends GeoModel<SuitSentry> {
+public class Mark5SentryModel extends GeoModel<SuitSentry> {
 
     @Override
     public ResourceLocation getModelResource(SuitSentry object) {

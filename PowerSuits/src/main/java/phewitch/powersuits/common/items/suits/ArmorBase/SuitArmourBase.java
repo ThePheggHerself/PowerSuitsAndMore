@@ -6,6 +6,7 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,9 +19,10 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.jetbrains.annotations.NotNull;
+import phewitch.powersuits.PowerSuits;
+import phewitch.powersuits.client.KeyBinding;
 import phewitch.powersuits.client.gui.GUIManager;
 import phewitch.powersuits.client.gui.IHUDItem;
-import phewitch.powersuits.client.KeyBinding;
 import phewitch.powersuits.common.entity.EntityManager;
 import phewitch.powersuits.common.entity.mobs.SuitSentry;
 import phewitch.powersuits.common.entity.projectiles.ChestLaserProjectile;
@@ -30,7 +32,6 @@ import phewitch.powersuits.common.networking.packets.C2SSuitSentryMode;
 import phewitch.powersuits.common.networking.packets.C2SSuitShootArrow;
 import phewitch.powersuits.common.networking.packets.C2SSuitShootChestLaser;
 import phewitch.powersuits.common.networking.packets.C2SSuitShootLaser;
-import phewitch.powersuits.PowerSuits;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
@@ -42,7 +43,6 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
-    public final Minecraft minecraft = Minecraft.getInstance();
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public String name;
     SuitFeatures features;
@@ -89,15 +89,14 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         return hasBoots(player) || hasChestplate(player);
     }
 
-    public ArrayList<Integer> getsuitAbilities(){
+    public ArrayList<Integer> getsuitAbilities() {
         ArrayList<Integer> aList = new ArrayList<>();
-        for(var a : features.abilities){
+        for (var a : features.abilities) {
             aList.add(a.getValue());
         }
 
         return aList;
     }
-
 
     public void handleClientFeatures(TickEvent.ClientTickEvent ev, Player player) {
         if (hasFullSet(player)) {
@@ -133,18 +132,17 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         }
     }
     public void playerTickHandler(TickEvent.PlayerTickEvent ev) {
-        ev.player.displayClientMessage(Component.literal("Power: " + String.format("%.0f",features.currentPower) + "/" + String.format("%.0f",features.maxPower) ), true);
-
-        if (hasChestplate(ev.player) && ev.player.onGround()) {
-
-            if (features.currentPower != features.maxPower) {
-                features.addPower(features.powerRechargePerSecond / 20);
-            }
-        }
+        //ev.player.displayClientMessage(Component.literal("Power: " + String.format("%.0f", features.currentPower) + "/" + String.format("%.0f", features.maxPower)), true);
 
         if (hasFullSet(ev.player)) {
+            if(ev.player.onGround()){
+                if (features.currentPower != features.maxPower) {
+                    features.addPower(features.powerRechargePerSecond / 20);
+                }
+            }
+
             if (features.abilities.contains(SuitFeatures.ABILITIES.FULL_FLIGHT)) {
-                if(features.currentPower > 0)
+                if (features.currentPower > 0)
                     ev.player.getAbilities().mayfly = true;
                 else {
                     ev.player.getAbilities().flying = false;
@@ -168,8 +166,8 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
                 }
             }
 
-            for (MobEffectInstance effect : features.fullArmourEffects) {
-                ev.player.addEffect(effect);
+            for (MobEffect effect : features.fullArmourEffects) {
+                ev.player.addEffect(new MobEffectInstance(effect, 220));
             }
 
         } else {
@@ -177,6 +175,9 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
                 ev.player.getAbilities().mayfly = false;
         }
     }
+
+
+
     public void handleFallDamage(LivingFallEvent ev) {
 
         if (ev.getDistance() > features.fallDamageCancellationDistance)
@@ -186,20 +187,20 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
 
         ev.setDamageMultiplier(features.fallDamageMultiplier);
     }
-    public void handleHurt(LivingHurtEvent ev){
+
+    public void handleHurt(LivingHurtEvent ev) {
         var damage = ev.getAmount();
-        if(features.currentPower > damage * 2){
+        if (features.currentPower > damage * 2) {
             features.removePower(damage * 2);
             ev.setAmount(0);
-        }
-        else{
-            ev.setAmount(damage - (features.currentPower /2));
+        } else {
+            ev.setAmount(damage - (features.currentPower / 2));
             features.setPower(0);
         }
     }
 
-    public void shootLaser(Level lvl, ServerPlayer plr){
-        if(!features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_LASERS) || !features.hasPower(features.laserShotCost))
+    public void shootLaser(Level lvl, ServerPlayer plr) {
+        if (!features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_LASERS) || !features.hasPower(features.laserShotCost))
             return;
 
         try {
@@ -210,13 +211,13 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
             lvl.addFreshEntity(proj);
 
             features.removePower(15);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             plr.server.sendSystemMessage(Component.literal(e.getMessage()));
         }
     }
-    public void shootChestLaser(Level lvl, ServerPlayer plr){
-        if(!features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_CHEST_LASER) || !features.hasPower(features.chestLaserShotCost))
+
+    public void shootChestLaser(Level lvl, ServerPlayer plr) {
+        if (!features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_CHEST_LASER) || !features.hasPower(features.chestLaserShotCost))
             return;
 
         try {
@@ -227,25 +228,24 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
             lvl.addFreshEntity(proj);
 
             features.removePower(50f);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             plr.server.sendSystemMessage(Component.literal(e.getMessage()));
         }
     }
-    public void sentryMode(Level lvl, ServerPlayer plr){
-        if(!features.abilities.contains(SuitFeatures.ABILITIES.SENTRY_MODE))
+
+    public void sentryMode(Level lvl, ServerPlayer plr) {
+        if (!features.abilities.contains(SuitFeatures.ABILITIES.SENTRY_MODE))
             return;
 
         try {
-            var proj = new SuitSentry(EntityManager.MARK5_SENTRY.get(), plr.level(), plr, this);
-            proj.setPos(plr.getX(), plr.getY() + 1.5, plr.getZ());
-            proj.setXRot(plr.getXRot());
-            proj.setYRot(plr.getYRot());
-            lvl.addFreshEntity(proj);
+            var sentry = new SuitSentry(EntityManager.SENTRY.get(), plr.level(), plr, this);
+            sentry.setPos(plr.getX(), plr.getY() + 1.5, plr.getZ());
+            sentry.setXRot(plr.getXRot());
+            sentry.setYRot(plr.getYRot());
+            lvl.addFreshEntity(sentry);
 
             plr.getInventory().armor.clear();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             plr.server.sendSystemMessage(Component.literal(e.getMessage()));
         }
     }
@@ -259,6 +259,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
+
     @Override
     public void renderGUI(RenderGuiEvent event, PoseStack matrix) {
         var instance = Minecraft.getInstance();
@@ -274,11 +275,13 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
 
         event.getGuiGraphics().drawString(instance.font, "Power: " + features.currentPower + "/" + features.maxPower, x - 75, y - 25, color);
     }
+
     @Override
     public void appendHoverText(@NotNull ItemStack item, Level level, List<Component> components, @NotNull TooltipFlag tooltipFlag) {
         components.add(Component.translatable("tooltip.powersuits." + name + ".identifier"));
         components.add(Component.translatable("tooltip.powersuits." + name + ".extra"));
     }
+
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
@@ -287,7 +290,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
                 if (this.renderer == null) {
-                    this.renderer = new SuitArmourRenderer(name);
+                    this.renderer = new SuitArmourRenderer();
                 }
 
                 this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
@@ -295,10 +298,12 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
             }
         });
     }
+
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController(this, "controller", 0, this::predicate));
     }
+
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;

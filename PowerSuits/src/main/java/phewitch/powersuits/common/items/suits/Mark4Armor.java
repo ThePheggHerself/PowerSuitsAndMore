@@ -19,7 +19,7 @@ public class Mark4Armor extends SuitArmourBase {
                                         SuitFeatures.ABILITIES.SHOOT_ARROWS,
                                         SuitFeatures.ABILITIES.SHOOT_LASERS)),
                         new ArrayList<>(
-                                List.of(new MobEffectInstance(MobEffects.NIGHT_VISION, 600),
-                                        new MobEffectInstance(MobEffects.WATER_BREATHING, 600)))));
+                                List.of(MobEffects.NIGHT_VISION,
+                                        MobEffects.WATER_BREATHING))));
     }
 }
