@@ -172,7 +172,7 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
     }
     @Override
     public void writeSpawnData(FriendlyByteBuf buffer) {
-//        buffer.writeBytes(getSentryName().getBytes());
+        buffer.writeBytes(name.getBytes());
     }
 
     @Override
@@ -216,15 +216,15 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
 
     @Override
     public void readSpawnData(FriendlyByteBuf additionalData) {
-//        if(level().isClientSide) {
-//
-//            if(additionalData.readableBytes() > 0) {
-//                var e = additionalData.readBytes(additionalData.readableBytes()).toString(StandardCharsets.UTF_8);
-//                this.name = e;
-//            }
-//            else {
-//                this.name = this.entityData.get(SENTRY_NAME);
-//            }
-//        }
+        if(level().isClientSide) {
+
+            if(additionalData.readableBytes() > 0) {
+                var e = additionalData.readBytes(additionalData.readableBytes()).toString(StandardCharsets.UTF_8);
+                this.name = e;
+            }
+            else {
+                this.name = this.entityData.get(SENTRY_NAME);
+            }
+        }
     }
 }

@@ -8,12 +8,12 @@ public class Mark5SentryModel extends GeoModel<SuitSentry> {
 
     @Override
     public ResourceLocation getModelResource(SuitSentry object) {
-        return new ResourceLocation(PowerSuits.MODID, "geo/entity/sentry.geo.json");
+        return new ResourceLocation(PowerSuits.MODID, "geo/entity/" + object.name + "_sentry.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(SuitSentry object) {
-        return new ResourceLocation(PowerSuits.MODID, "textures/entity/sentry.png");
+        return new ResourceLocation(PowerSuits.MODID, "textures/entity/" + object.name + "_sentry.png");
     }
 
     @Override
