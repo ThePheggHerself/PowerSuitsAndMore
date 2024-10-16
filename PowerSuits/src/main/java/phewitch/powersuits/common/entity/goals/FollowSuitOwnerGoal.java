@@ -80,7 +80,7 @@ public class FollowSuitOwnerGoal extends Goal {
     }
 
     private boolean unableToMove() {
-        return this.sentry.doNotFollow;
+        return this.sentry.doNotFollow || sentry.sentToOSS || sentry.summonedFromOSS;
     }
 
     /**

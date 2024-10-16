@@ -6,8 +6,9 @@ import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
-import phewitch.powersuits.common.networking.packets.*;
 import phewitch.powersuits.PowerSuits;
+import phewitch.powersuits.common.networking.packets.client2server.*;
+import phewitch.powersuits.common.networking.packets.server2client.S2CGetOSSSuits;
 
 public class ModMessages {
     private static SimpleChannel Instance;
@@ -48,6 +49,24 @@ public class ModMessages {
                 .decoder(C2SSuitSentryMode::new)
                 .encoder(C2SSuitSentryMode::toBytes)
                 .consumerMainThread(C2SSuitSentryMode::handle)
+                .add();
+
+        net.messageBuilder(C2SSummonOSSSuit.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(C2SSummonOSSSuit::new)
+                .encoder(C2SSummonOSSSuit::toBytes)
+                .consumerMainThread(C2SSummonOSSSuit::handle)
+                .add();
+
+        net.messageBuilder(C2SGetOSSSuits.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(C2SGetOSSSuits::new)
+                .encoder(C2SGetOSSSuits::toBytes)
+                .consumerMainThread(C2SGetOSSSuits::handle)
+                .add();
+
+        net.messageBuilder(S2CGetOSSSuits.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(S2CGetOSSSuits::new)
+                .encoder(S2CGetOSSSuits::toBytes)
+                .consumerMainThread(S2CGetOSSSuits::handle)
                 .add();
     }
 

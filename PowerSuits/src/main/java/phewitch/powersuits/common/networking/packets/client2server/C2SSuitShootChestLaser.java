@@ -1,4 +1,4 @@
-package phewitch.powersuits.common.networking.packets;
+package phewitch.powersuits.common.networking.packets.client2server;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
@@ -6,9 +6,9 @@ import phewitch.powersuits.common.items.suits.ArmorBase.SuitArmourBase;
 
 import java.util.function.Supplier;
 
-public class C2SSuitShootLaser {
-    public C2SSuitShootLaser(){ }
-    public C2SSuitShootLaser(FriendlyByteBuf buf){ }
+public class C2SSuitShootChestLaser {
+    public C2SSuitShootChestLaser(){ }
+    public C2SSuitShootChestLaser(FriendlyByteBuf buf){ }
 
     public void toBytes(FriendlyByteBuf buf){ }
 
@@ -17,7 +17,7 @@ public class C2SSuitShootLaser {
 
         context.enqueueWork(() -> {
             if(context.getSender().getInventory().getArmor(0).getItem() instanceof SuitArmourBase sAB) {
-                sAB.shootLaser(context.getSender().level(), context.getSender());
+                sAB.shootChestLaser(context.getSender().level(), context.getSender());
             }
         });
 

@@ -24,14 +24,15 @@ import phewitch.powersuits.client.KeyBinding;
 import phewitch.powersuits.client.gui.GUIManager;
 import phewitch.powersuits.client.gui.IHUDItem;
 import phewitch.powersuits.common.entity.EntityManager;
+import phewitch.powersuits.common.entity.OSSManager;
 import phewitch.powersuits.common.entity.mobs.SuitSentry;
 import phewitch.powersuits.common.entity.projectiles.ChestLaserProjectile;
 import phewitch.powersuits.common.entity.projectiles.LaserProjectile;
 import phewitch.powersuits.common.networking.ModMessages;
-import phewitch.powersuits.common.networking.packets.C2SSuitSentryMode;
-import phewitch.powersuits.common.networking.packets.C2SSuitShootArrow;
-import phewitch.powersuits.common.networking.packets.C2SSuitShootChestLaser;
-import phewitch.powersuits.common.networking.packets.C2SSuitShootLaser;
+import phewitch.powersuits.common.networking.packets.client2server.C2SSuitSentryMode;
+import phewitch.powersuits.common.networking.packets.client2server.C2SSuitShootArrow;
+import phewitch.powersuits.common.networking.packets.client2server.C2SSuitShootChestLaser;
+import phewitch.powersuits.common.networking.packets.client2server.C2SSuitShootLaser;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
@@ -238,11 +239,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
             return;
 
         try {
-            var sentry = new SuitSentry(EntityManager.SENTRY.get(), plr.level(), plr, this);
-            sentry.setPos(plr.getX(), plr.getY() + 1.5, plr.getZ());
-            sentry.setXRot(plr.getXRot());
-            sentry.setYRot(plr.getYRot());
-            lvl.addFreshEntity(sentry);
+            OSSManager.SpawnSentry(plr, this.name);
 
             plr.getInventory().armor.clear();
         } catch (Exception e) {

@@ -1,4 +1,4 @@
-package phewitch.powersuits.common.networking.packets;
+package phewitch.powersuits.common.networking.packets.client2server;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.projectile.Arrow;

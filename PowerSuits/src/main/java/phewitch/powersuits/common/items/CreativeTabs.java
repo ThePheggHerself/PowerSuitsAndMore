@@ -29,9 +29,10 @@ public class CreativeTabs {
                         pOutput.accept(BlocksManager.STONE_PALLADIUM_ORE.get());
                         pOutput.accept(BlocksManager.DEEPSLATE_PALLADIUM_ORE.get());
 
-                        pOutput.accept(ItemsManager.RAW_PALLADIUM.get());
                         pOutput.accept(ItemsManager.RAW_TITANIUM.get());
                         pOutput.accept(ItemsManager.TITANIUM_INGOT.get());
+                        pOutput.accept(ItemsManager.RAW_PALLADIUM.get());
+                        pOutput.accept(ItemsManager.PALLADIUM_INGOT.get());
                         pOutput.accept(ItemsManager.STEEL_INGOT.get());
                         pOutput.accept(ItemsManager.MIXED_METAL_ALLOY.get());
                         pOutput.accept(ItemsManager.ADVANCED_METAL_ALLOY.get());
@@ -48,6 +49,7 @@ public class CreativeTabs {
                         pOutput.accept(ItemsManager.PHOTONIC_BEAM_GENERATOR.get());
                         pOutput.accept(ItemsManager.THRUSTER.get());
                         pOutput.accept(ItemsManager.MICRO_CANNON.get());
+                        pOutput.accept(ItemsManager.OSS_REMOTE.get());
 
                         pOutput.accept(ToolsManager.TITANIUM_SWORD.get());
                         pOutput.accept(ToolsManager.TITANIUM_PICKAXE.get());

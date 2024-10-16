@@ -1,6 +1,7 @@
 package phewitch.powersuits.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -13,6 +14,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import phewitch.powersuits.client.gui.GUIManager;
+import phewitch.powersuits.client.gui.hud.oss.OSSMenu;
+import phewitch.powersuits.client.gui.hud.oss.OSSScreen;
 import phewitch.powersuits.common.entity.EntityManager;
 import phewitch.powersuits.common.entity.mobs.SuitSentry;
 import phewitch.powersuits.common.entity.mobs.SentryRenderer;
@@ -26,6 +29,7 @@ public class ClientEvents {
     public ClientEvents(IEventBus eventBus){
         Instance = this;
 
+        GUIManager.register(eventBus);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -50,6 +54,8 @@ public class ClientEvents {
             EntityRenderers.register(EntityManager.SENTRY.get(), context ->  new SentryRenderer(context));
             EntityRenderers.register(EntityManager.LASER_PROJECTILE.get(), context -> new LaserProjectileRenderer(context));
             EntityRenderers.register(EntityManager.CHEST_LASER_PROJECTILE.get(), context -> new ChestLaserProjectileRenderer(context));
+
+            MenuScreens.register(GUIManager.OSS_MENU.get(), OSSScreen::new);
         }
     }
 

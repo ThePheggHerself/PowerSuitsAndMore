@@ -2,6 +2,7 @@ package phewitch.powersuits.common.entity.mobs;
 
 import ca.weblite.objc.Client;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.nbt.CompoundTag;
@@ -29,17 +30,24 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.NetworkHooks;
 import phewitch.powersuits.PowerSuits;
 import phewitch.powersuits.common.CommonCore;
+import phewitch.powersuits.common.capabilities.PlayerOSS;
+import phewitch.powersuits.common.capabilities.PlayerOSSProvider;
+import phewitch.powersuits.common.entity.OSSManager;
 import phewitch.powersuits.common.entity.goals.FollowSuitOwnerGoal;
 import phewitch.powersuits.common.entity.goals.OwnerAttackedGoal;
+import phewitch.powersuits.common.items.ItemsManager;
 import phewitch.powersuits.common.items.suits.ArmorBase.SuitArmourBase;
 import phewitch.powersuits.common.items.suits.Suits;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.object.Color;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
@@ -48,6 +56,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.concurrent.Executors;
 
 public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAdditionalSpawnData {
 
@@ -55,7 +64,7 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
 
     Player owner;
     public Player getOwner() {
-        if (owner != null)
+        if (owner == null)
             owner = getServer().getPlayerList().getPlayer(ownerUUID);
 
         return owner;
@@ -70,14 +79,21 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
 
     ArrayList<Integer> suitAbilities = new ArrayList<>();
     public boolean doNotFollow = false;
+    public boolean sentToOSS = false;
+    public boolean summonedFromOSS = false;
 
     public SuitSentry(EntityType<? extends PathfinderMob> pEntityType, Level pLevel, Player owner, SuitArmourBase suit) {
         super(pEntityType, pLevel);
         this.owner = owner;
         this.ownerUUID = owner.getUUID();
         this.name = suit.name;
+    }
 
-        sendSystemMessage(Component.literal("EEEE " + suit.name + " " + suit.toString() + " " + suit.getType().name()));
+    public SuitSentry(EntityType<? extends PathfinderMob> pEntityType, Level pLevel, Player owner, String name) {
+        super(pEntityType, pLevel);
+        this.owner = owner;
+        this.ownerUUID = owner.getUUID();
+        this.name = name;
     }
 
     public static AttributeSupplier setAttributes() {
@@ -121,9 +137,11 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
     }
 
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController(this, "controller", 0, this::predicate));
-        controllers.add(new AnimationController(this, "attackController", 0, this::attackPredicate));
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        if (pSource.isCreativePlayer())
+            return true;
+
+        return false;
     }
 
     @Override
@@ -132,6 +150,29 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
             return InteractionResult.FAIL;
 
         if (ownerUUID.equals(pPlayer.getUUID())) {
+            var item = pPlayer.getMainHandItem();
+
+            if(!item.isEmpty()){
+                if(item.getItem() == ItemsManager.OSS_REMOTE.get()){
+                    InteractionResult result = InteractionResult.FAIL;
+
+                    pPlayer.getCapability(PlayerOSSProvider.PLAYER_OSS).ifPresent(oss -> {
+                        if(oss.getSuits().contains(name)){
+                            pPlayer.sendSystemMessage(OSSManager.getOSSChatPrefix()
+                                    .append("Suit already in orbital storage"));
+                        }
+                        else {
+                            pPlayer.sendSystemMessage(OSSManager.getOSSChatPrefix()
+                                    .append("Suit sent to Orbital Suit Storage"));
+                            oss.getSuits().add(this.name);
+                            this.sentToOSS = true;
+                        }
+                    });
+
+                    return result;
+                }
+            }
+
             if (pPlayer.isShiftKeyDown()) {
                 doNotFollow = !doNotFollow;
                 pPlayer.sendSystemMessage(Component.literal(getSentryName() + " ")
@@ -157,22 +198,29 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
                 }
             }
         } else {
-            pPlayer.hurt(pPlayer.damageSources().generic(), 10);
+            pPlayer.hurt(pPlayer.damageSources().generic(), 5);
             pPlayer.sendSystemMessage(Component.literal("This suit does not belong to you!"));
             return InteractionResult.FAIL;
         }
     }
 
     @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
-        if (pSource.isCreativePlayer())
-            return true;
+    public void tick() {
+        super.tick();
 
-        return false;
-    }
-    @Override
-    public void writeSpawnData(FriendlyByteBuf buffer) {
-        buffer.writeBytes(name.getBytes());
+        if(level().isClientSide)
+            return;
+
+        if(sentToOSS && getOwner() != null){
+            this.setDeltaMovement(0, 1, 0);
+
+            if(this.distanceTo(getOwner()) > 50)
+                this.remove(RemovalReason.DISCARDED);
+        }
+        if(summonedFromOSS){
+            if(onGround())
+                summonedFromOSS = false;
+        }
     }
 
     @Override
@@ -188,6 +236,11 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
 //            this.entityData.define(SENTRY_NAME, name);
     }
 
+    @Override
+    public void writeSpawnData(FriendlyByteBuf buffer) {
+        buffer.writeBytes(name.getBytes());
+    }
+
     //Client Only{
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     public SuitSentry(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
@@ -195,6 +248,12 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
     }
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() { return this.geoCache; }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController(this, "controller", 0, this::predicate));
+        controllers.add(new AnimationController(this, "attackController", 0, this::attackPredicate));
+    }
 
     private PlayState predicate(AnimationState aState) {
         if (aState.isMoving())
@@ -227,4 +286,5 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
             }
         }
     }
+    //}
 }

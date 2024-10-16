@@ -17,6 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import phewitch.powersuits.common.items.ArmorManager;
 import phewitch.powersuits.common.items.ItemsManager;
+import phewitch.powersuits.common.items.advanced.OSSRemote;
 import phewitch.powersuits.common.items.suits.Suits;
 import phewitch.powersuits.common.items.ToolsManager;
 import phewitch.powersuits.PowerSuits;
@@ -58,7 +59,6 @@ public class ItemModelGenerator extends ItemModelProvider {
 
         simpleItem(ItemsManager.BASIC_CIRCUIT);
         simpleItem(ItemsManager.ADVANCED_CIRCUIT);
-        simpleItem(ItemsManager.LASER_PROJECTILE);
 
         simpleItem(ItemsManager.MIXED_METAL_ALLOY);
         simpleItem(ItemsManager.MIXED_METAL_PLATE);
@@ -68,6 +68,7 @@ public class ItemModelGenerator extends ItemModelProvider {
         simpleItem(ItemsManager.FOCUSING_CRYSTAL);
         simpleItem(ItemsManager.PHOTONIC_BEAM_GENERATOR);
         simpleItem(ItemsManager.MICRO_CANNON);
+        simpleOSSItem(ItemsManager.OSS_REMOTE);
 
         handheldItem(ToolsManager.TITANIUM_SWORD);
         handheldItem(ToolsManager.TITANIUM_PICKAXE);
@@ -154,6 +155,12 @@ public class ItemModelGenerator extends ItemModelProvider {
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(PowerSuits.MODID,"item/" + item.getId().getPath()));
+    }
+
+    private ItemModelBuilder simpleOSSItem(RegistryObject<OSSRemote> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(PowerSuits.MODID,"item/" + item.getId().getPath()));

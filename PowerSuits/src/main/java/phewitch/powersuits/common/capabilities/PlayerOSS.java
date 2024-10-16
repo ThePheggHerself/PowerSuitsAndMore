@@ -1,13 +1,17 @@
 package phewitch.powersuits.common.capabilities;
 
 import com.google.gson.Gson;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import javax.json.JsonArray;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerOSS {
-    private List<String> suits;
+    private List<String> suits = new ArrayList<>();
 
     public List<String> getSuits(){
         return suits;

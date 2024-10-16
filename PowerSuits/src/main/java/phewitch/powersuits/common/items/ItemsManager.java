@@ -5,11 +5,11 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import phewitch.powersuits.common.items.advanced.OSSRemote;
 import phewitch.powersuits.common.items.suits.Suits;
 import phewitch.powersuits.PowerSuits;
 
 public class ItemsManager {
-
     public static void register(IEventBus eventBus){
         Suits.register(eventBus);
 
@@ -73,4 +73,7 @@ public class ItemsManager {
             new Item(new Item.Properties()));
     public static final RegistryObject<Item> STEEL_PLATE = ITEMS.register("steel_plate", () ->
             new Item(new Item.Properties()));
+
+    public static final RegistryObject<OSSRemote> OSS_REMOTE = ITEMS.register("oss_remote", () ->
+            new OSSRemote(new Item.Properties()));
 }
