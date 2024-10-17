@@ -67,7 +67,9 @@ public class SuitFeatures{
         SHOOT_ARROWS(2),
         SHOOT_LASERS(3),
         SHOOT_CHEST_LASER(4),
-        SENTRY_MODE(5);
+        SENTRY_MODE(5),
+        SHOOT_FIRE_ARROWS(6),
+        SHOOT_FLAMETHROWER(7);
 
         private final int value;
 

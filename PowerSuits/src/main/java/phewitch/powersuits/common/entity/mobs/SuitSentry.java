@@ -191,6 +191,12 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
                             pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK5_LEGS.get()));
                             pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK5_BOOTS.get()));
                         }
+                        case "mark6" -> {
+                            pPlayer.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Suits.MK6_HELM.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Suits.MK6_CHEST.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK6_LEGS.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK6_BOOTS.get()));
+                        }
                     }
 
                     this.remove(RemovalReason.DISCARDED);

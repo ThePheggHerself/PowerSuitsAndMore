@@ -105,6 +105,11 @@ public class ItemModelGenerator extends ItemModelProvider {
         handheldItem(Suits.MK5_LEGS);
         handheldItem(Suits.MK5_CHEST);
         handheldItem(Suits.MK5_HELM);
+
+        handheldItem(Suits.MK6_BOOTS);
+        handheldItem(Suits.MK6_LEGS);
+        handheldItem(Suits.MK6_CHEST);
+        handheldItem(Suits.MK6_HELM);
     }
 
     private void trimmedArmorItem(RegistryObject<Item> itemRegistryObject) {

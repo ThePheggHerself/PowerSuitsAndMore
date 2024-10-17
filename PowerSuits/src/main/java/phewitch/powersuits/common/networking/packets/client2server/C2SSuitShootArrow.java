@@ -7,14 +7,15 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.network.NetworkEvent;
 import phewitch.powersuits.common.CommonCore;
 import phewitch.powersuits.common.items.suits.ArmorBase.SuitArmourBase;
+import phewitch.powersuits.common.items.suits.ArmorBase.SuitFeatures;
 
 import java.util.function.Supplier;
 
 public class C2SSuitShootArrow {
-    public C2SSuitShootArrow(){ }
-    public C2SSuitShootArrow(FriendlyByteBuf buf){ }
+    public C2SSuitShootArrow() { }
+    public C2SSuitShootArrow(FriendlyByteBuf buf) { }
 
-    public void toBytes(FriendlyByteBuf buf){ }
+    public void toBytes(FriendlyByteBuf buf) { }
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier){
         NetworkEvent.Context context = supplier.get();
@@ -33,6 +34,10 @@ public class C2SSuitShootArrow {
                 proj.shootFromRotation(plr, plr.getXRot(), plr.getYRot(), 0f, 1f * 3f, 1f);
                 proj.tickCount = 50;
                 proj.setNoGravity(true);
+
+                if(sAB.features.abilities.contains(SuitFeatures.ABILITIES.SHOOT_FIRE_ARROWS))
+                    proj.setSecondsOnFire(20);
+
                 lvl.addFreshEntity(proj);
             }
         });
