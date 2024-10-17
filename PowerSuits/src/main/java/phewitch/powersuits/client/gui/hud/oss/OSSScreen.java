@@ -22,7 +22,7 @@ public class OSSScreen extends AbstractContainerScreen<OSSMenu> {
 
     int scrollOff;
 
-    private final List<OSSOrderSuitButton> suitButtons = new ArrayList<OSSOrderSuitButton>();
+    private final List<OSSOrderSuitButton> suitButtons = new ArrayList<>();
 
     public OSSScreen(OSSMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -54,7 +54,7 @@ public class OSSScreen extends AbstractContainerScreen<OSSMenu> {
         if(!suits.isEmpty()) {
             for(var suit : suits){
                 this.suitButtons.add(
-                        this.addRenderableWidget(new OSSOrderSuitButton(width + 5, distance, index, suit, (callback) -> {
+                        this.addRenderableWidget(new OSSOrderSuitButton(width + 5, distance + (index * 16), index, suit, (callback) -> {
                             if (callback instanceof OSSOrderSuitButton ossB) {
                                 this.postButtonClick(ossB);
                             }

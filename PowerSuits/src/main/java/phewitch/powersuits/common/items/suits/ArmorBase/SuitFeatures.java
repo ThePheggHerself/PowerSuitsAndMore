@@ -69,7 +69,12 @@ public class SuitFeatures{
         SHOOT_CHEST_LASER(4),
         SENTRY_MODE(5),
         SHOOT_FIRE_ARROWS(6),
-        SHOOT_FLAMETHROWER(7);
+        SHOOT_FLAMETHROWER(7),
+        SHOOT_ENDER_SHOT(8),
+        TELEPORT(9),
+        WITHER_PUNCH(10),
+        SHOOT_WITHER_SKULLS(11),
+        WITHER_RESISTANCE(12);
 
         private final int value;
 

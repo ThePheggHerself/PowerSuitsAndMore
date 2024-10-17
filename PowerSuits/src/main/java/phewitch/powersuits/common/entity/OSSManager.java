@@ -70,14 +70,15 @@ public class OSSManager {
         if(owner.level().isClientSide)
             return;
 
-        SpawnSentry(owner, suitName, 0, 50, 0);
+        var sentry = SpawnSentry(owner, suitName, 0, 50, 0);
+        sentry.summonedFromOSS = true;
     }
 
     public static SuitSentry SpawnSentry(Player owner, String suitName){
         return SpawnSentry(owner, suitName, 0, 0.5f, 0);
     }
 
-    public static SuitSentry SpawnSentry(Player owner, String suitName, float xOffset, float yOffset, float zOffset){
+    public static SuitSentry SpawnSentry(Player owner, String suitName, double xOffset, double yOffset, double zOffset){
         if(owner.level().isClientSide)
             return null;
 

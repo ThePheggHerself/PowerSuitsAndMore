@@ -93,6 +93,15 @@ public class CreativeTabs {
                         pOutput.accept(Suits.MK6_CHEST.get());
                         pOutput.accept(Suits.MK6_HELM.get());
 
+                        pOutput.accept(Suits.MK7_BOOTS.get());
+                        pOutput.accept(Suits.MK7_LEGS.get());
+                        pOutput.accept(Suits.MK7_CHEST.get());
+                        pOutput.accept(Suits.MK7_HELM.get());
+
+                        pOutput.accept(Suits.MK8_BOOTS.get());
+                        pOutput.accept(Suits.MK8_LEGS.get());
+                        pOutput.accept(Suits.MK8_CHEST.get());
+                        pOutput.accept(Suits.MK8_HELM.get());
 
                     })
                     .build());

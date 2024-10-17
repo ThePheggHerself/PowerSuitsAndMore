@@ -37,7 +37,6 @@ public class C2SSummonOSSSuit {
                     playerOSS.removeSuit(suit);
                     OSSManager.ServerSummonSentry(plr, suit);
                 }
-
             });
         });
 
