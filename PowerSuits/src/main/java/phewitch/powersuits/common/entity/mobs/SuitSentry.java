@@ -86,7 +86,7 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
         super(pEntityType, pLevel);
         this.owner = owner;
         this.ownerUUID = owner.getUUID();
-        this.name = suit.name;
+        this.name = suit.features.getModelName();
     }
 
     public SuitSentry(EntityType<? extends PathfinderMob> pEntityType, Level pLevel, Player owner, String name) {

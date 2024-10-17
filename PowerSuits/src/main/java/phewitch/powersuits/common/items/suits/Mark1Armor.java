@@ -10,9 +10,7 @@ import java.util.List;
 
 public class Mark1Armor extends SuitArmourBase {
     public Mark1Armor(ArmorMaterial materialIn, Type type, Properties properties) {
-        super(materialIn, type, properties, "mark1",
-                new SuitFeatures(30, 0.2f, 0.7f, 0.1f, 3, new ArrayList<SuitFeatures.ABILITIES>(
-                    List.of(SuitFeatures.ABILITIES.LIMITED_FLIGHT))));
+        super(materialIn, type, properties, Suits.MARK1_FEATURES);
     }
 
     @Override

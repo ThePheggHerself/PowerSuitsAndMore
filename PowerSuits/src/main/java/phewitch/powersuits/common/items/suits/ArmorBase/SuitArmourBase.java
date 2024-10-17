@@ -25,7 +25,6 @@ import phewitch.powersuits.client.gui.GUIManager;
 import phewitch.powersuits.client.gui.IHUDItem;
 import phewitch.powersuits.common.entity.EntityManager;
 import phewitch.powersuits.common.entity.OSSManager;
-import phewitch.powersuits.common.entity.mobs.SuitSentry;
 import phewitch.powersuits.common.entity.projectiles.ChestLaserProjectile;
 import phewitch.powersuits.common.entity.projectiles.LaserProjectile;
 import phewitch.powersuits.common.networking.ModMessages;
@@ -45,15 +44,13 @@ import java.util.function.Consumer;
 
 public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    public String name;
-    SuitFeatures features;
+    public SuitFeatures features;
 
-    public SuitArmourBase(ArmorMaterial materialIn, Type type, Properties properties, String name, SuitFeatures features) {
+    public SuitArmourBase(ArmorMaterial materialIn, Type type, Properties properties, SuitTemplate template) {
         super(materialIn, type, properties);
-        this.name = name;
-        this.features = features;
+        this.features = new SuitFeatures(template);
 
-        GUIManager.registerHUDItem(name + "_armor", this);
+        GUIManager.registerHUDItem(features.getModelName() + "_armor", this);
     }
 
     public Boolean hasBoots(Player player) {
@@ -239,7 +236,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
             return;
 
         try {
-            OSSManager.SpawnSentry(plr, this.name);
+            OSSManager.SpawnSentry(plr, this.features.getModelName());
 
             plr.getInventory().armor.clear();
         } catch (Exception e) {
@@ -275,8 +272,8 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
 
     @Override
     public void appendHoverText(@NotNull ItemStack item, Level level, List<Component> components, @NotNull TooltipFlag tooltipFlag) {
-        components.add(Component.translatable("tooltip.powersuits." + name + ".identifier"));
-        components.add(Component.translatable("tooltip.powersuits." + name + ".extra"));
+        components.add(Component.translatable("tooltip.powersuits." + features.getModelName() + ".identifier"));
+        components.add(Component.translatable("tooltip.powersuits." + features.getModelName() + ".extra"));
     }
 
     @Override

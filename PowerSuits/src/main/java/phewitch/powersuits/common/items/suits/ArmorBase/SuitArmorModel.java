@@ -8,16 +8,16 @@ public class SuitArmorModel extends GeoModel<SuitArmourBase> {
 
     @Override
     public ResourceLocation getModelResource(SuitArmourBase object) {
-        return new ResourceLocation(PowerSuits.MODID, "geo/suits/"+ object.name +"_armor.geo.json");
+        return new ResourceLocation(PowerSuits.MODID, "geo/suits/"+ object.features.getModelName() +"_armor.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(SuitArmourBase object) {
-        return new ResourceLocation(PowerSuits.MODID, "textures/models/armor/"+ object.name +"_armor.png");
+        return new ResourceLocation(PowerSuits.MODID, "textures/models/armor/"+ object.features.getModelName() +"_armor.png");
     }
 
     @Override
-    public ResourceLocation getAnimationResource(SuitArmourBase animatable) {
-        return new ResourceLocation(PowerSuits.MODID, "animations/"+ animatable.name +"_armor.json");
+    public ResourceLocation getAnimationResource(SuitArmourBase object) {
+        return new ResourceLocation(PowerSuits.MODID, "animations/"+ object.features.getModelName() +"_armor.json");
     }
 }

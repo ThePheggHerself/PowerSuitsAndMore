@@ -40,9 +40,9 @@ public class OSSRemote extends Item implements MenuProvider {
                 pPlayer.openMenu(new SimpleMenuProvider(((pContainerId, pPlayerInv, pPlayer1) -> {
                     return new OSSMenu(pContainerId, pPlayerInv);
                 }), Component.literal("Orbital Suit Storage")));
-
-
             });
+
+            return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
         }
 
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));

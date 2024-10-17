@@ -9,10 +9,6 @@ import java.util.List;
 
 public class Mark2Armor extends SuitArmourBase {
     public Mark2Armor(ArmorMaterial materialIn, Type type, Properties properties) {
-        super(materialIn, type, properties, "mark2",
-                new SuitFeatures(50, 0.6f, 0.6f, 9, 0.15f, 1f,
-                        new ArrayList<SuitFeatures.ABILITIES>(
-                                List.of(SuitFeatures.ABILITIES.LIMITED_FLIGHT,
-                                        SuitFeatures.ABILITIES.SHOOT_ARROWS))));
+        super(materialIn, type, properties, Suits.MARK2_FEATURES);
     }
 }

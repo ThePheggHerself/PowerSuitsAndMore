@@ -11,11 +11,6 @@ import java.util.List;
 
 public class Mark3Armor extends SuitArmourBase {
     public Mark3Armor(ArmorMaterial materialIn, Type type, Properties properties) {
-        super(materialIn, type, properties, "mark3",
-                new SuitFeatures(100, 1,
-                        new ArrayList<SuitFeatures.ABILITIES>(
-                                List.of(SuitFeatures.ABILITIES.LIMITED_FLIGHT,
-                                        SuitFeatures.ABILITIES.SHOOT_ARROWS)),
-                        new ArrayList<>(List.of(MobEffects.NIGHT_VISION))));
+        super(materialIn, type, properties, Suits.MARK3_FEATURES);
     }
 }

@@ -8,7 +8,7 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class SentryRenderer extends GeoEntityRenderer<SuitSentry> {
     public SentryRenderer(EntityRendererProvider.Context context) {
-        super(context, new Mark5SentryModel());
+        super(context, new SentryModel());
     }
 
     @Override
