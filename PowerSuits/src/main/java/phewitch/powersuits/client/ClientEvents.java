@@ -14,14 +14,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import phewitch.powersuits.client.gui.GUIManager;
-import phewitch.powersuits.client.gui.hud.oss.OSSMenu;
 import phewitch.powersuits.client.gui.hud.oss.OSSScreen;
 import phewitch.powersuits.common.entity.EntityManager;
 import phewitch.powersuits.common.entity.mobs.SuitSentry;
 import phewitch.powersuits.common.entity.mobs.SentryRenderer;
 import phewitch.powersuits.common.entity.projectiles.ChestLaserProjectileRenderer;
 import phewitch.powersuits.common.entity.projectiles.LaserProjectileRenderer;
-import phewitch.powersuits.common.items.suits.ArmorBase.SuitArmourBase;
+import phewitch.powersuits.common.item.suits.armorbase.SuitArmourBase;
 import phewitch.powersuits.PowerSuits;
 
 public class ClientEvents {
@@ -43,10 +42,10 @@ public class ClientEvents {
 
         @SubscribeEvent
         public static void registerKeys(RegisterKeyMappingsEvent event){
-            event.register(KeyBinding.SHOOT_ARROW_KEY);
-            event.register(KeyBinding.SHOOT_LASER_KEY);
-            event.register(KeyBinding.SHOOT_CHEST_LASER_KEY);
-            event.register(KeyBinding.SENTRY_MODE_KEY);
+            event.register(KeyBinding.ABILITY_1);
+            event.register(KeyBinding.ABILITY_2);
+            event.register(KeyBinding.ABILITY_3);
+            event.register(KeyBinding.ABILITY_4);
         }
 
         @SubscribeEvent

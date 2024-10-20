@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TSW",
+    "BMB",
+    "WST"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:ghast_tear"
+    },
+    "S": {
+      "item": "minecraft:magma_cream"
+    },
+    "W": {
+      "item": "minecraft:nether_wart"
+    },
+    "B": {
+      "item": "minecraft:blaze_rod"
+    },
+    "M": {
+      "item": "powersuits:mark5_chestplate"
+    }
+  },
+  "result": {
+    "item": "powersuits:mark6_chestplate"
+  }
+}

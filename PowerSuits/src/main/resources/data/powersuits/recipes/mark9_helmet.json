@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PDP",
+    "HMH",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "D": {
+      "item": "minecraft:conduit"
+    },
+    "H": {
+      "item": "minecraft:heart_of_the_sea"
+    },
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "M": {
+      "item": "powersuits:mark5_helmet"
+    }
+  },
+  "result": {
+    "item": "powersuits:mark9_helmet"
+  }
+}

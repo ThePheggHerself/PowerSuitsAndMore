@@ -3,10 +3,7 @@ package phewitch.powersuits.common;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
@@ -16,16 +13,12 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.items.ItemStackHandler;
 import phewitch.powersuits.PowerSuits;
 import phewitch.powersuits.common.capabilities.PlayerOSS;
 import phewitch.powersuits.common.capabilities.PlayerOSSProvider;
 import phewitch.powersuits.common.entity.EntityManager;
-import phewitch.powersuits.common.items.ItemsManager;
-import phewitch.powersuits.common.items.advanced.OSSRemote;
-import phewitch.powersuits.common.items.suits.ArmorBase.SuitArmourBase;
-
-import javax.swing.plaf.basic.BasicComboBoxUI;
+import phewitch.powersuits.common.item.ItemsManager;
+import phewitch.powersuits.common.item.suits.armorbase.SuitArmourBase;
 
 @Mod.EventBusSubscriber(modid = PowerSuits.MODID)
 public class CommonEvents {

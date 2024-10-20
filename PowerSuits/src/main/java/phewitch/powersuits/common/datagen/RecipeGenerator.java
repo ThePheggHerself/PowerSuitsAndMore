@@ -10,8 +10,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
-import phewitch.powersuits.common.items.BlocksManager;
-import phewitch.powersuits.common.items.ItemsManager;
+import phewitch.powersuits.common.item.BlocksManager;
+import phewitch.powersuits.common.item.ItemsManager;
 import phewitch.powersuits.PowerSuits;
 
 import java.util.List;

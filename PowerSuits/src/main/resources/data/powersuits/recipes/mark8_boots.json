@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CSC",
+    "BMB",
+    "CPC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:coal"
+    },
+    "B": {
+      "item": "minecraft:bone"
+    },
+    "P": {
+      "item": "minecraft:blaze_powder"
+    },
+    "S": {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    "M": {
+      "item": "powersuits:mark5_boots"
+    }
+  },
+  "result": {
+    "item": "powersuits:mark8_boots"
+  }
+}

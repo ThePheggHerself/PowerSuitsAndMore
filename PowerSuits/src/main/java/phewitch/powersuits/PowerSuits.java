@@ -8,7 +8,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import phewitch.powersuits.client.ClientEvents;
 import phewitch.powersuits.common.CommonEvents;
-import phewitch.powersuits.common.items.CreativeTabs;
+import phewitch.powersuits.common.item.CreativeTabs;
 import phewitch.powersuits.common.networking.ModMessages;
 
 // The value here should match an entry in the META-INF/mods.toml file

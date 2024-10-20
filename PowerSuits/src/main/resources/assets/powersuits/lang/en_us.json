@@ -82,5 +82,33 @@
   "item.powersuits.mark5_helmet": "Power Suit Helmet",
   "item.powersuits.mark5_chestplate": "Power Suit Chestplate",
   "item.powersuits.mark5_leggings": "Power Suit Leggings",
-  "item.powersuits.mark5_boots": "Power Suit Boots"
+  "item.powersuits.mark5_boots": "Power Suit Boots",
+
+  "tooltip.powersuits.mark6.identifier": "Mark VI",
+  "tooltip.powersuits.mark6.extra": "Specialization: Nether",
+  "item.powersuits.mark6_helmet": "Power Suit Helmet",
+  "item.powersuits.mark6_chestplate": "Power Suit Chestplate",
+  "item.powersuits.mark6_leggings": "Power Suit Leggings",
+  "item.powersuits.mark6_boots": "Power Suit Boots",
+
+  "tooltip.powersuits.mark7.identifier": "Mark VII",
+  "tooltip.powersuits.mark7.extra": "Specialization: End",
+  "item.powersuits.mark7_helmet": "Power Suit Helmet",
+  "item.powersuits.mark7_chestplate": "Power Suit Chestplate",
+  "item.powersuits.mark7_leggings": "Power Suit Leggings",
+  "item.powersuits.mark7_boots": "Power Suit Boots",
+
+  "tooltip.powersuits.mark8.identifier": "Mark VIII",
+  "tooltip.powersuits.mark8.extra": "Specialization: Wither",
+  "item.powersuits.mark8_helmet": "Power Suit Helmet",
+  "item.powersuits.mark8_chestplate": "Power Suit Chestplate",
+  "item.powersuits.mark8_leggings": "Power Suit Leggings",
+  "item.powersuits.mark8_boots": "Power Suit Boots",
+
+  "tooltip.powersuits.mark9.identifier": "Mark IX",
+  "tooltip.powersuits.mark9.extra": "Specialization: Water",
+  "item.powersuits.mark9_helmet": "Power Suit Helmet",
+  "item.powersuits.mark9_chestplate": "Power Suit Chestplate",
+  "item.powersuits.mark9_leggings": "Power Suit Leggings",
+  "item.powersuits.mark9_boots": "Power Suit Boots"
 }

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DCD",
+    "CEC",
+    "DCD"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "result": {
+    "item": "minecraft:heart_of_the_sea"
+  }
+}

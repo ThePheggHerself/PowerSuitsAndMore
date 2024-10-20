@@ -27,28 +27,10 @@ public class ModMessages {
 
         Instance = net;
 
-        net.messageBuilder(C2SSuitShootArrow.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(C2SSuitShootArrow::new)
-                .encoder(C2SSuitShootArrow::toBytes)
-                .consumerMainThread(C2SSuitShootArrow::handle)
-                .add();
-
-        net.messageBuilder(C2SSuitShootLaser.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(C2SSuitShootLaser::new)
-                .encoder(C2SSuitShootLaser::toBytes)
-                .consumerMainThread(C2SSuitShootLaser::handle)
-                .add();
-
-        net.messageBuilder(C2SSuitShootChestLaser.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(C2SSuitShootChestLaser::new)
-                .encoder(C2SSuitShootChestLaser::toBytes)
-                .consumerMainThread(C2SSuitShootChestLaser::handle)
-                .add();
-
-        net.messageBuilder(C2SSuitSentryMode.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(C2SSuitSentryMode::new)
-                .encoder(C2SSuitSentryMode::toBytes)
-                .consumerMainThread(C2SSuitSentryMode::handle)
+        net.messageBuilder(C2SSuitAbility.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(C2SSuitAbility::new)
+                .encoder(C2SSuitAbility::toBytes)
+                .consumerMainThread(C2SSuitAbility::handle)
                 .add();
 
         net.messageBuilder(C2SSummonOSSSuit.class, id(), NetworkDirection.PLAY_TO_SERVER)

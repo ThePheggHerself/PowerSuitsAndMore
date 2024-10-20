@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
-import phewitch.powersuits.common.items.BlocksManager;
+import phewitch.powersuits.common.item.BlocksManager;
 import phewitch.powersuits.PowerSuits;
 
 public class BlockStateGenerator extends BlockStateProvider {

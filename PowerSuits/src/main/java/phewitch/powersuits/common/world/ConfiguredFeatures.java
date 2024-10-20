@@ -11,7 +11,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-import phewitch.powersuits.common.items.BlocksManager;
+import phewitch.powersuits.common.item.BlocksManager;
 import phewitch.powersuits.PowerSuits;
 
 import java.util.List;

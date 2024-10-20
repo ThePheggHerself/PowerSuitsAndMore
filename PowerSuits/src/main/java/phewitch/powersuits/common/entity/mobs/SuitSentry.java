@@ -1,10 +1,5 @@
 package phewitch.powersuits.common.entity.mobs;
 
-import ca.weblite.objc.Client;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -30,33 +25,26 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.NetworkHooks;
 import phewitch.powersuits.PowerSuits;
 import phewitch.powersuits.common.CommonCore;
-import phewitch.powersuits.common.capabilities.PlayerOSS;
 import phewitch.powersuits.common.capabilities.PlayerOSSProvider;
 import phewitch.powersuits.common.entity.OSSManager;
 import phewitch.powersuits.common.entity.goals.FollowSuitOwnerGoal;
 import phewitch.powersuits.common.entity.goals.OwnerAttackedGoal;
-import phewitch.powersuits.common.items.ItemsManager;
-import phewitch.powersuits.common.items.suits.ArmorBase.SuitArmourBase;
-import phewitch.powersuits.common.items.suits.Suits;
+import phewitch.powersuits.common.item.ItemsManager;
+import phewitch.powersuits.common.item.suits.armorbase.SuitArmourBase;
+import phewitch.powersuits.common.item.suits.Suits;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.object.Color;
 import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.concurrent.Executors;
 
 public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAdditionalSpawnData {
 
@@ -196,6 +184,24 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
                             pPlayer.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Suits.MK6_CHEST.get()));
                             pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK6_LEGS.get()));
                             pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK6_BOOTS.get()));
+                        }
+                        case "mark7" -> {
+                            pPlayer.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Suits.MK7_HELM.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Suits.MK7_CHEST.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK7_LEGS.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK7_BOOTS.get()));
+                        }
+                        case "mark8" -> {
+                            pPlayer.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Suits.MK8_HELM.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Suits.MK8_CHEST.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK8_LEGS.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK8_BOOTS.get()));
+                        }
+                        case "mark9" -> {
+                            pPlayer.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Suits.MK9_HELM.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Suits.MK9_CHEST.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK9_LEGS.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK9_BOOTS.get()));
                         }
                     }
 

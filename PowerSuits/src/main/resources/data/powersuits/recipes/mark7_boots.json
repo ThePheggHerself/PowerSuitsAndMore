@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CEC",
+    "EME",
+    "CEC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "M": {
+      "item": "powersuits:mark5_boots"
+    }
+  },
+  "result": {
+    "item": "powersuits:mark7_boots"
+  }
+}

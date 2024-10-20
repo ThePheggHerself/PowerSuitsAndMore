@@ -15,11 +15,11 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import phewitch.powersuits.common.items.ArmorManager;
-import phewitch.powersuits.common.items.ItemsManager;
-import phewitch.powersuits.common.items.advanced.OSSRemote;
-import phewitch.powersuits.common.items.suits.Suits;
-import phewitch.powersuits.common.items.ToolsManager;
+import phewitch.powersuits.common.item.ArmorManager;
+import phewitch.powersuits.common.item.ItemsManager;
+import phewitch.powersuits.common.item.items.OSSRemote;
+import phewitch.powersuits.common.item.suits.Suits;
+import phewitch.powersuits.common.item.ToolsManager;
 import phewitch.powersuits.PowerSuits;
 
 import java.util.LinkedHashMap;
@@ -120,6 +120,11 @@ public class ItemModelGenerator extends ItemModelProvider {
         handheldItem(Suits.MK8_LEGS);
         handheldItem(Suits.MK8_CHEST);
         handheldItem(Suits.MK8_HELM);
+
+        handheldItem(Suits.MK9_BOOTS);
+        handheldItem(Suits.MK9_LEGS);
+        handheldItem(Suits.MK9_CHEST);
+        handheldItem(Suits.MK9_HELM);
     }
 
     private void trimmedArmorItem(RegistryObject<Item> itemRegistryObject) {
@@ -140,7 +145,7 @@ public class ItemModelGenerator extends ItemModelProvider {
                 };
 
                 String armorItemPath = "item/" + armorItem;
-                String trimPath = "trims/items/" + armorType + "_trim_" + trimMaterial.location().getPath();
+                String trimPath = "trims/item/" + armorType + "_trim_" + trimMaterial.location().getPath();
                 String currentTrimName = armorItemPath + "_" + trimMaterial.location().getPath() + "_trim";
                 ResourceLocation armorItemResLoc = new ResourceLocation(MOD_ID, armorItemPath);
                 ResourceLocation trimResLoc = new ResourceLocation(trimPath); // minecraft namespace
