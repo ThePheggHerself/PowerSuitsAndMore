@@ -10,19 +10,26 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.PumpkinBlock;
+import net.minecraft.world.level.block.SculkSensorBlock;
 import net.minecraft.world.level.block.WaterlilyBlock;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.EnderManAngerEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.eventbus.api.Event;
 import org.jetbrains.annotations.NotNull;
 import phewitch.powersuits.client.KeyBinding;
 import phewitch.powersuits.client.gui.GUIManager;
@@ -170,6 +177,8 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
                 }
             }
 
+            if(features.projCooldown > 0)
+                features.projCooldown -= 1;
         } else {
             if (features.passiveA.contains(PassiveAbilities.FULL_FLIGHT))
                 ev.player.getAbilities().mayfly = false;
@@ -198,17 +207,29 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
 
         ev.setDamageMultiplier(features.fallDmgMult);
     }
+    public void handleEndermanAnger(EnderManAngerEvent ev){
+        if(features.passiveA.contains(PassiveAbilities.BLOCK_ENDERMAN_LOOK)) {
+            ev.setResult(Event.Result.DENY);
+            ev.setCanceled(true);
+        }
+    }
 
     public void shootProjectile(Level lvl, ServerPlayer plr, Projectile proj, int powerDrain) {
-        try {
-            proj.setPos(plr.getX(), plr.getY() + 1.5, plr.getZ());
-            proj.shootFromRotation(plr, plr.getXRot(), plr.getYRot(), 0f, 3f, 1f);
-            proj.tickCount = 50;
-            lvl.addFreshEntity(proj);
+        if(features.projCooldown > 0){
+            proj.remove(Entity.RemovalReason.DISCARDED);
+        }
+        else {
+            try {
+                features.removePower(powerDrain);
+                features.projCooldown = 10;
 
-            features.removePower(powerDrain);
-        } catch (Exception e) {
-            plr.server.sendSystemMessage(Component.literal(e.getMessage()));
+                proj.setPos(plr.getX(), plr.getY() + 1.5, plr.getZ());
+                proj.shootFromRotation(plr, plr.getXRot(), plr.getYRot(), 0f, 3f, 1f);
+                proj.tickCount = 50;
+                lvl.addFreshEntity(proj);
+            } catch (Exception e) {
+                plr.server.sendSystemMessage(Component.literal(e.getMessage()));
+            }
         }
     }
     public void sentryMode(Level lvl, ServerPlayer plr) {

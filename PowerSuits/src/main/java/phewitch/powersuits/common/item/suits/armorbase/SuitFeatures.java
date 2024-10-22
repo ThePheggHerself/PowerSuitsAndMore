@@ -19,10 +19,7 @@ public class SuitFeatures{
     public float flightCost;
 
 
-    public long lastLaserShot = 0;
-    public float laserShotCost = 15f;
-    public long lastChestLaserShot = 0;
-    public float chestLaserShotCost = 50f;
+    public int projCooldown = 0;
 
     public ArrayList<ActiveAbilities> activeA;
     public ArrayList<PassiveAbilities> passiveA;

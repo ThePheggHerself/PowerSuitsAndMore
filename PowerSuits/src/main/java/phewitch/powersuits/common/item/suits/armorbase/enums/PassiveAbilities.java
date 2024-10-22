@@ -7,7 +7,8 @@ public enum PassiveAbilities {
     WITHER_RESISTANCE(3),
     WATER_CONDUIT(4),
     WATER_SPEED(5),
-    SILENT_SUIT(6);
+    SILENT_SUIT(6),
+    BLOCK_ENDERMAN_LOOK(7);
 
     private final int value;
 

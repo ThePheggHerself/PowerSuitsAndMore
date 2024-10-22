@@ -132,7 +132,7 @@ public class Suits {
     public static final SuitTemplate MARK7_FEATURES =
             new SuitTemplate("Mark 7", 180, 2, 0.0f, 9f, 0.1f, 0.0f,
                     new ArrayList<>(List.of(ActiveAbilities.SHOOT_ENDER_SHOT, ActiveAbilities.TELEPORT, ActiveAbilities.SENTRY_MODE)),
-                    new ArrayList<>(List.of(PassiveAbilities.LIMITED_FLIGHT, PassiveAbilities.FULL_FLIGHT)),
+                    new ArrayList<>(List.of(PassiveAbilities.LIMITED_FLIGHT, PassiveAbilities.FULL_FLIGHT, PassiveAbilities.BLOCK_ENDERMAN_LOOK)),
                     ChargeType.ON_GROUND,
                     new ArrayList<>(List.of(Weakness.WATER)),
                     new ArrayList<>(List.of(MobEffects.NIGHT_VISION, MobEffects.MOVEMENT_SPEED)));

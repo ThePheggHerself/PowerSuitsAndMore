@@ -2,8 +2,7 @@ package phewitch.powersuits.common.networking.packets.client2server;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.SmallFireball;
+import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.network.NetworkEvent;
@@ -71,19 +70,16 @@ public class C2SSuitAbility {
                             sAB.shootProjectile(lvl, plr, new ChestLaserProjectile(EntityManager.CHEST_LASER_PROJECTILE.get(), plr, lvl), 50);
                         }
                         case SHOOT_FLAMETHROWER -> {
-                            sAB.shootProjectile(lvl, plr, new SmallFireball(lvl, plr, plr.getX(), plr.getY() + 1.5, plr.getZ()), 15);
+                            sAB.shootProjectile(lvl, plr, new SmallFireball(lvl, plr, plr.getX(), plr.getY() + 1.5, plr.getZ()), 10);
                         }
                         case SHOOT_ENDER_SHOT -> {
-                            //TODO
+                            sAB.shootProjectile(lvl, plr, new DragonFireball(lvl, plr, plr.getX(), plr.getY() + 1.5, plr.getZ()), 75);
                         }
                         case TELEPORT -> {
                             sAB.teleport(lvl, plr);
                         }
                         case SHOOT_WITHER_SKULLS -> {
-                            //TODO
-                        }
-                        case SONIC_BOOM -> {
-                            //TODO
+                            sAB.shootProjectile(lvl, plr, new WitherSkull(lvl, plr, plr.getX(), plr.getY() + 1.5, plr.getZ()), 40);
                         }
                         case WATER_DASH -> {
                             //TODO
