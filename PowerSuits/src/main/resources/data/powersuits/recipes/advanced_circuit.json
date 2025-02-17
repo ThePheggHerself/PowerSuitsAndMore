@@ -7,13 +7,13 @@
   ],
   "key": {
     "C": {
-      "item": "minecraft:copper_ingot"
+      "tag": "forge:ingots/copper"
     },
     "G": {
-      "item": "minecraft:gold_ingot"
+      "tag": "forge:ingots/gold"
     },
     "A": {
-      "item": "powersuits:mixed_metal_alloy"
+      "tag": "forge:ingots/mixed_metal"
     },
     "S": {
       "item": "minecraft:smooth_stone_slab"

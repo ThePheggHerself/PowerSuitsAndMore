@@ -7,7 +7,7 @@
   ],
   "key": {
     "P": {
-      "item": "powersuits:titanium_plate"
+      "tag": "forge:plates/titanium"
     },
     "T": {
       "item": "powersuits:thruster"

@@ -7,16 +7,16 @@
   ],
   "key": {
     "T": {
-      "item": "powersuits:titanium_ingot"
+      "tag": "forge:ingots/titanium"
     },
     "P": {
-      "item": "powersuits:palladium_ingot"
+      "tag": "forge:ingots/palladium"
     },
     "G": {
-      "item": "minecraft:glass"
+      "tag": "forge:glass"
     },
     "R": {
-      "item": "minecraft:redstone"
+      "tag": "forge:dusts/redstone"
     }
   },
   "result": {

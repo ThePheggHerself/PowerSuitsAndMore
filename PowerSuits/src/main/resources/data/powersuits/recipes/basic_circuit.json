@@ -7,7 +7,7 @@
   ],
   "key": {
     "C": {
-      "item": "minecraft:copper_ingot"
+      "tag": "forge:ingots/copper"
     },
     "S": {
       "item": "minecraft:smooth_stone_slab"

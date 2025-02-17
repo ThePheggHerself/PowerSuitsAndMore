@@ -27,6 +27,7 @@ public class BlockLootTables extends BlockLootSubProvider {
         this.dropSelf(BlocksManager.DEEPSLATE_TITANIUM_ORE.get());
         this.dropSelf(BlocksManager.STONE_PALLADIUM_ORE.get());
         this.dropSelf(BlocksManager.DEEPSLATE_PALLADIUM_ORE.get());
+        //this.dropSelf(BlocksManager.WORKBENCH.get());
 
         this.add(BlocksManager.STONE_TITANIUM_ORE.get(),
                 block -> createSingleOreDrops(BlocksManager.STONE_TITANIUM_ORE.get(), ItemsManager.RAW_TITANIUM.get()));
@@ -36,7 +37,6 @@ public class BlockLootTables extends BlockLootSubProvider {
                 block -> createSingleOreDrops(BlocksManager.STONE_PALLADIUM_ORE.get(), ItemsManager.RAW_PALLADIUM.get()));
         this.add(BlocksManager.DEEPSLATE_PALLADIUM_ORE.get(),
                 block -> createSingleOreDrops(BlocksManager.DEEPSLATE_PALLADIUM_ORE.get(), ItemsManager.RAW_PALLADIUM.get()));
-
     }
 
     protected LootTable.Builder createSingleOreDrops(Block pBlock, Item item) {

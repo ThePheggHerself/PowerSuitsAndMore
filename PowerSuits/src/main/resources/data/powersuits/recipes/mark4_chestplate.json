@@ -7,7 +7,7 @@
   ],
   "key": {
     "A": {
-      "item": "powersuits:mixed_metal_plate"
+      "tag": "forge:plates/mixed_metal"
     },
     "T": {
       "item": "powersuits:thruster"

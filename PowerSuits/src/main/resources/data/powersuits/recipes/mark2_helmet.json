@@ -6,10 +6,10 @@
   ],
   "key": {
     "X": {
-      "item": "powersuits:titanium_plate"
+      "tag": "forge:plates/titanium"
     },
     "Y": {
-      "item": "minecraft:glass"
+      "tag": "forge:glass"
     }
   },
   "result": {

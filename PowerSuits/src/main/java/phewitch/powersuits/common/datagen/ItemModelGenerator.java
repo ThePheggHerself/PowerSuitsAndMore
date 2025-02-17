@@ -21,6 +21,7 @@ import phewitch.powersuits.common.item.items.OSSRemote;
 import phewitch.powersuits.common.item.suits.Suits;
 import phewitch.powersuits.common.item.ToolsManager;
 import phewitch.powersuits.PowerSuits;
+import phewitch.powersuits.common.util.ModItem;
 
 import java.util.LinkedHashMap;
 
@@ -174,7 +175,7 @@ public class ItemModelGenerator extends ItemModelProvider {
         }
     }
 
-    private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
+    private ItemModelBuilder simpleItem(RegistryObject<ModItem> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(PowerSuits.MODID,"item/" + item.getId().getPath()));

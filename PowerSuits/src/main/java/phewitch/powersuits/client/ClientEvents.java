@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import phewitch.powersuits.client.gui.GUIManager;
 import phewitch.powersuits.client.gui.hud.oss.OSSScreen;
+import phewitch.powersuits.client.gui.hud.workbench.WorkbenchScreen;
 import phewitch.powersuits.common.entity.EntityManager;
 import phewitch.powersuits.common.entity.mobs.SuitSentry;
 import phewitch.powersuits.common.entity.mobs.SentryRenderer;
@@ -55,6 +56,7 @@ public class ClientEvents {
             EntityRenderers.register(EntityManager.CHEST_LASER_PROJECTILE.get(), context -> new ChestLaserProjectileRenderer(context));
 
             MenuScreens.register(GUIManager.OSS_MENU.get(), OSSScreen::new);
+            MenuScreens.register(GUIManager.WORKBENCH_MENU.get(), WorkbenchScreen::new);
         }
     }
 

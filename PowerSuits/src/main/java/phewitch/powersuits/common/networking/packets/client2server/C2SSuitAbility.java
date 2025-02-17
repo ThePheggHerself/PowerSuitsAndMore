@@ -2,6 +2,7 @@ package phewitch.powersuits.common.networking.packets.client2server;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.ai.behavior.warden.SonicBoom;
 import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -70,18 +71,22 @@ public class C2SSuitAbility {
                             sAB.shootProjectile(lvl, plr, new ChestLaserProjectile(EntityManager.CHEST_LASER_PROJECTILE.get(), plr, lvl), 50);
                         }
                         case SHOOT_FLAMETHROWER -> {
-                            sAB.shootProjectile(lvl, plr, new SmallFireball(lvl, plr, plr.getX(), plr.getY() + 1.5, plr.getZ()), 10);
+                            var target = plr.getForward();
+                            sAB.shootProjectile(lvl, plr, new SmallFireball(lvl, plr, target.x, target.y, target.z), 10);
                         }
                         case SHOOT_ENDER_SHOT -> {
-                            sAB.shootProjectile(lvl, plr, new DragonFireball(lvl, plr, plr.getX(), plr.getY() + 1.5, plr.getZ()), 75);
+                            sAB.shootProjectile(lvl, plr, new DragonFireball(lvl, plr, plr.getX(), plr.getY(), plr.getZ()), 75);
                         }
                         case TELEPORT -> {
                             sAB.teleport(lvl, plr);
                         }
                         case SHOOT_WITHER_SKULLS -> {
-                            sAB.shootProjectile(lvl, plr, new WitherSkull(lvl, plr, plr.getX(), plr.getY() + 1.5, plr.getZ()), 40);
+                            sAB.shootProjectile(lvl, plr, new WitherSkull(lvl, plr, plr.getX(), plr.getY(), plr.getZ()), 40);
                         }
                         case WATER_DASH -> {
+                            //TODO
+                        }
+                        case SONIC_BOOM -> {
                             //TODO
                         }
                     }

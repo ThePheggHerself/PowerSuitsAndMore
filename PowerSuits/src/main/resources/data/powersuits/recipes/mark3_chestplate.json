@@ -7,7 +7,7 @@
   ],
   "key": {
     "A": {
-      "item": "powersuits:mixed_metal_plate"
+      "tag": "forge:plates/mixed_metal"
     },
     "T": {
       "item": "powersuits:thruster"
@@ -19,7 +19,7 @@
       "item": "powersuits:palladium_power_core"
     },
     "L": {
-      "item": "powersuits:titanium_plate"
+      "tag": "forge:plates/titanium"
     }
   },
   "result": {

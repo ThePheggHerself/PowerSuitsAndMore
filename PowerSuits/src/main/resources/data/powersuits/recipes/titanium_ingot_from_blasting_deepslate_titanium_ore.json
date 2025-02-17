@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "titanium_ingot",
   "ingredient": {
-    "item": "powersuits:deepslate_titanium_ore"
+    "tag": "forge:ores/titanium"
   },
   "result": "powersuits:titanium_ingot",
   "experience": 0.7,

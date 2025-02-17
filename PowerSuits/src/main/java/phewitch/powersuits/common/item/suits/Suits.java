@@ -96,7 +96,7 @@ public class Suits {
     public static final RegistryObject<Item> MK5_HELM = ItemsManager.ITEMS.register("mark5_helmet", () ->
             new Mark5Armor(ArmorItem.Type.HELMET, new Item.Properties()));
     public static final SuitTemplate MARK5_FEATURES =
-            new SuitTemplate("Mark 5", 250, 1, 0.0f, 9f, 0.1f, 0.0f,
+            new SuitTemplate("Mark 5", 250, 1, 0.0f, 9f, 0.25f, 0.0f,
                     new ArrayList<>(List.of(ActiveAbilities.SHOOT_ARROWS, ActiveAbilities.SHOOT_LASERS, ActiveAbilities.SENTRY_MODE, ActiveAbilities.SHOOT_CHEST_LASER)),
                     new ArrayList<>(List.of(PassiveAbilities.LIMITED_FLIGHT, PassiveAbilities.FULL_FLIGHT)),
                     ChargeType.ON_GROUND,
@@ -113,7 +113,7 @@ public class Suits {
     public static final RegistryObject<Item> MK6_HELM = ItemsManager.ITEMS.register("mark6_helmet", () ->
             new Mark6Armor(ArmorItem.Type.HELMET, new Item.Properties()));
     public static final SuitTemplate MARK6_FEATURES =
-            new SuitTemplate("Mark 6", 180, 2, 0.0f, 9f, 0.1f, 0.0f,
+            new SuitTemplate("Mark 6", 180, 2, 0.0f, 9f, 0.25f, 0.0f,
                     new ArrayList<>(List.of(ActiveAbilities.SHOOT_FIRE_ARROWS, ActiveAbilities.SHOOT_FLAMETHROWER, ActiveAbilities.SENTRY_MODE)),
                     new ArrayList<>(List.of(PassiveAbilities.LIMITED_FLIGHT, PassiveAbilities.FULL_FLIGHT)),
                     ChargeType.IN_FIRE_OR_LAVA,
@@ -130,7 +130,7 @@ public class Suits {
     public static final RegistryObject<Item> MK7_HELM = ItemsManager.ITEMS.register("mark7_helmet", () ->
             new Mark7Armor(ArmorItem.Type.HELMET, new Item.Properties()));
     public static final SuitTemplate MARK7_FEATURES =
-            new SuitTemplate("Mark 7", 180, 2, 0.0f, 9f, 0.1f, 0.0f,
+            new SuitTemplate("Mark 7", 180, 2, 0.0f, 9f, 0.25f, 0.0f,
                     new ArrayList<>(List.of(ActiveAbilities.SHOOT_ENDER_SHOT, ActiveAbilities.TELEPORT, ActiveAbilities.SENTRY_MODE)),
                     new ArrayList<>(List.of(PassiveAbilities.LIMITED_FLIGHT, PassiveAbilities.FULL_FLIGHT, PassiveAbilities.BLOCK_ENDERMAN_LOOK)),
                     ChargeType.ON_GROUND,
@@ -145,7 +145,7 @@ public class Suits {
     public static final RegistryObject<Item> MK8_HELM = ItemsManager.ITEMS.register("mark8_helmet", () ->
             new Mark8Armor(ArmorItem.Type.HELMET, new Item.Properties()));
     public static final SuitTemplate MARK8_FEATURES =
-            new SuitTemplate("Mark 8", 180, 2, 0.0f, 9f, 0.1f, 0.0f,
+            new SuitTemplate("Mark 8", 180, 2, 0.0f, 9f, 0.25f, 0.0f,
                     new ArrayList<>(List.of(ActiveAbilities.SHOOT_ARROWS, ActiveAbilities.SHOOT_WITHER_SKULLS, ActiveAbilities.SENTRY_MODE)),
                     new ArrayList<>(List.of(PassiveAbilities.LIMITED_FLIGHT, PassiveAbilities.FULL_FLIGHT, PassiveAbilities.WITHER_RESISTANCE, PassiveAbilities.WITHER_RESISTANCE)),
                     ChargeType.LIFE_DRAIN,
@@ -162,7 +162,7 @@ public class Suits {
     public static final RegistryObject<Item> MK9_HELM = ItemsManager.ITEMS.register("mark9_helmet", () ->
             new Mark9Armor(ArmorItem.Type.HELMET, new Item.Properties()));
     public static final SuitTemplate MARK9_FEATURES =
-            new SuitTemplate("Mark 9", 180, 2, 0.0f, 9f, 0.1f, 0.0f,
+            new SuitTemplate("Mark 9", 180, 2, 0.0f, 9f, 0.25f, 0.0f,
                     new ArrayList<>(List.of(ActiveAbilities.SONIC_BOOM, ActiveAbilities.WATER_DASH, ActiveAbilities.SENTRY_MODE)),
                     new ArrayList<>(List.of(PassiveAbilities.LIMITED_FLIGHT, PassiveAbilities.FULL_FLIGHT, PassiveAbilities.WATER_CONDUIT, PassiveAbilities.WATER_SPEED)),
                     ChargeType.IN_WATER,

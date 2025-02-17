@@ -6,10 +6,10 @@
   ],
   "key": {
     "T": {
-      "item": "powersuits:titanium_ingot"
+      "tag": "forge:ingots/titanium"
     },
     "S": {
-      "item": "powersuits:steel_ingot"
+      "tag": "forge:ingots/steel"
     }
   },
   "result": {

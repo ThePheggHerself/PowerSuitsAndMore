@@ -10,7 +10,7 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "powersuits:titanium_ingot"
+      "tag": "forge:ingots/titanium"
     }
   },
   "result": {

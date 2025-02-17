@@ -7,7 +7,7 @@
   ],
   "key": {
     "T": {
-      "item": "powersuits:titanium_ingot"
+      "tag": "forge:ingots/titanium"
     },
     "C": {
       "item": "powersuits:advanced_circuit"

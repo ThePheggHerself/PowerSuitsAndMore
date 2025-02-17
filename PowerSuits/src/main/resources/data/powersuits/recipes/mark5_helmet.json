@@ -6,13 +6,13 @@
   ],
   "key": {
     "A": {
-      "item": "powersuits:advanced_metal_plate"
+      "tag": "forge:plates/advanced_metal"
     },
     "C": {
       "item": "powersuits:advanced_circuit"
     },
     "G": {
-      "item": "minecraft:glass"
+      "tag": "forge:glass"
     }
   },
   "result": {

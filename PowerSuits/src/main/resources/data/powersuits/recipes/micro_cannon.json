@@ -7,13 +7,13 @@
   ],
   "key": {
     "C": {
-      "item": "powersuits:basic_circuit"
+      "tag": "powersuits:components/basic_circuit"
     },
     "S": {
-      "item": "powersuits:steel_plate"
+      "tag": "forge:plates/steel"
     },
     "R": {
-      "item": "minecraft:redstone"
+      "tag": "forge:dusts/redstone"
     },
     "D": {
       "item": "minecraft:dispenser"

@@ -7,7 +7,7 @@
   ],
   "key": {
     "T": {
-      "item": "powersuits:mixed_metal_alloy"
+      "tag": "forge:ingots/mixed_metal"
     },
     "N": {
       "item": "minecraft:nether_star"

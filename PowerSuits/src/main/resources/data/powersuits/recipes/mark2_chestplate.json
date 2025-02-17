@@ -7,7 +7,7 @@
   ],
   "key": {
     "X": {
-      "item": "powersuits:titanium_plate"
+      "tag": "forge:plates/titanium"
     },
     "Y": {
       "item": "powersuits:palladium_power_core"

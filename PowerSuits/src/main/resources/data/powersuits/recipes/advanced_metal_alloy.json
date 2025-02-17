@@ -6,13 +6,13 @@
   ],
   "key": {
     "A": {
-      "item": "powersuits:mixed_metal_alloy"
+      "tag": "forge:ingots/mixed_metal"
     },
     "N": {
-      "item": "minecraft:netherite_ingot"
+      "tag": "forge:ingots/netherite"
     },
     "G": {
-      "item": "minecraft:gold_ingot"
+      "tag": "forge:ingots/gold"
     }
   },
   "result": {

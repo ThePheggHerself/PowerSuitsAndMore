@@ -22,7 +22,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.PumpkinBlock;
 import net.minecraft.world.level.block.SculkSensorBlock;
 import net.minecraft.world.level.block.WaterlilyBlock;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.TickEvent;
@@ -30,6 +32,7 @@ import net.minecraftforge.event.entity.living.EnderManAngerEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.fml.Logging;
 import org.jetbrains.annotations.NotNull;
 import phewitch.powersuits.client.KeyBinding;
 import phewitch.powersuits.client.gui.GUIManager;
@@ -137,45 +140,10 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         ev.player.displayClientMessage(Component.literal("Power: " + String.format("%.0f", features.currentPower) + "/" + String.format("%.0f", features.maxPower)), true);
 
         if (hasFullSet(ev.player)) {
-            if(ev.player.onGround()){
-                if (features.currentPower != features.maxPower) {
-                    features.addPower(features.pRechargePS / 20);
-                }
-            }
-
-            if (features.passiveA.contains(PassiveAbilities.FULL_FLIGHT)) {
-                if (features.currentPower > 0)
-                    ev.player.getAbilities().mayfly = true;
-                else {
-                    ev.player.getAbilities().flying = false;
-                    ev.player.getAbilities().mayfly = false;
-                }
-            }
-            if (features.canLimitedFlight() && hasBootsOrChestplate(ev.player)) {
-
-                if (Minecraft.getInstance().options.keyJump.isDown()) {
-                    var motion = ev.player.getDeltaMovement();
-                    var upwardsVelocity = motion.get(Direction.Axis.Y);
-                    upwardsVelocity += features.flightVelocity;
-
-                    if (upwardsVelocity > 1)
-                        upwardsVelocity = 1;
-
-                    ev.player.setDeltaMovement(motion.get(Direction.Axis.X), upwardsVelocity, motion.get(Direction.Axis.Z));
-                    if (features.flightCost > 0) {
-                        features.removePower(features.flightCost / 20);
-                    }
-                }
-            }
-
-            for (MobEffect effect : features.effects) {
-                if(effect == MobEffects.DOLPHINS_GRACE || effect == MobEffects.CONDUIT_POWER){
-                    ev.player.addEffect(new MobEffectInstance(effect, 220, 3));
-                }
-                else {
-                    ev.player.addEffect(new MobEffectInstance(effect, 220));
-                }
-            }
+            tryChargeArmour(ev);
+            doFullFlight(ev);
+            doLimitedFlight(ev);
+            doEffects(ev);
 
             if(features.projCooldown > 0)
                 features.projCooldown -= 1;
@@ -211,6 +179,69 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         if(features.passiveA.contains(PassiveAbilities.BLOCK_ENDERMAN_LOOK)) {
             ev.setResult(Event.Result.DENY);
             ev.setCanceled(true);
+        }
+    }
+
+    public void tryChargeArmour(TickEvent.PlayerTickEvent ev){
+        switch (features.chargeType){
+            case ON_GROUND:
+            default: {
+                if(ev.player.onGround()){
+                    if (features.currentPower != features.maxPower) {
+                        features.addPower(features.pRechargePS / 20);
+                    }
+                }
+            }
+            case IN_FIRE:
+            case IN_FIRE_OR_LAVA: {
+                if(ev.player.isOnFire() || ev.player.isInLava()){
+                    if (features.currentPower != features.maxPower) {
+                        features.addPower(features.pRechargePS / 20);
+                    }
+                }
+            }
+
+            case IN_WATER:{
+                if(ev.player.isUnderWater() || (ev.player.isInWaterOrRain() && ev.player.onGround())){
+                    if (features.currentPower != features.maxPower) {
+                        features.addPower(features.pRechargePS / 20);
+                    }
+                }
+            }
+
+            case LIFE_DRAIN: {
+
+            }
+        }
+    }
+    public void doFullFlight(TickEvent.PlayerTickEvent ev){
+        if (features.passiveA.contains(PassiveAbilities.FULL_FLIGHT)) {
+            if (features.currentPower > 0)
+                ev.player.getAbilities().mayfly = true;
+            else {
+                ev.player.getAbilities().flying = false;
+                ev.player.getAbilities().mayfly = false;
+            }
+        }
+    }
+    public void doLimitedFlight(TickEvent.PlayerTickEvent ev){
+        if (features.canLimitedFlight() && ev.player.isFallFlying()) {
+            Vec3 lAng = ev.player.getLookAngle();
+            Vec3 mov = ev.player.getDeltaMovement();
+            ev.player.setDeltaMovement(
+                    lAng.x * features.flightVelocity + (lAng.x * 1.5D - mov.x) * 0.8D,
+                    lAng.y * features.flightVelocity + (lAng.y * 1.5D - mov.y) * 0.8D,
+                    lAng.z * features.flightVelocity + (lAng.z * 1.5D - mov.z) * 0.8D);
+        }
+    }
+    public void doEffects(TickEvent.PlayerTickEvent ev){
+        for (MobEffect effect : features.effects) {
+            if(effect == MobEffects.DOLPHINS_GRACE || effect == MobEffects.CONDUIT_POWER){
+                ev.player.addEffect(new MobEffectInstance(effect, 220, 3));
+            }
+            else {
+                ev.player.addEffect(new MobEffectInstance(effect, 220));
+            }
         }
     }
 
@@ -312,5 +343,26 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    @Override
+    public boolean canElytraFly(ItemStack stack, LivingEntity entity) {
+        System.out.println("EEE");
+
+        if(entity instanceof Player plr && hasChestplate(plr) && hasBoots(plr)
+        && features.canLimitedFlight()) {
+            System.out.println("AAA");
+            return true;
+        }
+        else
+            return false;
+    }
+
+    @Override
+    public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
+        if(!entity.level().isClientSide())
+            entity.gameEvent(GameEvent.ELYTRA_GLIDE);
+
+        return true;
     }
 }

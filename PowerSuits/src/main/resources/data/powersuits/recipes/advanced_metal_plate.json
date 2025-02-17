@@ -6,7 +6,7 @@
   ],
   "key": {
     "S": {
-      "item": "powersuits:advanced_metal_alloy"
+      "tag": "forge:ingots/advanced_metal"
     }
   },
   "result": {
