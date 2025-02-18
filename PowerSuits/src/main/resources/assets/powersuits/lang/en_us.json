@@ -110,5 +110,7 @@
   "item.powersuits.mark9_helmet": "Power Suit Helmet",
   "item.powersuits.mark9_chestplate": "Power Suit Chestplate",
   "item.powersuits.mark9_leggings": "Power Suit Leggings",
-  "item.powersuits.mark9_boots": "Power Suit Boots"
+  "item.powersuits.mark9_boots": "Power Suit Boots",
+
+  "sounds.powersuits.laser_pew": "PEW PEW"
 }

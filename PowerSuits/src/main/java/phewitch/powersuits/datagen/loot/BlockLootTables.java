@@ -1,4 +1,4 @@
-package phewitch.powersuits.common.datagen.loot;
+package phewitch.powersuits.datagen.loot;
 
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;

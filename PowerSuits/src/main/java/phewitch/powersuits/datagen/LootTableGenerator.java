@@ -1,9 +1,9 @@
-package phewitch.powersuits.common.datagen;
+package phewitch.powersuits.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import phewitch.powersuits.common.datagen.loot.BlockLootTables;
+import phewitch.powersuits.datagen.loot.BlockLootTables;
 
 import java.util.List;
 import java.util.Set;

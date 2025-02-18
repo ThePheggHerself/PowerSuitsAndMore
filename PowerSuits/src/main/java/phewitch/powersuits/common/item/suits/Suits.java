@@ -145,7 +145,7 @@ public class Suits {
     public static final RegistryObject<Item> MK8_HELM = ItemsManager.ITEMS.register("mark8_helmet", () ->
             new Mark8Armor(ArmorItem.Type.HELMET, new Item.Properties()));
     public static final SuitTemplate MARK8_FEATURES =
-            new SuitTemplate("Mark 8", 180, 2, 0.0f, 9f, 0.25f, 0.0f,
+            new SuitTemplate("Mark 8", 180, 8, 0.0f, 9f, 0.25f, 0.0f,
                     new ArrayList<>(List.of(ActiveAbilities.SHOOT_ARROWS, ActiveAbilities.SHOOT_WITHER_SKULLS, ActiveAbilities.SENTRY_MODE)),
                     new ArrayList<>(List.of(PassiveAbilities.LIMITED_FLIGHT, PassiveAbilities.FULL_FLIGHT, PassiveAbilities.WITHER_RESISTANCE, PassiveAbilities.WITHER_RESISTANCE)),
                     ChargeType.LIFE_DRAIN,
@@ -167,5 +167,5 @@ public class Suits {
                     new ArrayList<>(List.of(PassiveAbilities.LIMITED_FLIGHT, PassiveAbilities.FULL_FLIGHT, PassiveAbilities.WATER_CONDUIT, PassiveAbilities.WATER_SPEED)),
                     ChargeType.IN_WATER,
                     new ArrayList<>(List.of(Weakness.FIRE)),
-                    new ArrayList<>(List.of(MobEffects.NIGHT_VISION, MobEffects.CONDUIT_POWER, MobEffects.DOLPHINS_GRACE)));
+                    new ArrayList<>(List.of(MobEffects.NIGHT_VISION, MobEffects.CONDUIT_POWER, MobEffects.DOLPHINS_GRACE, MobEffects.WATER_BREATHING)));
 }

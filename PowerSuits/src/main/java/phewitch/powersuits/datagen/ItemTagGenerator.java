@@ -1,4 +1,4 @@
-package phewitch.powersuits.common.datagen;
+package phewitch.powersuits.datagen;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

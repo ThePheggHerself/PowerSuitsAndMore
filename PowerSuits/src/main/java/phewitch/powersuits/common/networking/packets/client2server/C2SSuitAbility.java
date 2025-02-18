@@ -2,16 +2,15 @@ package phewitch.powersuits.common.networking.packets.client2server;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.ai.behavior.warden.SonicBoom;
 import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.network.NetworkEvent;
-import phewitch.powersuits.common.CommonCore;
 import phewitch.powersuits.common.entity.EntityManager;
 import phewitch.powersuits.common.entity.projectiles.ChestLaserProjectile;
 import phewitch.powersuits.common.entity.projectiles.LaserProjectile;
 import phewitch.powersuits.common.item.suits.armorbase.SuitArmourBase;
+import phewitch.powersuits.common.item.suits.armorbase.enums.ActiveAbilities;
 
 import java.util.function.Supplier;
 
@@ -43,11 +42,12 @@ public class C2SSuitAbility {
 
             if(inv.getArmor(0).getItem() instanceof SuitArmourBase sAB){
                 if(sAB.features.activeA.get(abilityKey).getValue() == abilityType){
+                    var target = plr.getForward();
+
                     switch (sAB.features.activeA.get(abilityKey)){
                         default -> {
                             if(inv.contains(new ItemStack(Items.ARROW))) {
-                                CommonCore.RemoveItemFromInventory(plr, Items.ARROW, 1);
-                                sAB.shootProjectile(lvl, plr, new Arrow(lvl, plr), 0);
+                                sAB.shootProjectile(lvl, plr, new Arrow(lvl, plr), 0, Items.ARROW);
                             }
                             else {
                                 plr.displayClientMessage(Component.literal("No Arrows Detected"), true);
@@ -55,39 +55,45 @@ public class C2SSuitAbility {
                         }
                         case SHOOT_FIRE_ARROWS -> {
                             if(inv.contains(new ItemStack(Items.ARROW))) {
-                                CommonCore.RemoveItemFromInventory(plr, Items.ARROW, 1);
                                 var arr = new Arrow(lvl, plr);
                                 arr.setSecondsOnFire(30);
-                                sAB.shootProjectile(lvl, plr, new Arrow(lvl, plr), 0);
+                                sAB.shootProjectile(lvl, plr, new Arrow(lvl, plr), 0, Items.ARROW);
                             }
                         }
                         case SENTRY_MODE -> {
                             sAB.sentryMode(lvl, plr);
                         }
                         case SHOOT_LASERS -> {
-                            sAB.shootProjectile(lvl, plr, new LaserProjectile(EntityManager.LASER_PROJECTILE.get(), plr, lvl), 15);
+                            if(sAB.features.hasPower(15))
+                                sAB.shootProjectile(lvl, plr, new LaserProjectile(EntityManager.LASER_PROJECTILE.get(), plr, lvl), 15);
                         }
                         case SHOOT_CHEST_LASER -> {
-                            sAB.shootProjectile(lvl, plr, new ChestLaserProjectile(EntityManager.CHEST_LASER_PROJECTILE.get(), plr, lvl), 50);
+                            if(sAB.features.hasPower(50))
+                               sAB.shootProjectile(lvl, plr, new ChestLaserProjectile(EntityManager.CHEST_LASER_PROJECTILE.get(), plr, lvl), 50);
                         }
                         case SHOOT_FLAMETHROWER -> {
-                            var target = plr.getForward();
-                            sAB.shootProjectile(lvl, plr, new SmallFireball(lvl, plr, target.x, target.y, target.z), 10);
+                            if(sAB.features.hasPower(10))
+                                sAB.shootProjectile(lvl, plr, new SmallFireball(lvl, plr, target.x, target.y, target.z), 10);
                         }
                         case SHOOT_ENDER_SHOT -> {
-                            sAB.shootProjectile(lvl, plr, new DragonFireball(lvl, plr, plr.getX(), plr.getY(), plr.getZ()), 75);
+                            if(sAB.features.hasPower(75))
+                                sAB.shootProjectile(lvl, plr, new DragonFireball(lvl, plr, target.x, target.y, target.z), 75);
                         }
                         case TELEPORT -> {
                             sAB.teleport(lvl, plr);
                         }
                         case SHOOT_WITHER_SKULLS -> {
-                            sAB.shootProjectile(lvl, plr, new WitherSkull(lvl, plr, plr.getX(), plr.getY(), plr.getZ()), 40);
+                            if(sAB.features.hasPower(40))
+                                sAB.shootProjectile(lvl, plr, new WitherSkull(lvl, plr, target.x, target.y, target.z), 40);
                         }
                         case WATER_DASH -> {
-                            //TODO
+                            if(sAB.features.hasPower(30) && sAB.features.activeA.contains(ActiveAbilities.WATER_DASH) && !plr.isAutoSpinAttack())
+                                sAB.waterDash(lvl, plr);
                         }
                         case SONIC_BOOM -> {
-                            //TODO
+                            if(sAB.features.hasPower(150)){
+                                sAB.sonicBoom(lvl, plr);
+                            }
                         }
                     }
                 }

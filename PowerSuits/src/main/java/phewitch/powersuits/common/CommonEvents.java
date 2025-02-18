@@ -4,10 +4,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.SculkSensorBlock;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.gameevent.vibrations.VibrationInfo;
-import net.minecraft.world.level.gameevent.vibrations.VibrationSystem;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -16,7 +12,6 @@ import net.minecraftforge.event.entity.living.EnderManAngerEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,7 +21,9 @@ import phewitch.powersuits.common.capabilities.PlayerOSSProvider;
 import phewitch.powersuits.common.entity.EntityManager;
 import phewitch.powersuits.common.item.ItemsManager;
 import phewitch.powersuits.common.item.suits.armorbase.SuitArmourBase;
-import phewitch.powersuits.common.item.suits.armorbase.enums.PassiveAbilities;
+import phewitch.powersuits.common.networking.ModMessages;
+import phewitch.powersuits.common.networking.packets.server2client.S2CSuitPowerSync;
+import phewitch.powersuits.common.sound.ModSounds;
 
 @Mod.EventBusSubscriber(modid = PowerSuits.MODID)
 public class CommonEvents {
@@ -37,6 +34,7 @@ public class CommonEvents {
 
         ItemsManager.register(eventBus);
         EntityManager.register(eventBus);
+        ModSounds.register(eventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -44,7 +42,8 @@ public class CommonEvents {
     @SubscribeEvent
     public void PlayerFallEvent(LivingFallEvent ev){
         if(ev.getEntity() instanceof Player plr){
-            if(plr.getInventory().getArmor(0).getItem() instanceof SuitArmourBase sAB){
+            var sAB = SuitArmourBase.isWearingAnyPiece(plr);
+            if(sAB != null){
                 sAB.handleFallDamage(ev);
             }
         }
@@ -52,23 +51,29 @@ public class CommonEvents {
     @SubscribeEvent
     public void EntityHurtEvent(LivingHurtEvent ev){
         if(ev.getEntity() instanceof Player plr){
-            if(plr.getInventory().getArmor(0).getItem() instanceof SuitArmourBase sAB){
-                sAB.handleHurt(ev);
-            }
+            var sAB = SuitArmourBase.isWearingAnyPiece(plr);
+            if(sAB != null)
+                sAB.handleWearerHurt(ev);
+        }
+        if (ev.getSource().getEntity() instanceof Player plr) {
+            var sAB = SuitArmourBase.isWearingAnyPiece(plr);
+            if(sAB != null)
+                sAB.handleDamagedEntity(ev);
         }
     }
 
     @SubscribeEvent
     public void TickEvent(TickEvent.PlayerTickEvent ev){
-        if(ev.player.getInventory().getArmor(0).getItem() instanceof SuitArmourBase sAB){
-            sAB.playerTickHandler(ev);
-        }
+        var sAB = SuitArmourBase.isWearingAnyPiece(ev.player);
+        if(sAB != null)
+            sAB.armourTick(ev);
     }
     @SubscribeEvent
     public void EndermanAngerEvent(EnderManAngerEvent ev){
-        if(ev.getPlayer().getInventory().getArmor(0).getItem() instanceof SuitArmourBase sAB){
+        var sAB = SuitArmourBase.isWearingAnyPiece(ev.getPlayer());
+        if(sAB != null)
             sAB.handleEndermanAnger(ev);
-        }
+
     }
 
 

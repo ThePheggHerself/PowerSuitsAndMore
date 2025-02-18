@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class SuitFeatures{
 
     public float maxPower;
-    float currentPower;
+    public float currentPower;
     public float pRechargePS;
     public float fallDmgMult;
     public float fallDmgCancDist;
@@ -47,12 +47,22 @@ public class SuitFeatures{
     }
 
 
-    public boolean hasPower(float value){ return currentPower >= value; }
+    public boolean hasPower(float value){
+        if(value < 0)
+            return currentPower == maxPower;
+        return currentPower >= value;
+    }
     public void addPower(float value){
-        currentPower = Math.min(currentPower + value, maxPower);
+        if(value < 0)
+            currentPower = maxPower;
+        else
+            currentPower = Math.min(currentPower + value, maxPower);
     }
     public void removePower(float value){
-        currentPower = Math.max(currentPower - value, 0);
+        if(value < 0)
+            currentPower = 0;
+        else
+            currentPower = Math.max(currentPower - value, 0);
     }
     public void setPower(float power){
         currentPower = power;

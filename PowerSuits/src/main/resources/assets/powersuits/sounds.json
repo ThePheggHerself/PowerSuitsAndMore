@@ -1,0 +1,11 @@
+{
+  "laser_pew": {
+    "subtitles": "sounds.powersuits.laser_pew",
+    "sounds": [
+      "powersuits:laser_pew",
+      "powersuits:laser_pew2",
+      "powersuits:laser_pew3",
+      "powersuits:laser_pew4"
+    ]
+  }
+}

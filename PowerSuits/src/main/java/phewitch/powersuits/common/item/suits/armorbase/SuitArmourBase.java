@@ -3,26 +3,25 @@ package phewitch.powersuits.common.item.suits.armorbase;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.EnderMan;
-import net.minecraft.world.entity.monster.warden.Warden;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.PumpkinBlock;
-import net.minecraft.world.level.block.SculkSensorBlock;
-import net.minecraft.world.level.block.WaterlilyBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.RenderGuiEvent;
@@ -32,26 +31,32 @@ import net.minecraftforge.event.entity.living.EnderManAngerEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.fml.Logging;
 import org.jetbrains.annotations.NotNull;
 import phewitch.powersuits.client.KeyBinding;
 import phewitch.powersuits.client.gui.GUIManager;
 import phewitch.powersuits.client.gui.IHUDItem;
+import phewitch.powersuits.common.CommonCore;
 import phewitch.powersuits.common.entity.OSSManager;
 import phewitch.powersuits.common.item.suits.armorbase.enums.ActiveAbilities;
+import phewitch.powersuits.common.item.suits.armorbase.enums.ChargeType;
 import phewitch.powersuits.common.item.suits.armorbase.enums.PassiveAbilities;
 import phewitch.powersuits.common.item.suits.armorbase.enums.Weakness;
 import phewitch.powersuits.common.networking.ModMessages;
-import phewitch.powersuits.common.networking.packets.client2server.*;
+import phewitch.powersuits.common.networking.packets.client2server.C2SSuitAbility;
+import phewitch.powersuits.common.networking.packets.server2client.S2CSuitPowerSync;
+import phewitch.powersuits.common.sound.ModSounds;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
@@ -63,6 +68,15 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         this.features = new SuitFeatures(template);
 
         GUIManager.registerHUDItem(features.getModelName() + "_armor", this);
+    }
+
+    public static SuitArmourBase isWearingAnyPiece(Player plr){
+        for (var i : plr.getInventory().armor){
+            if(i.getItem() instanceof SuitArmourBase sAB)
+                return sAB;
+        }
+
+        return null;
     }
 
     public Boolean hasBoots(Player player) {
@@ -116,43 +130,30 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         return false;
     }
 
-    public void handleClientFeatures(TickEvent.ClientTickEvent ev, Player player) {
-        if (hasFullSet(player)) {
-            if(KeyBinding.ABILITY_1.consumeClick()){
-                if(0 < features.activeA.size())
-                    ModMessages.sendToServer(new C2SSuitAbility(0, features.activeA.get(0).getValue()));
-            }
-            if(KeyBinding.ABILITY_2.consumeClick()){
-                if(1 < features.activeA.size())
-                    ModMessages.sendToServer(new C2SSuitAbility(1, features.activeA.get(1).getValue()));
-            }
-            if(KeyBinding.ABILITY_3.consumeClick()){
-                if(2 < features.activeA.size())
-                    ModMessages.sendToServer(new C2SSuitAbility(2, features.activeA.get(2).getValue()));
-            }
-            if(KeyBinding.ABILITY_4.consumeClick()){
-                if(3 < features.activeA.size())
-                    ModMessages.sendToServer(new C2SSuitAbility(3, features.activeA.get(3).getValue()));
+    public void armourTick(TickEvent.PlayerTickEvent ev) {
+        if(ev.player.level().isClientSide){
+            if (hasFullSet(ev.player)) {
+                doLimitedFlight(ev);
+                doFullFlight(ev);
+                tryChargeArmour(ev);
+
+                if(features.projCooldown > 0)
+                    features.projCooldown -= 1;
+            } else {
+                if (features.passiveA.contains(PassiveAbilities.FULL_FLIGHT))
+                    ev.player.getAbilities().mayfly = false;
             }
         }
-    }
-    public void playerTickHandler(TickEvent.PlayerTickEvent ev) {
-        ev.player.displayClientMessage(Component.literal("Power: " + String.format("%.0f", features.currentPower) + "/" + String.format("%.0f", features.maxPower)), true);
 
-        if (hasFullSet(ev.player)) {
-            tryChargeArmour(ev);
-            doFullFlight(ev);
-            doLimitedFlight(ev);
+        if(!ev.player.level().isClientSide){
             doEffects(ev);
-
-            if(features.projCooldown > 0)
-                features.projCooldown -= 1;
-        } else {
-            if (features.passiveA.contains(PassiveAbilities.FULL_FLIGHT))
-                ev.player.getAbilities().mayfly = false;
+            if(features.passiveA.contains(PassiveAbilities.WATER_CONDUIT)){
+                if(ev.player.getAirSupply() != ev.player.getMaxAirSupply())
+                    ev.player.setAirSupply(ev.player.getMaxAirSupply());
+            }
         }
     }
-    public void handleHurt(LivingHurtEvent ev) {
+    public void handleWearerHurt(LivingHurtEvent ev) {
         var damage = ev.getAmount();
         var type = ev.getSource();
 
@@ -165,6 +166,10 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
                 features.setPower(0);
             }
         }
+    }
+    public void handleDamagedEntity(LivingHurtEvent ev){
+        if(features.chargeType == ChargeType.LIFE_DRAIN)
+            features.addPower(ev.getAmount() * features.pRechargePS);
     }
     public void handleFallDamage(LivingFallEvent ev) {
 
@@ -184,8 +189,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
 
     public void tryChargeArmour(TickEvent.PlayerTickEvent ev){
         switch (features.chargeType){
-            case ON_GROUND:
-            default: {
+            case ON_GROUND: {
                 if(ev.player.onGround()){
                     if (features.currentPower != features.maxPower) {
                         features.addPower(features.pRechargePS / 20);
@@ -208,10 +212,6 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
                     }
                 }
             }
-
-            case LIFE_DRAIN: {
-
-            }
         }
     }
     public void doFullFlight(TickEvent.PlayerTickEvent ev){
@@ -225,9 +225,10 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         }
     }
     public void doLimitedFlight(TickEvent.PlayerTickEvent ev){
-        if (features.canLimitedFlight() && ev.player.isFallFlying()) {
+        if (features.canLimitedFlight() && ev.player.isFallFlying() && !ev.player.isInWater()) {
             Vec3 lAng = ev.player.getLookAngle();
             Vec3 mov = ev.player.getDeltaMovement();
+
             ev.player.setDeltaMovement(
                     lAng.x * features.flightVelocity + (lAng.x * 1.5D - mov.x) * 0.8D,
                     lAng.y * features.flightVelocity + (lAng.y * 1.5D - mov.y) * 0.8D,
@@ -236,7 +237,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
     }
     public void doEffects(TickEvent.PlayerTickEvent ev){
         for (MobEffect effect : features.effects) {
-            if(effect == MobEffects.DOLPHINS_GRACE || effect == MobEffects.CONDUIT_POWER){
+            if(effect == MobEffects.DOLPHINS_GRACE || effect == MobEffects.CONDUIT_POWER || effect == MobEffects.WATER_BREATHING){
                 ev.player.addEffect(new MobEffectInstance(effect, 220, 3));
             }
             else {
@@ -245,7 +246,13 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         }
     }
 
-    public void shootProjectile(Level lvl, ServerPlayer plr, Projectile proj, int powerDrain) {
+    public void shootProjectile(Level lvl, ServerPlayer plr, Projectile proj, int powerDrain){
+        shootProjectile(lvl, plr, proj, powerDrain, null, 0);
+    }
+    public void shootProjectile(Level lvl, ServerPlayer plr, Projectile proj, int powerDrain, Item removalItem){
+        shootProjectile(lvl, plr, proj, powerDrain, removalItem, 1);
+    }
+    public void shootProjectile(Level lvl, ServerPlayer plr, Projectile proj, int powerDrain, Item removalItem, int removalCount) {
         if(features.projCooldown > 0){
             proj.remove(Entity.RemovalReason.DISCARDED);
         }
@@ -254,10 +261,16 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
                 features.removePower(powerDrain);
                 features.projCooldown = 10;
 
-                proj.setPos(plr.getX(), plr.getY() + 1.5, plr.getZ());
-                proj.shootFromRotation(plr, plr.getXRot(), plr.getYRot(), 0f, 3f, 1f);
+                proj.shootFromRotation(plr, plr.getXRot(), plr.getYRot(), 0.0F, 1.5F, 1.0F);
                 proj.tickCount = 50;
                 lvl.addFreshEntity(proj);
+
+                lvl.playSound(null, plr.getX(), plr.getY(), plr.getZ(), ModSounds.LASER_PEW.get(), SoundSource.PLAYERS, 3.0f, 1.0f);
+
+                if(removalItem != null)
+                {
+                    CommonCore.RemoveItemFromInventory(plr, removalItem, removalCount);
+                }
             } catch (Exception e) {
                 plr.server.sendSystemMessage(Component.literal(e.getMessage()));
             }
@@ -293,6 +306,50 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
 
 
 
+    }
+    public void sonicBoom(Level lvl, ServerPlayer plr){
+        if(lvl.isClientSide || !features.activeA.contains(ActiveAbilities.SONIC_BOOM))
+            return;
+
+        features.removePower(150);
+        lvl.playSound(null, plr.getX(), plr.getY(), plr.getZ(), SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 3.0f, 1.0f);
+
+        Vec3 target = plr.position().add(plr.getLookAngle().scale(20));
+        Vec3 source = plr.position().add(0, 1, 0);
+        Vec3 offset = target.subtract(source);
+        Vec3 normalized = offset.normalize();
+
+        Set<Entity> hit = new HashSet<>();
+        for (int particleIndex = 1; particleIndex < Mth.floor(offset.length()) + 7; particleIndex++) {
+            Vec3 particlePos = source.add(normalized.scale(particleIndex));
+            ((ServerLevel) lvl).sendParticles(ParticleTypes.SONIC_BOOM, particlePos.x, particlePos.y, particlePos.z, 1, 0.0, 0.0, 0.0, 0.0);
+
+            hit.addAll(lvl.getEntitiesOfClass(LivingEntity.class, new AABB(new BlockPos((int) particlePos.x, (int) particlePos.y, (int) particlePos.z)).inflate(2)));
+
+            hit.remove(plr);
+
+            for (Entity hitTarget : hit) {
+                if (hitTarget instanceof LivingEntity living) {
+                    living.hurt(plr.damageSources().sonicBoom(plr), 30);
+                }
+            }
+        }
+    }
+    @Override
+    public boolean canElytraFly(ItemStack stack, LivingEntity entity) {
+        if(entity instanceof Player plr && hasChestplate(plr) && hasBoots(plr)
+                && features.canLimitedFlight()) {
+            return true;
+        }
+        else
+            return false;
+    }
+    @Override
+    public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
+        if(!entity.level().isClientSide())
+            entity.gameEvent(GameEvent.ELYTRA_GLIDE);
+
+        return true;
     }
 
     //Client only
@@ -344,25 +401,45 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }
-
-    @Override
-    public boolean canElytraFly(ItemStack stack, LivingEntity entity) {
-        System.out.println("EEE");
-
-        if(entity instanceof Player plr && hasChestplate(plr) && hasBoots(plr)
-        && features.canLimitedFlight()) {
-            System.out.println("AAA");
-            return true;
+    public void clientArmourTick(TickEvent.ClientTickEvent ev, Player player) {
+        if (hasFullSet(player)) {
+            if(KeyBinding.ABILITY_1.consumeClick()){
+                if(0 < features.activeA.size())
+                    ModMessages.sendToServer(new C2SSuitAbility(0, features.activeA.get(0).getValue()));
+            }
+            if(KeyBinding.ABILITY_2.consumeClick()){
+                if(1 < features.activeA.size())
+                    ModMessages.sendToServer(new C2SSuitAbility(1, features.activeA.get(1).getValue()));
+            }
+            if(KeyBinding.ABILITY_3.consumeClick()){
+                if(2 < features.activeA.size())
+                    ModMessages.sendToServer(new C2SSuitAbility(2, features.activeA.get(2).getValue()));
+            }
+            if(KeyBinding.ABILITY_4.consumeClick()){
+                if(3 < features.activeA.size())
+                    ModMessages.sendToServer(new C2SSuitAbility(3, features.activeA.get(3).getValue()));
+            }
         }
-        else
-            return false;
     }
 
-    @Override
-    public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
-        if(!entity.level().isClientSide())
-            entity.gameEvent(GameEvent.ELYTRA_GLIDE);
+    public void waterDash(Level lvl, Player plr){
+        features.removePower(30);
 
-        return true;
+        float f7 = plr.getYRot();
+        float f = plr.getXRot();
+        float f1 = -Mth.sin(f7 * ((float)Math.PI / 180F)) * Mth.cos(f * ((float)Math.PI / 180F));
+        float f2 = -Mth.sin(f * ((float)Math.PI / 180F));
+        float f3 = Mth.cos(f7 * ((float)Math.PI / 180F)) * Mth.cos(f * ((float)Math.PI / 180F));
+        float f4 = Mth.sqrt(f1 * f1 + f2 * f2 + f3 * f3);
+        float f5 = 3.0F * ((1.0F + (float)2) / 4.0F);
+        f1 *= f5 / f4;
+        f2 *= f5 / f4;
+        f3 *= f5 / f4;
+        plr.push((double)f1, (double)f2, (double)f3);
+        plr.startAutoSpinAttack(20);
+        if (plr.onGround()) {
+            float f6 = 1.1999999F;
+            plr.move(MoverType.SELF, new Vec3(0.0D, (double)1.1999999F, 0.0D));
+        }
     }
 }
