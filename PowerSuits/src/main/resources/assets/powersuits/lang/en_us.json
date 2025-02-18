@@ -1,10 +1,6 @@
 {
   "itemGroup.powersuitstab": "Power Suits",
   "key.category.powersuits": "Power Suits",
-  "key.powersuits.suit.shootarrow": "Shoot Arrow",
-  "key.powersuits.suit.shootlaser": "Shoot Laser",
-  "key.powersuits.suit.shootchestlaser": "Shoot Chest Laser",
-
   "msg.powersuits.suit.noarrows": "No arrows detected",
   "msg.powersuits.suit.notfollow.true": "Will No Longer Follow",
   "msg.powersuits.suit.notfollow.false": "Will Now Follow",
@@ -25,6 +21,7 @@
   "item.powersuits.titanium_leggings": "Titanium Leggings",
   "item.powersuits.titanium_boots": "Titanium Boots",
   "item.powersuits.titanium_plate": "Titanium Plate",
+  "item.powersuits.oss_remote": "Orbital Suit Storage Remote",
 
   "item.powersuits.raw_palladium": "Raw Palladium",
   "block.powersuits.palladium_ore": "Palladium Ore",
@@ -111,6 +108,11 @@
   "item.powersuits.mark9_chestplate": "Power Suit Chestplate",
   "item.powersuits.mark9_leggings": "Power Suit Leggings",
   "item.powersuits.mark9_boots": "Power Suit Boots",
+
+  "item.powersuits.suit.ability1": "Suit Ability 1",
+  "item.powersuits.suit.ability2": "Suit Ability 2",
+  "item.powersuits.suit.ability3": "Suit Ability 3",
+  "item.powersuits.suit.ability4": "Suit Ability 4",
 
   "sounds.powersuits.laser_pew": "PEW PEW"
 }

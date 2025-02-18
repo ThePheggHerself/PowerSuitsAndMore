@@ -19,10 +19,10 @@ public class ModTags {
 
     public static class Items {
 
-        public static final TagKey<Item> ORE = commonTag("ore");
+        public static final TagKey<Item> ORE = commonTag("ores");
         public static final TagKey<Item> INGOT = commonTag("ingots");
         public static final TagKey<Item> PLATES = commonTag("plates");
-        public static final TagKey<Item> COMP = commonTag("components");
+        public static final TagKey<Item> COMP = tag("components");
         public static final TagKey<Item> COMP_WEAPONS = tag("components/weapons");
         public static final TagKey<Item> COMP_FLIGHT = tag("components/flight");
         public static final TagKey<Item> COMP_POWER = tag("components/power");

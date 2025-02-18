@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MRM",
+    "CAC",
+    "MRM"
+  ],
+  "key": {
+    "M": {
+      "tag": "forge:plates/advanced_metal"
+    },
+    "R": {
+      "item": "minecraft:comparator"
+    },
+    "C": {
+      "item": "powersuits:advanced_circuit"
+    },
+    "A": {
+      "item": "powersuits:advanced_palladium_power_core"
+    }
+  },
+  "result": {
+    "item": "powersuits:oss_remote"
+  }
+}
