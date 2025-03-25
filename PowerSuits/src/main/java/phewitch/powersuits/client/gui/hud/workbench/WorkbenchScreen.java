@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import phewitch.powersuits.PowerSuits;
 import phewitch.powersuits.common.item.suits.Suits;
-import phewitch.powersuits.common.item.suits.armorbase.SuitTemplate;
+import phewitch.powersuits.common.item.suits.armorbase.SuitFeatures;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,18 +21,10 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchMenu> {
 
     int scrollOff;
 
-    SuitTemplate currentSuit = null;
+    SuitFeatures currentSuit = null;
 
-    private final List<SuitTemplate> templates = new ArrayList<>(List.of(
-            Suits.MARK1_FEATURES,
-            Suits.MARK2_FEATURES,
-            Suits.MARK3_FEATURES,
-            Suits.MARK4_FEATURES,
-            Suits.MARK5_FEATURES,
-            Suits.MARK6_FEATURES,
-            Suits.MARK7_FEATURES,
-            Suits.MARK8_FEATURES,
-            Suits.MARK9_FEATURES
+    private final List<SuitFeatures> templates = new ArrayList<>(List.of(
+
     ));
     private final List<WBSuitButton> suitButtons = new ArrayList<>();
 
@@ -105,10 +97,10 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchMenu> {
         }
 
         if(currentSuit != null){
-            pGuiGraphics.drawString(this.font, "Name: " + currentSuit.name, x + 62, y - 10, ChatFormatting.WHITE.getColor());
+            pGuiGraphics.drawString(this.font, "Name: " + currentSuit.DisplayName(), x + 62, y - 10, ChatFormatting.WHITE.getColor());
             pGuiGraphics.drawString(this.font, "Power: " + currentSuit.maxPower, x + 62, y, ChatFormatting.WHITE.getColor());
             pGuiGraphics.drawString(this.font, "Charge Type: " + currentSuit.chargeType, x + 62, y  + 10, ChatFormatting.WHITE.getColor());
-            pGuiGraphics.drawString(this.font, "Recharge: " + currentSuit.powerRechargePerSecond + "/s", x + 62, y  + 20, ChatFormatting.WHITE.getColor());
+            pGuiGraphics.drawString(this.font, "Recharge: " + currentSuit.pRechargePS + "/s", x + 62, y  + 20, ChatFormatting.WHITE.getColor());
             //pGuiGraphics.drawString(this.font, "Name: " + currentSuit.name, x + 62, y  + 30, ChatFormatting.WHITE.getColor());
         }
 
@@ -144,11 +136,11 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchMenu> {
     class WBSuitButton extends Button {
         final int index;
         final String name;
-        final SuitTemplate template;
+        final SuitFeatures template;
 
-        public WBSuitButton(int x, int y, int index, SuitTemplate template, Button.OnPress onPress){
-            super(x, y, 48, 16, Component.literal(template.name), onPress, DEFAULT_NARRATION);
-            this.name = template.name;
+        public WBSuitButton(int x, int y, int index, SuitFeatures template, Button.OnPress onPress){
+            super(x, y, 48, 16, Component.literal(template.getModelName()), onPress, DEFAULT_NARRATION);
+            this.name = template.getModelName();
             this.index = index;
             this.visible = true;
             this.template = template;

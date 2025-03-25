@@ -21,4 +21,12 @@ public enum ActiveAbilities {
     public int getValue() {
         return value;
     }
+
+    public static ActiveAbilities valueOf(int value){
+        for (var ab : ActiveAbilities.values()){
+            if(ab.value == value)
+                return ab;
+        }
+        return null;
+    }
 }

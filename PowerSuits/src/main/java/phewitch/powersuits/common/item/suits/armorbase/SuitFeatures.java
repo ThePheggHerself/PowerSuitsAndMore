@@ -1,11 +1,13 @@
 package phewitch.powersuits.common.item.suits.armorbase;
 
+import com.google.j2objc.annotations.Weak;
 import net.minecraft.world.effect.MobEffect;
 import phewitch.powersuits.common.item.suits.armorbase.enums.ActiveAbilities;
 import phewitch.powersuits.common.item.suits.armorbase.enums.ChargeType;
 import phewitch.powersuits.common.item.suits.armorbase.enums.PassiveAbilities;
 import phewitch.powersuits.common.item.suits.armorbase.enums.Weakness;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SuitFeatures{
@@ -21,7 +23,7 @@ public class SuitFeatures{
 
     public int projCooldown = 0;
 
-    public ArrayList<ActiveAbilities> activeA;
+    public ArrayList<SuitAbility> activeA;
     public ArrayList<PassiveAbilities> passiveA;
     public ChargeType chargeType;
     public ArrayList<Weakness> weaknesses;
@@ -30,20 +32,22 @@ public class SuitFeatures{
 
     private final String name;
 
-    public SuitFeatures(SuitTemplate template){
-        this.maxPower = template.maxPower;
+    public SuitFeatures(float MaxPower, float RechargePerSecond, float FallDamageMultiplier, float FallDamageCancellationDistance, double FlightVelocity,
+                        float FlightCostPerSecond, ArrayList<SuitAbility> ActiveAbilities, ArrayList<PassiveAbilities> PassiveAbilities, ChargeType ChargeType,
+                        ArrayList<Weakness> Weaknesses, ArrayList<MobEffect> Effects, String Name){
+        this.maxPower = MaxPower;
         this.currentPower = maxPower / 4;
-        this.pRechargePS = template.powerRechargePerSecond;
-        this.fallDmgMult = template.fallDamageMultiplier;
-        this.fallDmgCancDist = template.fallDamageCancellationDistance;
-        this.flightVelocity = template.flightVelocity;
-        this.flightCost = template.flightCost;
-        this.activeA = template.activeAbilities;
-        this.passiveA = template.passiveAbilities;
-        this.chargeType = template.chargeType;
-        this.weaknesses = template.weaknesses;
-        this.effects = template.fullArmourEffects;
-        this.name = template.name;
+        this.pRechargePS = RechargePerSecond;
+        this.fallDmgMult = FallDamageMultiplier;
+        this.fallDmgCancDist = FallDamageCancellationDistance;
+        this.flightVelocity = FlightVelocity;
+        this.flightCost = FlightCostPerSecond;
+        this.activeA = ActiveAbilities;
+        this.passiveA = PassiveAbilities;
+        this.chargeType = ChargeType;
+        this.weaknesses = Weaknesses;
+        this.effects = Effects;
+        this.name = Name;
     }
 
 

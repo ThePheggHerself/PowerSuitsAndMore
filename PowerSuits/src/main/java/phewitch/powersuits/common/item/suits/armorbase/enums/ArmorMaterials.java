@@ -1,4 +1,4 @@
-package phewitch.powersuits.common.item.suits.armorbase;
+package phewitch.powersuits.common.item.suits.armorbase.enums;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;

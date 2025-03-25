@@ -5,7 +5,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import phewitch.powersuits.common.item.suits.armorbase.ArmorMaterials;
+import phewitch.powersuits.common.item.suits.armorbase.enums.ArmorMaterials;
 import phewitch.powersuits.PowerSuits;
 
 public class ArmorManager {

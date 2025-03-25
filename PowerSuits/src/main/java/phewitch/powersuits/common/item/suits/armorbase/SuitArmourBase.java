@@ -51,21 +51,16 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 
 public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     public SuitFeatures features;
 
-    public SuitArmourBase(ArmorMaterial materialIn, Type type, Properties properties, SuitTemplate template) {
+    public SuitArmourBase(ArmorMaterial materialIn, Type type, Properties properties, SuitFeatures features) {
         super(materialIn, type, properties);
-        this.features = new SuitFeatures(template);
+        this.features = features;
 
         GUIManager.registerHUDItem(features.getModelName() + "_armor", this);
     }
@@ -246,95 +241,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         }
     }
 
-    public void shootProjectile(Level lvl, ServerPlayer plr, Projectile proj, int powerDrain){
-        shootProjectile(lvl, plr, proj, powerDrain, null, 0);
-    }
-    public void shootProjectile(Level lvl, ServerPlayer plr, Projectile proj, int powerDrain, Item removalItem){
-        shootProjectile(lvl, plr, proj, powerDrain, removalItem, 1);
-    }
-    public void shootProjectile(Level lvl, ServerPlayer plr, Projectile proj, int powerDrain, Item removalItem, int removalCount) {
-        if(features.projCooldown > 0){
-            proj.remove(Entity.RemovalReason.DISCARDED);
-        }
-        else {
-            try {
-                features.removePower(powerDrain);
-                features.projCooldown = 10;
 
-                proj.shootFromRotation(plr, plr.getXRot(), plr.getYRot(), 0.0F, 1.5F, 1.0F);
-                proj.tickCount = 50;
-                lvl.addFreshEntity(proj);
-
-                lvl.playSound(null, plr.getX(), plr.getY(), plr.getZ(), ModSounds.LASER_PEW.get(), SoundSource.PLAYERS, 3.0f, 1.0f);
-
-                if(removalItem != null)
-                {
-                    CommonCore.RemoveItemFromInventory(plr, removalItem, removalCount);
-                }
-            } catch (Exception e) {
-                plr.server.sendSystemMessage(Component.literal(e.getMessage()));
-            }
-        }
-    }
-    public void sentryMode(Level lvl, ServerPlayer plr) {
-        if(lvl.isClientSide || !features.activeA.contains(ActiveAbilities.SENTRY_MODE))
-            return;
-
-        try {
-            OSSManager.SpawnSentry(plr, this.features.getModelName());
-
-            plr.getInventory().armor.clear();
-        } catch (Exception e) {
-            plr.server.sendSystemMessage(Component.literal(e.getMessage()));
-        }
-    }
-    public void teleport(Level lvl, ServerPlayer plr){
-        if(lvl.isClientSide || !features.activeA.contains(ActiveAbilities.TELEPORT))
-            return;
-
-        var block = plr.pick(50, 1, false);
-        if(block.getType() == HitResult.Type.BLOCK){
-            var cost = new BigDecimal(block.getLocation().distanceTo(plr.position())).setScale(2, RoundingMode.UP).floatValue() * 3;
-            plr.displayClientMessage(Component.literal("EEEE " + cost + " E "), false);
-
-            if(features.hasPower(cost))
-            {
-                plr.teleportTo(block.getLocation().x, block.getLocation().y, block.getLocation().z);
-                features.removePower(cost);
-            }
-        }
-
-
-
-    }
-    public void sonicBoom(Level lvl, ServerPlayer plr){
-        if(lvl.isClientSide || !features.activeA.contains(ActiveAbilities.SONIC_BOOM))
-            return;
-
-        features.removePower(150);
-        lvl.playSound(null, plr.getX(), plr.getY(), plr.getZ(), SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 3.0f, 1.0f);
-
-        Vec3 target = plr.position().add(plr.getLookAngle().scale(20));
-        Vec3 source = plr.position().add(0, 1, 0);
-        Vec3 offset = target.subtract(source);
-        Vec3 normalized = offset.normalize();
-
-        Set<Entity> hit = new HashSet<>();
-        for (int particleIndex = 1; particleIndex < Mth.floor(offset.length()) + 7; particleIndex++) {
-            Vec3 particlePos = source.add(normalized.scale(particleIndex));
-            ((ServerLevel) lvl).sendParticles(ParticleTypes.SONIC_BOOM, particlePos.x, particlePos.y, particlePos.z, 1, 0.0, 0.0, 0.0, 0.0);
-
-            hit.addAll(lvl.getEntitiesOfClass(LivingEntity.class, new AABB(new BlockPos((int) particlePos.x, (int) particlePos.y, (int) particlePos.z)).inflate(2)));
-
-            hit.remove(plr);
-
-            for (Entity hitTarget : hit) {
-                if (hitTarget instanceof LivingEntity living) {
-                    living.hurt(plr.damageSources().sonicBoom(plr), 30);
-                }
-            }
-        }
-    }
     @Override
     public boolean canElytraFly(ItemStack stack, LivingEntity entity) {
         if(entity instanceof Player plr && hasChestplate(plr) && hasBoots(plr)
@@ -402,28 +309,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         return cache;
     }
     public void clientArmourTick(TickEvent.ClientTickEvent ev, Player player) {
-        if (hasFullSet(player)) {
-            if(KeyBinding.ABILITY_1.consumeClick()){
-                System.out.println("ABILITY KEY 1 PRESSED");
-                if(0 < features.activeA.size())
-                    ModMessages.sendToServer(new C2SSuitAbility(0, features.activeA.get(0).getValue()));
-            }
-            if(KeyBinding.ABILITY_2.consumeClick()){
-                System.out.println("ABILITY KEY 2 PRESSED");
-                if(1 < features.activeA.size())
-                    ModMessages.sendToServer(new C2SSuitAbility(1, features.activeA.get(1).getValue()));
-            }
-            if(KeyBinding.ABILITY_3.consumeClick()){
-                System.out.println("ABILITY KEY 3 PRESSED");
-                if(2 < features.activeA.size())
-                    ModMessages.sendToServer(new C2SSuitAbility(2, features.activeA.get(2).getValue()));
-            }
-            if(KeyBinding.ABILITY_4.consumeClick()){
-                System.out.println("ABILITY KEY 4 PRESSED");
-                if(3 < features.activeA.size())
-                    ModMessages.sendToServer(new C2SSuitAbility(3, features.activeA.get(3).getValue()));
-            }
-        }
+
     }
 
     public void waterDash(Level lvl, Player plr){
