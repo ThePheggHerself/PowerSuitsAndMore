@@ -404,18 +404,22 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
     public void clientArmourTick(TickEvent.ClientTickEvent ev, Player player) {
         if (hasFullSet(player)) {
             if(KeyBinding.ABILITY_1.consumeClick()){
+                System.out.println("ABILITY KEY 1 PRESSED");
                 if(0 < features.activeA.size())
                     ModMessages.sendToServer(new C2SSuitAbility(0, features.activeA.get(0).getValue()));
             }
             if(KeyBinding.ABILITY_2.consumeClick()){
+                System.out.println("ABILITY KEY 2 PRESSED");
                 if(1 < features.activeA.size())
                     ModMessages.sendToServer(new C2SSuitAbility(1, features.activeA.get(1).getValue()));
             }
             if(KeyBinding.ABILITY_3.consumeClick()){
+                System.out.println("ABILITY KEY 3 PRESSED");
                 if(2 < features.activeA.size())
                     ModMessages.sendToServer(new C2SSuitAbility(2, features.activeA.get(2).getValue()));
             }
             if(KeyBinding.ABILITY_4.consumeClick()){
+                System.out.println("ABILITY KEY 4 PRESSED");
                 if(3 < features.activeA.size())
                     ModMessages.sendToServer(new C2SSuitAbility(3, features.activeA.get(3).getValue()));
             }
