@@ -1,7 +1,6 @@
 package phewitch.powersuits.client.gui.hud.oss;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -10,9 +9,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import phewitch.powersuits.PowerSuits;
-import phewitch.powersuits.common.entity.OSSManager;
-import phewitch.powersuits.common.networking.ModMessages;
-import phewitch.powersuits.common.networking.packets.client2server.C2SSummonOSSSuit;
+import phewitch.powersuits.client.data.ClientData;
+import phewitch.powersuits.common.OSS.OSSManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +47,7 @@ public class OSSScreen extends AbstractContainerScreen<OSSMenu> {
         int height = (this.height - this.imageHeight) / 2;
         int distance = height + 16 + 2;
         var index = 0;
-        var suits = OSSManager.getSuits();
+        var suits = ClientData.getOSSSuits();
 
         if(!suits.isEmpty()) {
             for(var suit : suits){
@@ -81,7 +79,7 @@ public class OSSScreen extends AbstractContainerScreen<OSSMenu> {
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
         this.renderBackground(pGuiGraphics);
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
-        var suits = OSSManager.getSuits();
+        var suits = ClientData.getOSSSuits();
         if (!suits.isEmpty()) {
             int width = (this.width - this.imageWidth) / 2;
             int height = (this.height - this.imageHeight) / 2;
@@ -91,7 +89,7 @@ public class OSSScreen extends AbstractContainerScreen<OSSMenu> {
             this.renderScroller(pGuiGraphics, width, height, suits);
             int i1 = 0;
 
-            for(var suit : OSSManager.getSuits()) {
+            for(var suit : suits) {
                 if (!this.canScroll(suits.size()) || i1 >= this.scrollOff && i1 < 7 + this.scrollOff) {
                     //pGuiGraphics.drawString(this.font, suit, x, y, ChatFormatting.WHITE.getColor());
                     y += 16;

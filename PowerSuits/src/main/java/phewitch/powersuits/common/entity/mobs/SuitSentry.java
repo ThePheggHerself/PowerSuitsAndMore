@@ -8,6 +8,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -29,8 +30,8 @@ import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.NetworkHooks;
 import phewitch.powersuits.PowerSuits;
 import phewitch.powersuits.common.CommonCore;
-import phewitch.powersuits.common.capabilities.PlayerOSSProvider;
-import phewitch.powersuits.common.entity.OSSManager;
+import phewitch.powersuits.common.OSS.PlayerOSSProvider;
+import phewitch.powersuits.common.OSS.OSSManager;
 import phewitch.powersuits.common.entity.goals.FollowSuitOwnerGoal;
 import phewitch.powersuits.common.entity.goals.OwnerAttackedGoal;
 import phewitch.powersuits.common.item.ItemsManager;
@@ -90,7 +91,8 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
                 .add(Attributes.ATTACK_DAMAGE, 6f)
                 .add(Attributes.ATTACK_SPEED, 1.0f)
                 .add(Attributes.MOVEMENT_SPEED, 1f)
-                .add(Attributes.FOLLOW_RANGE, 5f).build();
+                .add(Attributes.FOLLOW_RANGE, 5f)
+                .add(Attributes.ATTACK_KNOCKBACK, 1f).build();
     }
 
     @Override
@@ -145,15 +147,17 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
                     InteractionResult result = InteractionResult.FAIL;
 
                     pPlayer.getCapability(PlayerOSSProvider.PLAYER_OSS).ifPresent(oss -> {
-                        if(oss.getSuits().contains(name)){
-                            pPlayer.sendSystemMessage(OSSManager.getOSSChatPrefix()
-                                    .append("Suit already in orbital storage"));
-                        }
-                        else {
-                            pPlayer.sendSystemMessage(OSSManager.getOSSChatPrefix()
-                                    .append("Suit sent to Orbital Suit Storage"));
-                            oss.getSuits().add(this.name);
-                            this.sentToOSS = true;
+                        if(pPlayer.isCrouching()) {
+                            if (oss.getSuits().contains(name)) {
+                                pPlayer.sendSystemMessage(OSSManager.OSSChatPrefix()
+                                        .append("Suit already in orbital storage"));
+                            } else {
+                                pPlayer.sendSystemMessage(OSSManager.OSSChatPrefix()
+                                        .append("Suit sent to Orbital Suit Storage"));
+
+                                OSSManager.AddSuitToPlayer(name, (ServerPlayer) pPlayer);
+                                this.sentToOSS = true;
+                            }
                         }
                     });
 

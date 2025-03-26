@@ -1,12 +1,7 @@
 package phewitch.powersuits.common.networking.packets.client2server;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.SimpleMenuProvider;
 import net.minecraftforge.network.NetworkEvent;
-import phewitch.powersuits.client.gui.hud.oss.OSSMenu;
-import phewitch.powersuits.common.capabilities.PlayerOSSProvider;
-import phewitch.powersuits.common.networking.ModMessages;
 
 import java.util.function.Supplier;
 

@@ -1,32 +1,35 @@
-package phewitch.powersuits.common.capabilities;
+package phewitch.powersuits.common.OSS;
 
 import com.google.gson.Gson;
-import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerPlayer;
+import phewitch.powersuits.common.networking.ModMessages;
+import phewitch.powersuits.common.networking.packets.server2client.S2CSyncOSS;
 
-import javax.json.JsonArray;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerOSS {
+public class PlayerOSSData {
     private List<String> suits = new ArrayList<>();
 
-    public List<String> getSuits(){
+    public List<String> getSuits() {
         return suits;
     }
 
-    public void addSuit(String suit){
-        if(!suits.contains(suit))
+    public void addSuit(String suit) {
+        if (!suits.contains(suit)) {
             suits.add(suit);
-    }
-    public void removeSuit(String suit){
-        if(suit.contains(suit))
-            suits.remove(suit);
+
+        }
     }
 
-    public void copyFrom(PlayerOSS source){
+    public void removeSuit(String suit) {
+        if (suits.contains(suit)) {
+            suits.remove(suit);
+        }
+    }
+
+    public void copyFrom(PlayerOSSData source) {
         this.suits = source.suits;
     }
 

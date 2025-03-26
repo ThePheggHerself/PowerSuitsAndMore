@@ -1,8 +1,7 @@
-package phewitch.powersuits.common.capabilities;
+package phewitch.powersuits.common.OSS;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -13,14 +12,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PlayerOSSProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
-    public static Capability<PlayerOSS> PLAYER_OSS = CapabilityManager.get(new CapabilityToken<PlayerOSS>() {});
+    public static Capability<PlayerOSSData> PLAYER_OSS = CapabilityManager.get(new CapabilityToken<PlayerOSSData>() {});
 
-    private PlayerOSS suits = null;
-    private final LazyOptional<PlayerOSS> optional = LazyOptional.of(this::getSuits);
+    private PlayerOSSData suits = null;
+    private final LazyOptional<PlayerOSSData> optional = LazyOptional.of(this::getSuits);
 
-    private PlayerOSS getSuits(){
+    private PlayerOSSData getSuits(){
         if(this.suits == null){
-            this.suits = new PlayerOSS();
+            this.suits = new PlayerOSSData();
         }
         return suits;
     }

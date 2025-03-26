@@ -1,21 +1,18 @@
 package phewitch.powersuits.client.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClientData {
-    private static int suitPower;
-    private static int maxSuitPower;
+    private static List<String> OSSSuits = new ArrayList<>();
 
-    public static void setPower(int power){
-        ClientData.suitPower = power;
+    public static void setOSSSuits(List<String> Suits){
+        OSSSuits = Suits;
     }
-
-    public static int getSuitPower(){
-        return suitPower;
+    public static List<String> getOSSSuits(){
+        return OSSSuits;
     }
-    public static void setMaxPower(int power){
-        ClientData.maxSuitPower = power;
-    }
-
-    public static int getMaxSuitPower(){
-        return maxSuitPower;
+    public static void RemoveSuit(String SuitName){
+        OSSSuits.remove(SuitName);
     }
 }

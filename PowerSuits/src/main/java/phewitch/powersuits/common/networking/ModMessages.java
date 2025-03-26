@@ -8,8 +8,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import phewitch.powersuits.PowerSuits;
 import phewitch.powersuits.common.networking.packets.client2server.*;
-import phewitch.powersuits.common.networking.packets.server2client.S2CGetOSSSuits;
-import phewitch.powersuits.common.networking.packets.server2client.S2CSuitPowerSync;
+import phewitch.powersuits.common.networking.packets.server2client.S2CSyncOSS;
 
 public class ModMessages {
     private static SimpleChannel Instance;
@@ -46,16 +45,10 @@ public class ModMessages {
                 .consumerMainThread(C2SGetOSSSuits::handle)
                 .add();
 
-        net.messageBuilder(S2CGetOSSSuits.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(S2CGetOSSSuits::new)
-                .encoder(S2CGetOSSSuits::toBytes)
-                .consumerMainThread(S2CGetOSSSuits::handle)
-                .add();
-
-        net.messageBuilder(S2CSuitPowerSync.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(S2CSuitPowerSync::new)
-                .encoder(S2CSuitPowerSync::toBytes)
-                .consumerMainThread(S2CSuitPowerSync::handle)
+        net.messageBuilder(S2CSyncOSS.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(S2CSyncOSS::new)
+                .encoder(S2CSyncOSS::toBytes)
+                .consumerMainThread(S2CSyncOSS::handle)
                 .add();
     }
 

@@ -1,15 +1,11 @@
 package phewitch.powersuits.common.networking.packets.client2server;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraftforge.network.NetworkEvent;
-import phewitch.powersuits.common.capabilities.PlayerOSSProvider;
-import phewitch.powersuits.common.entity.EntityManager;
-import phewitch.powersuits.common.entity.OSSManager;
-import phewitch.powersuits.common.entity.mobs.SuitSentry;
+import phewitch.powersuits.common.OSS.PlayerOSSProvider;
+import phewitch.powersuits.common.OSS.OSSManager;
 
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.function.Supplier;
 
 public class C2SSummonOSSSuit {
@@ -34,7 +30,7 @@ public class C2SSummonOSSSuit {
 
             plr.getCapability(PlayerOSSProvider.PLAYER_OSS).ifPresent(playerOSS -> {
                 if(playerOSS.getSuits().contains(suit)){
-                    playerOSS.removeSuit(suit);
+                    OSSManager.RemoveSuitFromPlayer(suit, plr);
                     OSSManager.ServerSummonSentry(plr, suit);
                 }
             });

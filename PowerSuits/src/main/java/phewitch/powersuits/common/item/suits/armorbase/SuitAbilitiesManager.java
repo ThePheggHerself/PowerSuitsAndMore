@@ -18,8 +18,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import phewitch.powersuits.common.CommonCore;
-import phewitch.powersuits.common.entity.OSSManager;
-import phewitch.powersuits.common.item.suits.armorbase.enums.ActiveAbilities;
+import phewitch.powersuits.common.OSS.OSSManager;
 import phewitch.powersuits.common.sound.ModSounds;
 
 import java.math.BigDecimal;

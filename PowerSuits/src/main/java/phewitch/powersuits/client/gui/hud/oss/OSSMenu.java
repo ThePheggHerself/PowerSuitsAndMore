@@ -4,9 +4,10 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import phewitch.powersuits.client.data.ClientData;
 import phewitch.powersuits.client.gui.GUIManager;
-import phewitch.powersuits.common.capabilities.PlayerOSSProvider;
-import phewitch.powersuits.common.entity.OSSManager;
+import phewitch.powersuits.common.OSS.PlayerOSSProvider;
+import phewitch.powersuits.common.OSS.OSSManager;
 
 public class OSSMenu extends AbstractContainerMenu {
 
@@ -17,14 +18,9 @@ public class OSSMenu extends AbstractContainerMenu {
     public OSSMenu(int pContainerId, Inventory inv, ContainerLevelAccess access) {
         super(GUIManager.OSS_MENU.get(), pContainerId);
         checkContainerSize(inv, 2);
-
         addPlayerInventory(inv);
 
-        if(!inv.player.level().isClientSide) {
-            inv.player.getCapability(PlayerOSSProvider.PLAYER_OSS).ifPresent(oss -> {
-                OSSManager.getSuits();
-            });
-        }
+        System.out.println("aaaaaaaaaa");
     }
 
     @Override

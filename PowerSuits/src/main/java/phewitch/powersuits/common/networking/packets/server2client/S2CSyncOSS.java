@@ -3,19 +3,19 @@ package phewitch.powersuits.common.networking.packets.server2client;
 import com.google.gson.Gson;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
-import phewitch.powersuits.common.entity.OSSManager;
+import phewitch.powersuits.client.data.ClientData;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class S2CGetOSSSuits {
+public class S2CSyncOSS {
     private List<String> suits;
 
-    public S2CGetOSSSuits(List<String> suits){
+    public S2CSyncOSS(List<String> suits){
         this.suits = suits;
     }
-    public S2CGetOSSSuits(FriendlyByteBuf buf){
+    public S2CSyncOSS(FriendlyByteBuf buf){
         this.suits = new Gson().fromJson(buf.readBytes(buf.readableBytes()).toString(StandardCharsets.UTF_8), List.class);
     }
 
@@ -27,9 +27,9 @@ public class S2CGetOSSSuits {
         NetworkEvent.Context context = supplier.get();
 
         context.enqueueWork(() -> {
-            var plr = context.getSender();
+            ClientData.setOSSSuits(suits);
 
-            OSSManager.setSuits(suits);
+            System.out.println("Syncing Suit Data: " + suits.size());
         });
 
         return true;

@@ -3,13 +3,7 @@ package phewitch.powersuits.common.item.suits.armorbase;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
@@ -17,12 +11,9 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
@@ -32,19 +23,11 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.Event;
 import org.jetbrains.annotations.NotNull;
-import phewitch.powersuits.client.KeyBinding;
 import phewitch.powersuits.client.gui.GUIManager;
 import phewitch.powersuits.client.gui.IHUDItem;
-import phewitch.powersuits.common.CommonCore;
-import phewitch.powersuits.common.entity.OSSManager;
-import phewitch.powersuits.common.item.suits.armorbase.enums.ActiveAbilities;
 import phewitch.powersuits.common.item.suits.armorbase.enums.ChargeType;
 import phewitch.powersuits.common.item.suits.armorbase.enums.PassiveAbilities;
 import phewitch.powersuits.common.item.suits.armorbase.enums.Weakness;
-import phewitch.powersuits.common.networking.ModMessages;
-import phewitch.powersuits.common.networking.packets.client2server.C2SSuitAbility;
-import phewitch.powersuits.common.networking.packets.server2client.S2CSuitPowerSync;
-import phewitch.powersuits.common.sound.ModSounds;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
@@ -308,10 +291,6 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }
-    public void clientArmourTick(TickEvent.ClientTickEvent ev, Player player) {
-
-    }
-
     public void waterDash(Level lvl, Player plr){
         features.removePower(30);
 
