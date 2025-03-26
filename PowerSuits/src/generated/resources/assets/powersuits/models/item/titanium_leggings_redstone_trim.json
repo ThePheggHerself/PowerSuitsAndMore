@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "powersuits:item/titanium_leggings",
+    "layer1": "minecraft:trims/item/leggings_trim_redstone"
+  }
+}

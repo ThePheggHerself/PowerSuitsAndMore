@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "powersuits:item/photonic_beam_generator"
+  }
+}
