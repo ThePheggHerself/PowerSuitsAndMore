@@ -124,7 +124,7 @@ public class ClientEvents {
                         ModMessages.sendToServer(new C2SSuitAbility(2, ability.AbilityType.getValue()));
                         return;
                     }
-                    if(KeyBinding.ABILITY_4.consumeClick() && 0 < sAB.features.activeA.size()){
+                    if(KeyBinding.ABILITY_4.consumeClick() && 3 < sAB.features.activeA.size()){
                         var ability = sAB.features.activeA.get(3);
                         if(!sAB.features.hasPower(ability.Cost) || isOnCooldown(ability))
                             return;

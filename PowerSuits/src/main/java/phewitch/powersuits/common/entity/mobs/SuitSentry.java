@@ -92,7 +92,7 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
                 .add(Attributes.ATTACK_DAMAGE, 6f)
                 .add(Attributes.ATTACK_SPEED, 1.0f)
                 .add(Attributes.MOVEMENT_SPEED, 1f)
-                .add(Attributes.FOLLOW_RANGE, 5f)
+                .add(Attributes.FOLLOW_RANGE, 20f)
                 .add(Attributes.ATTACK_KNOCKBACK, 1f).build();
     }
 
@@ -117,12 +117,12 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
         super.registerGoals();
 
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 0.3f, true));
-        this.goalSelector.addGoal(2, new FollowSuitOwnerGoal(this, 1, 10f, 3, true));
+        this.goalSelector.addGoal(2, new FollowSuitOwnerGoal(this, 0.4, 20f, 3, true));
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0f));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new OwnerAttackedGoal(this, this));
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(1, new OwnerAttackedGoal(this, this));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false,
                 (entity) -> entity instanceof Enemy && !(entity instanceof Creeper)));
     }

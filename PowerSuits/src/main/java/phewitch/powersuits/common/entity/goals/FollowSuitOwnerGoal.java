@@ -108,7 +108,7 @@ public class FollowSuitOwnerGoal extends Goal {
         sentry.getLookControl().setLookAt(this.owner, 10.0F, (float)sentry.getMaxHeadXRot());
         if (--this.timeToRecalcPath <= 0) {
             this.timeToRecalcPath = this.adjustedTickDelay(10);
-            if (sentry.distanceToSqr(this.owner) >= 144.0D) {
+            if (sentry.distanceToSqr(this.owner) >= 900.0D) {
                 this.teleportToOwner();
             } else {
                 this.navigation.moveTo(this.owner, this.speedModifier);
