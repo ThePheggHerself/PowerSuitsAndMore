@@ -1,20 +1,32 @@
 package commands;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import annotations.Command;
 import net.minecraft.server.level.ServerPlayer;
+import annotations.Command;
 
 @Command(
         name = "powerhelp",
-        description = "Displays all PowerSuit commands with their descriptions and arguments."
+        description = "Displays all PowerSuit commands with their descriptions and arguments.",
+        isPlayerOnly = true
 )
-public class TestCommand extends CommandFormat {
+public class TestCommand extends CommandFormat<CommandSourceStack> {
+
 
     @Override
-    protected int executeCommand(ServerPlayer source, String[] args) {
-        // Create a mutable header text.
+    protected Class<?> getValidSourceClass() {
+        return ServerPlayer.class;
+    }
+
+    @Override
+    protected int executeCommand(CommandSourceStack source, String[] args) {
+        sendHelpMessage(source);
+        return 1;
+    }
+
+    private void sendHelpMessage(CommandSourceStack source) {
         MutableComponent header = Component.literal("=== PowerSuit Commands ===\n")
                 .withStyle(ChatFormatting.GOLD);
 
@@ -45,8 +57,6 @@ public class TestCommand extends CommandFormat {
         message.append(statusCommand);
         message.append(footer);
 
-        // Send the final message using a supplier.
         source.sendSystemMessage(message);
-        return 1;
     }
 }
