@@ -2,7 +2,6 @@ package phewitch.powersuits.common.entity.mobs;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -152,12 +151,12 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
                         if(pPlayer.isCrouching()) {
                             if (oss.getSuits().contains(name)) {
 
-                                PlayerMessenger.sendPlayerMessage(pPlayer, PowerSuits.GLOBAL_OSS, "&e Suit already in storage");
+                                PlayerMessenger.sendPlayerMessage(pPlayer, PowerSuits.OSS_PREFIX, "&e Suit already in storage");
                                 PowerSuitsLogger.info("Player: " + pPlayer.getName().getString() + " tried to send suit to OSS, but it was already in storage");
 
                             } else {
 
-                                PlayerMessenger.sendPlayerMessage(pPlayer, PowerSuits.GLOBAL_OSS, "&e Sending suit to Orbital Suit Storage");
+                                PlayerMessenger.sendPlayerMessage(pPlayer, PowerSuits.OSS_PREFIX, "&e Sending suit to Orbital Suit Storage");
                                 PowerSuitsLogger.info("Player: " + pPlayer.getName().getString() + " sent suit to OSS");
 
                                 OSSManager.AddSuitToPlayer(name, (ServerPlayer) pPlayer);

@@ -1,9 +1,6 @@
 package phewitch.powersuits.common.OSS;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import phewitch.powersuits.PowerSuits;
@@ -15,22 +12,16 @@ import phewitch.powersuits.common.networking.packets.client2server.C2SSummonOSSS
 import phewitch.powersuits.common.networking.packets.server2client.S2CSyncOSS;
 import phewitch.powersuits.utils.PlayerMessenger;
 
-import java.util.List;
-
 public class OSSManager {
     public static String OSSMenuDisplayName() {
         return "Orbital Suit Storage";
-    }
-
-    public static MutableComponent OSSChatPrefix() {
-        return Component.literal("§6[OSS] §7");
     }
 
     public static void RequestSuitFromOSS(String suitName) {
         if (!Minecraft.getInstance().level.isClientSide)
             return;
 
-        //PlayerMessenger.sendMessageToPlayer(Minecraft.getInstance().player, OSSChatPrefix(), "&e Suit requested from Orbital Suit Storage");
+        PlayerMessenger.sendSystemMessageToClient(PowerSuits.OSS_PREFIX, "&e Suit requested from Orbital Suit Storage");
 
         ClientData.RemoveSuit(suitName);
 

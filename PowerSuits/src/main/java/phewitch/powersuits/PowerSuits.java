@@ -13,8 +13,6 @@ import phewitch.powersuits.common.item.CreativeTabs;
 import phewitch.powersuits.common.networking.ModMessages;
 import phewitch.powersuits.utils.PlayerMessenger;
 
-import java.awt.*;
-
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("powersuits")
 public class PowerSuits {
@@ -25,7 +23,7 @@ public class PowerSuits {
     public static PowerSuits Instance;
 
     public static Component GLOBAL_PREFIX = PlayerMessenger.colour("&b[PowerSuits]&7");
-    public static String GLOBAL_OSS = "&6[OSS]&7";
+    public static String OSS_PREFIX = "&6[OSS]&7";
 
     public static long lastTick = 0;
 
