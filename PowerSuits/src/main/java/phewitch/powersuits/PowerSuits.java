@@ -1,6 +1,7 @@
 package phewitch.powersuits;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -10,6 +11,9 @@ import phewitch.powersuits.client.ClientEvents;
 import phewitch.powersuits.common.CommonEvents;
 import phewitch.powersuits.common.item.CreativeTabs;
 import phewitch.powersuits.common.networking.ModMessages;
+import phewitch.powersuits.utils.PlayerMessenger;
+
+import java.awt.*;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("powersuits")
@@ -19,6 +23,9 @@ public class PowerSuits {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String MODID = "powersuits";
     public static PowerSuits Instance;
+
+    public static Component GLOBAL_PREFIX = PlayerMessenger.colour("&b[PowerSuits]&7");
+    public static String GLOBAL_OSS = "&6[OSS]&7";
 
     public static long lastTick = 0;
 

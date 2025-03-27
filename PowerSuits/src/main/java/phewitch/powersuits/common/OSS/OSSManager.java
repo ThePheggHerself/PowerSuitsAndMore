@@ -6,12 +6,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import phewitch.powersuits.PowerSuits;
 import phewitch.powersuits.client.data.ClientData;
 import phewitch.powersuits.common.entity.EntityManager;
 import phewitch.powersuits.common.entity.mobs.SuitSentry;
 import phewitch.powersuits.common.networking.ModMessages;
 import phewitch.powersuits.common.networking.packets.client2server.C2SSummonOSSSuit;
 import phewitch.powersuits.common.networking.packets.server2client.S2CSyncOSS;
+import phewitch.powersuits.utils.PlayerMessenger;
 
 import java.util.List;
 
@@ -28,8 +30,8 @@ public class OSSManager {
         if (!Minecraft.getInstance().level.isClientSide)
             return;
 
-        Minecraft.getInstance().player.sendSystemMessage(OSSManager.OSSChatPrefix()
-                .append("Suit requested from Orbital Suit Storage"));
+        //PlayerMessenger.sendMessageToPlayer(Minecraft.getInstance().player, OSSChatPrefix(), "&e Suit requested from Orbital Suit Storage");
+
         ClientData.RemoveSuit(suitName);
 
         ModMessages.sendToServer(new C2SSummonOSSSuit(suitName));

@@ -37,6 +37,8 @@ import phewitch.powersuits.common.entity.goals.OwnerAttackedGoal;
 import phewitch.powersuits.common.item.ItemsManager;
 import phewitch.powersuits.common.item.suits.armorbase.SuitArmourBase;
 import phewitch.powersuits.common.item.suits.Suits;
+import phewitch.powersuits.utils.PlayerMessenger;
+import phewitch.powersuits.utils.PowerSuitsLogger;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
@@ -149,11 +151,14 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
                     pPlayer.getCapability(PlayerOSSProvider.PLAYER_OSS).ifPresent(oss -> {
                         if(pPlayer.isCrouching()) {
                             if (oss.getSuits().contains(name)) {
-                                pPlayer.sendSystemMessage(OSSManager.OSSChatPrefix()
-                                        .append("Suit already in orbital storage"));
+
+                                PlayerMessenger.sendPlayerMessage(pPlayer, PowerSuits.GLOBAL_OSS, "&e Suit already in storage");
+                                PowerSuitsLogger.info("Player: " + pPlayer.getName().getString() + " tried to send suit to OSS, but it was already in storage");
+
                             } else {
-                                pPlayer.sendSystemMessage(OSSManager.OSSChatPrefix()
-                                        .append("Suit sent to Orbital Suit Storage"));
+
+                                PlayerMessenger.sendPlayerMessage(pPlayer, PowerSuits.GLOBAL_OSS, "&e Sending suit to Orbital Suit Storage");
+                                PowerSuitsLogger.info("Player: " + pPlayer.getName().getString() + " sent suit to OSS");
 
                                 OSSManager.AddSuitToPlayer(name, (ServerPlayer) pPlayer);
                                 this.sentToOSS = true;
@@ -167,13 +172,14 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
 
             if (pPlayer.isShiftKeyDown()) {
                 doNotFollow = !doNotFollow;
-                pPlayer.sendSystemMessage(Component.literal(getSentryName() + " ")
-                        .append(Component.translatable("msg." + PowerSuits.MODID + ".suit.notfollow." + doNotFollow)));
+
+                PlayerMessenger.sendPlayerMessage(pPlayer, "&6[" + getSentryName().toUpperCase() + "]&7 ", (doNotFollow ? "&cWill no longer follow you" : "&aWill now follow you"));
 
                 return InteractionResult.SUCCESS;
             } else {
                 if (CommonCore.hasAnyArmour(pPlayer)) {
-                    pPlayer.sendSystemMessage(Component.literal("You cannot be wearing armour"));
+                    PlayerMessenger.sendPlayerMessage(pPlayer,"&e You cannot be wearing armour");
+                    PowerSuitsLogger.info("Player: " + pPlayer.getName().getString() + " tried to equip suit, but they were wearing armour");
                     return InteractionResult.FAIL;
                 } else {
                     switch (getSentryName().toLowerCase()) {
@@ -215,7 +221,8 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
             }
         } else {
             pPlayer.hurt(pPlayer.damageSources().generic(), 5);
-            pPlayer.sendSystemMessage(Component.literal("This suit does not belong to you!"));
+            PlayerMessenger.sendPlayerMessage(pPlayer,"&e You cannot equip a suit that does not belong to you!");
+            PowerSuitsLogger.info("Player: " + pPlayer.getName().getString() + " tried to equip suit" + name.toLowerCase() + ", but it did not belong to them!");
             return InteractionResult.FAIL;
         }
     }
