@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -27,6 +28,7 @@ import phewitch.powersuits.common.item.suits.armorbase.SuitArmourBase;
 import phewitch.powersuits.common.networking.ModMessages;
 import phewitch.powersuits.common.networking.packets.server2client.S2CSyncOSS;
 import phewitch.powersuits.common.sound.ModSounds;
+import phewitch.powersuits.utils.CommandManager;
 
 @Mod.EventBusSubscriber(modid = PowerSuits.MODID)
 public class CommonEvents {
@@ -121,5 +123,10 @@ public class CommonEvents {
         public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
             event.put(EntityManager.SENTRY.get(), SuitSentry.setAttributes());
         }
+    }
+
+    @SubscribeEvent
+    public static void onRegisterCommands(RegisterCommandsEvent event) {
+        CommandManager.registerALL(event.getDispatcher());
     }
 }

@@ -1,6 +1,7 @@
 package phewitch.powersuits;
 
 import com.mojang.logging.LogUtils;
+import commands.TestCommand;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -11,6 +12,7 @@ import phewitch.powersuits.client.ClientEvents;
 import phewitch.powersuits.common.CommonEvents;
 import phewitch.powersuits.common.item.CreativeTabs;
 import phewitch.powersuits.common.networking.ModMessages;
+import phewitch.powersuits.utils.CommandManager;
 import phewitch.powersuits.utils.PlayerMessenger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -41,5 +43,7 @@ public class PowerSuits {
         MinecraftForge.EVENT_BUS.register(this);
         CreativeTabs.register(eventBus);
         ModMessages.register();
+
+        CommandManager.registerCommand(new TestCommand());
     }
 }
