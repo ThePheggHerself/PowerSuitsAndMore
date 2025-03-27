@@ -157,7 +157,7 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
                             } else {
 
                                 PlayerMessenger.sendPlayerMessage(pPlayer, PowerSuits.OSS_PREFIX, "&e Sending suit to Orbital Suit Storage");
-                                PowerSuitsLogger.info("Player: " + pPlayer.getName().getString() + " sent suit to OSS");
+                                //PowerSuitsLogger.info("Player: " + pPlayer.getName().getString() + " sent suit to OSS");
 
                                 OSSManager.AddSuitToPlayer(name, (ServerPlayer) pPlayer);
                                 this.sentToOSS = true;

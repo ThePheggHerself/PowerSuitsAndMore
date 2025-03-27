@@ -30,7 +30,7 @@ public class OSSManager {
         if (!Minecraft.getInstance().level.isClientSide)
             return;
 
-        PlayerMessenger.sendSystemMessageToClient(PowerSuits.OSS_PREFIX, "&e Suit requested from Orbital Suit Storage");
+        //PlayerMessenger.sendSystemMessageToClient(PowerSuits.OSS_PREFIX, "&e Suit requested from Orbital Suit Storage");
 
         ClientData.RemoveSuit(suitName);
 
