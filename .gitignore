@@ -1,7 +1,7 @@
 /.idea/
 /TextureModels/
-/PowerSuits/run/
-/PowerSuits/run-data/
-/PowerSuits/build/
-/PowerSuits/gradle/wrapper/
-/PowerSuits/src/generated/resources/.cache/
+/run/
+/run-data/
+/build/
+/.gradle/
+/src/generated/resources/.cache/
