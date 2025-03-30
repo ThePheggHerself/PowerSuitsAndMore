@@ -54,6 +54,7 @@ public class TestCommand extends CommandFormat<CommandSourceStack> {
         MutableComponent footer = Component.literal("=== PowerSuit Commands ===\n")
                 .withStyle(ChatFormatting.GOLD);
 
+
         MutableComponent message = header.copy();
         message.append(helpCommand);
         message.append(activateCommand);
