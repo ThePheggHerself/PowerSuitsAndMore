@@ -12,6 +12,5 @@ public @interface Command {
     String description() default "";
     String usage() default "";
     String[] aliases() default {};
-    String permission() default "";
     boolean isPlayerOnly() default false;
 }

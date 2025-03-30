@@ -152,7 +152,7 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
                             if (oss.getSuits().contains(name)) {
 
                                 PlayerMessenger.sendPlayerMessage(pPlayer, PowerSuits.OSS_PREFIX, "&e Suit already in storage");
-                                PowerSuitsLogger.info("Player: " + pPlayer.getName().getString() + " tried to send suit to OSS, but it was already in storage");
+                                PowerSuitsLogger.warn("Player: " + pPlayer.getName().getString() + " tried to send suit to OSS, but it was already in storage");
 
                             } else {
 
@@ -178,7 +178,7 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
             } else {
                 if (CommonCore.hasAnyArmour(pPlayer)) {
                     PlayerMessenger.sendPlayerMessage(pPlayer,"&e You cannot be wearing armour");
-                    PowerSuitsLogger.info("Player: " + pPlayer.getName().getString() + " tried to equip suit, but they were wearing armour");
+                    PowerSuitsLogger.warn("Player: " + pPlayer.getName().getString() + " tried to equip suit, but they were wearing armour");
                     return InteractionResult.FAIL;
                 } else {
                     switch (getSentryName().toLowerCase()) {
@@ -221,7 +221,7 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
         } else {
             pPlayer.hurt(pPlayer.damageSources().generic(), 5);
             PlayerMessenger.sendPlayerMessage(pPlayer,"&e You cannot equip a suit that does not belong to you!");
-            PowerSuitsLogger.info("Player: " + pPlayer.getName().getString() + " tried to equip suit" + name.toLowerCase() + ", but it did not belong to them!");
+            PowerSuitsLogger.warn("Player: " + pPlayer.getName().getString() + " tried to equip suit" + name.toLowerCase() + ", but it did not belong to them!");
             return InteractionResult.FAIL;
         }
     }

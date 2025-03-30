@@ -15,7 +15,6 @@ public abstract class CommandFormat<T extends CommandSourceStack> extends BaseCo
 
     protected final String usage;
     protected final String[] aliases;
-    protected final String permission;
     protected final boolean isPlayerOnly;
 
     public CommandFormat() {
@@ -30,7 +29,6 @@ public abstract class CommandFormat<T extends CommandSourceStack> extends BaseCo
 
         this.usage = meta.usage();
         this.aliases = meta.aliases();
-        this.permission = meta.permission();
 
         this.isPlayerOnly = meta.isPlayerOnly();
     }
