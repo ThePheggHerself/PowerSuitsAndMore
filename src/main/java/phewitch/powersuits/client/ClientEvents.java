@@ -6,14 +6,12 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import phewitch.powersuits.client.data.ClientData;
 import phewitch.powersuits.client.gui.GUIManager;
 import phewitch.powersuits.client.gui.hud.oss.OSSScreen;
 import phewitch.powersuits.client.gui.hud.suit.SuitOverlay;
@@ -22,8 +20,7 @@ import phewitch.powersuits.common.entity.EntityManager;
 import phewitch.powersuits.common.entity.mobs.SentryRenderer;
 import phewitch.powersuits.common.entity.projectiles.ChestLaserProjectileRenderer;
 import phewitch.powersuits.common.entity.projectiles.LaserProjectileRenderer;
-import phewitch.powersuits.common.item.suits.armorbase.SuitAbilitiesManager;
-import phewitch.powersuits.common.item.suits.armorbase.datatypes.SuitAbility;
+import phewitch.powersuits.common.item.suits.armorbase.SuitAbility;
 import phewitch.powersuits.PowerSuits;
 import phewitch.powersuits.common.item.suits.armorbase.enums.ActiveAbilities;
 import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourBase;
@@ -55,9 +52,9 @@ public class ClientEvents {
 
         @SubscribeEvent
         public static void setupClient(FMLClientSetupEvent event) {
-            EntityRenderers.register(EntityManager.SENTRY.get(), context ->  new SentryRenderer(context));
-            EntityRenderers.register(EntityManager.LASER_PROJECTILE.get(), context -> new LaserProjectileRenderer(context));
-            EntityRenderers.register(EntityManager.CHEST_LASER_PROJECTILE.get(), context -> new ChestLaserProjectileRenderer(context));
+            EntityRenderers.register(EntityManager.SENTRY.get(), SentryRenderer::new);
+            EntityRenderers.register(EntityManager.LASER_PROJECTILE.get(), LaserProjectileRenderer::new);
+            EntityRenderers.register(EntityManager.CHEST_LASER_PROJECTILE.get(), ChestLaserProjectileRenderer::new);
 
             MenuScreens.register(GUIManager.OSS_MENU.get(), OSSScreen::new);
             MenuScreens.register(GUIManager.WORKBENCH_MENU.get(), WorkbenchScreen::new);
@@ -72,12 +69,10 @@ public class ClientEvents {
     @Mod.EventBusSubscriber(modid = PowerSuits.MODID, value = Dist.CLIENT)
     public static class ClientForgeEvents{
 
-        public static Map<ActiveAbilities, Integer> CooldownList = new HashMap<ActiveAbilities, Integer>();
+        public static Map<ActiveAbilities, Integer> CooldownList = new HashMap<>();
 
         public static boolean isOnCooldown(SuitAbility ability){
-            if(CooldownList.containsKey(ability.AbilityType) && (System.currentTimeMillis() - CooldownList.get(ability.AbilityType)) < ability.Cooldown)
-                return true;
-            else return false;
+            return CooldownList.containsKey(ability.AbilityType) && (System.currentTimeMillis() - CooldownList.get(ability.AbilityType)) < ability.Cooldown;
         }
 
         @SubscribeEvent
@@ -85,7 +80,7 @@ public class ClientEvents {
             var instance = Minecraft.getInstance();
             var player = instance.player;
 
-            if (instance == null || instance.isPaused() || player == null || player.level() == null)
+            if (instance.isPaused() || player == null)
                 return;
 
             var sAB = SuitArmourChest.getChestplate(player);
@@ -95,7 +90,6 @@ public class ClientEvents {
                         if(isOnCooldown(ability))
                             return;
 
-                        System.out.println("ABILITY KEY 1 PRESSED");
                         ModMessages.sendToServer(new C2SSuitAbility(ability.Cost, ability.AbilityType.getValue()));
                         return;
                     }
@@ -104,7 +98,6 @@ public class ClientEvents {
                         if(isOnCooldown(ability))
                             return;
 
-                        System.out.println("ABILITY KEY 2 PRESSED");
                         ModMessages.sendToServer(new C2SSuitAbility(ability.Cost, ability.AbilityType.getValue()));
                         return;
                     }
@@ -113,7 +106,6 @@ public class ClientEvents {
                         if(isOnCooldown(ability))
                             return;
 
-                        System.out.println("ABILITY KEY 3 PRESSED");
                         ModMessages.sendToServer(new C2SSuitAbility(ability.Cost, ability.AbilityType.getValue()));
                         return;
                     }
@@ -122,18 +114,9 @@ public class ClientEvents {
                         if(isOnCooldown(ability))
                             return;
 
-                        System.out.println("ABILITY KEY 4 PRESSED");
                         ModMessages.sendToServer(new C2SSuitAbility(ability.Cost, ability.AbilityType.getValue()));
-                        return;
                     }
             }
-        }
-
-
-
-        @SubscribeEvent
-        public void onRenderGui(RenderGuiEvent event){
-            GUIManager.renderHUDItems(event);
         }
     }
 }

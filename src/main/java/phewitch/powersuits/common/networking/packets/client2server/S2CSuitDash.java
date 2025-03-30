@@ -22,9 +22,9 @@ public class S2CSuitDash {
 
         context.enqueueWork(() -> {
             var plr = Minecraft.getInstance().player;
-            var sAB = SuitArmourBase.isWearingAnyPiece(plr);
-            if(sAB != null)
-                sAB.waterDash(plr.level(), plr);
+            var sAB = SuitArmourBase.hasAny(plr);
+//            if(sAB != null)
+//                sAB.waterDash(plr.level(), plr);
         });
 
         return true;

@@ -4,10 +4,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
-import phewitch.powersuits.common.item.suits.armorbase.datatypes.SuitFeatures;
+import phewitch.powersuits.common.item.suits.armorbase.SuitFeatures;
 import phewitch.powersuits.common.item.suits.armorbase.enums.PassiveAbilities;
 
-public class SuitArmourBoots extends SuitArmourBase{
+public class SuitArmourBoots extends SuitArmourBase {
     public SuitArmourBoots(ArmorMaterial materialIn, Type type, Properties properties, SuitFeatures features) {
         super(materialIn, type, properties, features);
     }

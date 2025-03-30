@@ -1,4 +1,4 @@
-package phewitch.powersuits.common.item.suits.armorbase.datatypes;
+package phewitch.powersuits.common.item.suits.armorbase;
 
 import net.minecraft.world.effect.MobEffect;
 import phewitch.powersuits.common.item.suits.armorbase.enums.ChargeType;
@@ -10,16 +10,11 @@ import java.util.ArrayList;
 public class SuitFeatures{
 
     public int maxPower;
-    public int currentPower;
     public int recharge;
     public float fallDmgMult;
     public float fallDmgCancDist;
     public double flightVelocity;
     public int flightCost;
-
-
-    public int projCooldown = 0;
-
     public ArrayList<SuitAbility> activeA;
     public ArrayList<PassiveAbilities> passiveA;
     public ChargeType chargeType;
@@ -45,9 +40,7 @@ public class SuitFeatures{
         this.effects = Effects;
         this.name = Name;
     }
-
-    public boolean canLimitedFlight(){ return passiveA.contains(PassiveAbilities.LIMITED_FLIGHT) && currentPower > 0 && (flightCost == 0 || currentPower - flightCost > 0); }
-
+    
     public String getModelName(){
         return name.toLowerCase().replaceAll("\\s","").trim();
     }

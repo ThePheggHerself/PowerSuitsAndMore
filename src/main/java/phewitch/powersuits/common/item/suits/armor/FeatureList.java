@@ -1,8 +1,8 @@
 package phewitch.powersuits.common.item.suits.armor;
 
 import net.minecraft.world.effect.MobEffects;
-import phewitch.powersuits.common.item.suits.armorbase.datatypes.SuitAbility;
-import phewitch.powersuits.common.item.suits.armorbase.datatypes.SuitFeatures;
+import phewitch.powersuits.common.item.suits.armorbase.SuitAbility;
+import phewitch.powersuits.common.item.suits.armorbase.SuitFeatures;
 import phewitch.powersuits.common.item.suits.armorbase.enums.ChargeType;
 import phewitch.powersuits.common.item.suits.armorbase.enums.PassiveAbilities;
 import phewitch.powersuits.common.item.suits.armorbase.enums.Weakness;

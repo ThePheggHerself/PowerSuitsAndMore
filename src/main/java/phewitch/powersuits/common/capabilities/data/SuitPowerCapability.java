@@ -8,38 +8,20 @@ import phewitch.powersuits.common.networking.ModMessages;
 import phewitch.powersuits.common.networking.packets.server2client.S2CSuitEnergySync;
 
 public class SuitPowerCapability extends EnergyStorage {
-    public SuitPowerCapability(int Capacity, int CurrentPower) {
-        super(Capacity);
-        this.capacity = Capacity;
-        this.energy = CurrentPower;
-    }
-
     public SuitPowerCapability(int Capacity) {
         super(Capacity);
     }
 
-    public int charge(int maxExtract, @Nullable ServerPlayer player) {
-        System.out.println("PRE CHARGE: " + this.energy);
-
+    public void charge(int maxExtract, @Nullable ServerPlayer player) {
         int extractedEnergy = super.receiveEnergy(maxExtract, false);
-
-        System.out.println("POST CHARGE: " + this.energy);
-
         if(player != null)
             ModMessages.sendToClient(new S2CSuitEnergySync(this.getEnergyStored(), this.getMaxEnergyStored()), player);
 
-        return extractedEnergy;
     }
 
-    public int discharge(int maxReceive, ServerPlayer player) {
-        System.out.println("PRE CHARGE: " + this.energy);
-
+    public void discharge(int maxReceive, ServerPlayer player) {
         int receivedEnergy = super.extractEnergy(maxReceive, false);
-
-        System.out.println("PRE CHARGE: " + this.energy);
-
         ModMessages.sendToClient(new S2CSuitEnergySync(this.getEnergyStored(), this.getMaxEnergyStored()), player);
-        return receivedEnergy;
     }
 
     public void setEnergy(int energy) {
@@ -54,7 +36,5 @@ public class SuitPowerCapability extends EnergyStorage {
     public void loadNBTData(CompoundTag nbt) {
         this.capacity = nbt.getInt("eCap");
         this.charge(nbt.getInt("eCur"), null);
-
-        System.out.println("ENERGY: " + this.energy);
     }
 }

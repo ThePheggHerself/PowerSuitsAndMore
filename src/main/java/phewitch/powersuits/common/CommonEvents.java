@@ -14,6 +14,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.EnderManAngerEvent;
+import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -29,12 +30,17 @@ import phewitch.powersuits.common.capabilities.providers.SuitPowerCapabilityProv
 import phewitch.powersuits.common.entity.EntityManager;
 import phewitch.powersuits.common.entity.mobs.SuitSentry;
 import phewitch.powersuits.common.item.ItemsManager;
-import phewitch.powersuits.common.item.suits.armorbase.pieces.*;
+import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourBase;
+import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourBoots;
+import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourChest;
+import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourHelmet;
 import phewitch.powersuits.common.networking.ModMessages;
 import phewitch.powersuits.common.networking.packets.server2client.S2CSuitEnergySync;
 import phewitch.powersuits.common.networking.packets.server2client.S2CSyncOSS;
 import phewitch.powersuits.common.sound.ModSounds;
 import phewitch.powersuits.utils.CommandManager;
+
+import java.util.Optional;
 
 @Mod.EventBusSubscriber(modid = PowerSuits.MODID)
 public class CommonEvents {
@@ -127,10 +133,20 @@ public class CommonEvents {
 
     @SubscribeEvent
     public void TickEvent(TickEvent.PlayerTickEvent ev) {
-        var sAB = SuitArmourBase.getAny(ev.player);
+        Optional.ofNullable(SuitArmourBase.getAny(ev.player)).ifPresent(sAB -> {
+            sAB.tryTickSuit(ev);
+        });
+    }
 
-        if (sAB != null)
-            sAB.armourTick(ev);
+    @SubscribeEvent
+    public void OnEquip(LivingEquipmentChangeEvent ev){
+        if(!(ev.getEntity() instanceof Player))
+            return;
+
+        if(ev.getFrom().getItem() instanceof SuitArmourBase from)
+            from.onArmorUnequipped(ev);
+        if(ev.getTo().getItem() instanceof SuitArmourBase to)
+            to.onArmorEquipped(ev);
     }
 
     @SubscribeEvent
@@ -141,13 +157,18 @@ public class CommonEvents {
 
     }
 
-    @Mod.EventBusSubscriber(modid = PowerSuits.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ModEvents {
-        @SubscribeEvent
-        public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
-            event.put(EntityManager.SENTRY.get(), SuitSentry.setAttributes());
-        }
+    @SubscribeEvent
+    public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
+        event.put(EntityManager.SENTRY.get(), SuitSentry.setAttributes());
     }
+
+//    @Mod.EventBusSubscriber(modid = PowerSuits.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+//    public static class ModEvents {
+//        @SubscribeEvent
+//        public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
+//            event.put(EntityManager.SENTRY.get(), SuitSentry.setAttributes());
+//        }
+//    }
 
     @SubscribeEvent
     public static void onRegisterCommands(RegisterCommandsEvent event) {

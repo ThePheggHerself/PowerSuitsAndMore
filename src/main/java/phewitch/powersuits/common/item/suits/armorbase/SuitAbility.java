@@ -1,4 +1,4 @@
-package phewitch.powersuits.common.item.suits.armorbase.datatypes;
+package phewitch.powersuits.common.item.suits.armorbase;
 
 import phewitch.powersuits.common.item.suits.armorbase.enums.ActiveAbilities;
 

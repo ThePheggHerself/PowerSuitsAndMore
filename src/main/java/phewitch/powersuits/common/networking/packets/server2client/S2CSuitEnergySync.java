@@ -1,10 +1,8 @@
 package phewitch.powersuits.common.networking.packets.server2client;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 import phewitch.powersuits.client.data.ClientData;
-import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourChest;
 
 import java.util.function.Supplier;
 
