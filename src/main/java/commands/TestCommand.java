@@ -6,6 +6,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import annotations.Command;
+import phewitch.powersuits.common.OSS.OSSManager;
+import phewitch.powersuits.common.entity.mobs.SuitSentry;
+import phewitch.powersuits.common.item.suits.armorbase.SuitAbilitiesManager;
 
 @Command(
         name = "powerhelp",
