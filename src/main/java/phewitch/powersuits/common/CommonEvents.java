@@ -59,9 +59,7 @@ public class CommonEvents {
     @SubscribeEvent
     public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {
         if (!event.getLevel().isClientSide() && event.getEntity() instanceof ServerPlayer player) {
-            player.getCapability(Capabilities.PLAYER_OSS).ifPresent(playerOSS -> {
-                ModMessages.sendToClient(new S2CSyncOSS(playerOSS.getSuits()), player);
-            });
+            player.getCapability(Capabilities.PLAYER_OSS).ifPresent(playerOSS -> ModMessages.sendToClient(new S2CSyncOSS(playerOSS.getSuits()), player));
 
             var chestplate = SuitArmourChest.getChestplate(player);
 
@@ -93,11 +91,7 @@ public class CommonEvents {
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event) {
         if (event.isWasDeath()) {
-            event.getOriginal().getCapability(Capabilities.PLAYER_OSS).ifPresent(oldStore -> {
-                event.getOriginal().getCapability(Capabilities.PLAYER_OSS).ifPresent(newStore -> {
-                    newStore.copyFrom(oldStore);
-                });
-            });
+            event.getOriginal().getCapability(Capabilities.PLAYER_OSS).ifPresent(oldStore -> event.getOriginal().getCapability(Capabilities.PLAYER_OSS).ifPresent(newStore -> newStore.copyFrom(oldStore)));
         }
     }
 
@@ -133,9 +127,7 @@ public class CommonEvents {
 
     @SubscribeEvent
     public void TickEvent(TickEvent.PlayerTickEvent ev) {
-        Optional.ofNullable(SuitArmourBase.getAny(ev.player)).ifPresent(sAB -> {
-            sAB.tryTickSuit(ev);
-        });
+        Optional.ofNullable(SuitArmourBase.getAny(ev.player)).ifPresent(sAB -> sAB.tryTickSuit(ev));
     }
 
     @SubscribeEvent

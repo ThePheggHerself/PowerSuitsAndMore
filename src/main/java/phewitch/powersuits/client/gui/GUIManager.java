@@ -16,7 +16,7 @@ public class GUIManager {
             DeferredRegister.create(ForgeRegistries.MENU_TYPES, PowerSuits.MODID);
 
     public static final RegistryObject<MenuType<OSSMenu>> OSS_MENU =
-            MENUS.register("oss_menu", () -> new MenuType<OSSMenu>(OSSMenu::new, FeatureFlags.DEFAULT_FLAGS));
+            MENUS.register("oss_menu", () -> new MenuType<>(OSSMenu::new, FeatureFlags.DEFAULT_FLAGS));
 
     public static final RegistryObject<MenuType<WorkbenchMenu>> WORKBENCH_MENU =
             MENUS.register("workbench_menu", () -> IForgeMenuType.create(WorkbenchMenu::new));

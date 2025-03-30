@@ -73,7 +73,7 @@ public class SuitAbilitiesManager {
 
         var block = plr.pick(50, 1, false);
         if(block.getType() == HitResult.Type.BLOCK){
-            var cost = new BigDecimal(block.getLocation().distanceTo(plr.position())).setScale(2, RoundingMode.UP).floatValue() * 3;
+            var cost = BigDecimal.valueOf(block.getLocation().distanceTo(plr.position())).setScale(2, RoundingMode.UP).floatValue() * 3;
             plr.displayClientMessage(Component.literal("EEEE " + cost + " E "), false);
 
             if(chestplate.tryDischargeArmor((int)cost, plr))
