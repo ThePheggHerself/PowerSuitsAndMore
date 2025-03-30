@@ -7,7 +7,7 @@ import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourLegs;
 
 public class Mark1ArmorLegs extends SuitArmourLegs {
         public Mark1ArmorLegs(Type type, Properties properties) {
-            super(ArmorMaterials.MARK1, type, properties, FeatureList.MARK1_SUIT_FEATURES);
+            super(ArmorMaterials.MARK1, type, properties, FeatureList.MARK1);
         }
 
         @Override

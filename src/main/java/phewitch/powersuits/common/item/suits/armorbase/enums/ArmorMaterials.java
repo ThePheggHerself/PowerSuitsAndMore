@@ -23,14 +23,6 @@ public enum ArmorMaterials implements ArmorMaterial {
     MARK4("mark4", 15, new int[]{10, 13, 14, 11}, 0, SoundEvents.ARMOR_EQUIP_NETHERITE, 5f,
             5F, () -> Ingredient.of(Blocks.BEDROCK)),
     MARK5("mark5", 15, new int[]{15, 18, 19, 16}, 0, SoundEvents.ARMOR_EQUIP_NETHERITE, 5f,
-            5F, () -> Ingredient.of(Blocks.BEDROCK)),
-    MARK6("mark6", 15, new int[]{15, 18, 19, 16}, 0, SoundEvents.ARMOR_EQUIP_NETHERITE, 5f,
-            5F, () -> Ingredient.of(Blocks.BEDROCK)),
-    MARK7("mark7", 15, new int[]{15, 18, 19, 16}, 0, SoundEvents.ARMOR_EQUIP_NETHERITE, 5f,
-            5F, () -> Ingredient.of(Blocks.BEDROCK)),
-    MARK8("mark8", 15, new int[]{15, 18, 19, 16}, 0, SoundEvents.ARMOR_EQUIP_NETHERITE, 5f,
-            5F, () -> Ingredient.of(Blocks.BEDROCK)),
-    MARK9("mark9", 15, new int[]{15, 18, 19, 16}, 0, SoundEvents.ARMOR_EQUIP_NETHERITE, 5f,
             5F, () -> Ingredient.of(Blocks.BEDROCK));
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};

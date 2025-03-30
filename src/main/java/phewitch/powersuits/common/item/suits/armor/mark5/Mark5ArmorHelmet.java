@@ -6,6 +6,6 @@ import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourHelmet;
 
 public class Mark5ArmorHelmet extends SuitArmourHelmet {
         public Mark5ArmorHelmet(Type type, Properties properties) {
-            super(ArmorMaterials.MARK5, type, properties, FeatureList.MARK5_SUIT_FEATURES);
+            super(ArmorMaterials.MARK5, type, properties, FeatureList.MARK5);
         }
     }

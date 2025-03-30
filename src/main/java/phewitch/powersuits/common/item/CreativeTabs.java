@@ -88,25 +88,25 @@ public class CreativeTabs {
                         pOutput.accept(Suits.MK5_CHEST.get());
                         pOutput.accept(Suits.MK5_HELM.get());
 
-                        pOutput.accept(Suits.MK6_BOOTS.get());
-                        pOutput.accept(Suits.MK6_LEGS.get());
-                        pOutput.accept(Suits.MK6_CHEST.get());
-                        pOutput.accept(Suits.MK6_HELM.get());
+                        pOutput.accept(Suits.MK5a_BOOTS.get());
+                        pOutput.accept(Suits.MK5a_LEGS.get());
+                        pOutput.accept(Suits.MK5a_CHEST.get());
+                        pOutput.accept(Suits.MK5a_HELM.get());
 
-                        pOutput.accept(Suits.MK7_BOOTS.get());
-                        pOutput.accept(Suits.MK7_LEGS.get());
-                        pOutput.accept(Suits.MK7_CHEST.get());
-                        pOutput.accept(Suits.MK7_HELM.get());
+                        pOutput.accept(Suits.MK5b_BOOTS.get());
+                        pOutput.accept(Suits.MK5b_LEGS.get());
+                        pOutput.accept(Suits.MK5b_CHEST.get());
+                        pOutput.accept(Suits.MK5b_HELM.get());
 
-                        pOutput.accept(Suits.MK8_BOOTS.get());
-                        pOutput.accept(Suits.MK8_LEGS.get());
-                        pOutput.accept(Suits.MK8_CHEST.get());
-                        pOutput.accept(Suits.MK8_HELM.get());
+                        pOutput.accept(Suits.MK5c_BOOTS.get());
+                        pOutput.accept(Suits.MK5c_LEGS.get());
+                        pOutput.accept(Suits.MK5c_CHEST.get());
+                        pOutput.accept(Suits.MK5c_HELM.get());
 
-                        pOutput.accept(Suits.MK9_BOOTS.get());
-                        pOutput.accept(Suits.MK9_LEGS.get());
-                        pOutput.accept(Suits.MK9_CHEST.get());
-                        pOutput.accept(Suits.MK9_HELM.get());
+                        pOutput.accept(Suits.MK5d_BOOTS.get());
+                        pOutput.accept(Suits.MK5d_LEGS.get());
+                        pOutput.accept(Suits.MK5d_CHEST.get());
+                        pOutput.accept(Suits.MK5d_HELM.get());
 
                     })
                     .build());

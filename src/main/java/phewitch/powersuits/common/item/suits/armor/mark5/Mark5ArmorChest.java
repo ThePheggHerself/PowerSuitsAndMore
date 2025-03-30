@@ -6,6 +6,6 @@ import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourChest;
 
 public class Mark5ArmorChest extends SuitArmourChest {
         public Mark5ArmorChest(Type type, Properties properties) {
-            super(ArmorMaterials.MARK5, type, properties, FeatureList.MARK5_SUIT_FEATURES);
+            super(ArmorMaterials.MARK5, type, properties, FeatureList.MARK5);
         }
     }

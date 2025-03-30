@@ -107,25 +107,25 @@ public class ItemModelGenerator extends ItemModelProvider {
         handheldItem(Suits.MK5_CHEST);
         handheldItem(Suits.MK5_HELM);
 
-        handheldItem(Suits.MK6_BOOTS);
-        handheldItem(Suits.MK6_LEGS);
-        handheldItem(Suits.MK6_CHEST);
-        handheldItem(Suits.MK6_HELM);
+        handheldItem(Suits.MK5a_BOOTS);
+        handheldItem(Suits.MK5a_LEGS);
+        handheldItem(Suits.MK5a_CHEST);
+        handheldItem(Suits.MK5a_HELM);
 
-        handheldItem(Suits.MK7_BOOTS);
-        handheldItem(Suits.MK7_LEGS);
-        handheldItem(Suits.MK7_CHEST);
-        handheldItem(Suits.MK7_HELM);
+        handheldItem(Suits.MK5b_BOOTS);
+        handheldItem(Suits.MK5b_LEGS);
+        handheldItem(Suits.MK5b_CHEST);
+        handheldItem(Suits.MK5b_HELM);
 
-        handheldItem(Suits.MK8_BOOTS);
-        handheldItem(Suits.MK8_LEGS);
-        handheldItem(Suits.MK8_CHEST);
-        handheldItem(Suits.MK8_HELM);
+        handheldItem(Suits.MK5c_BOOTS);
+        handheldItem(Suits.MK5c_LEGS);
+        handheldItem(Suits.MK5c_CHEST);
+        handheldItem(Suits.MK5c_HELM);
 
-        handheldItem(Suits.MK9_BOOTS);
-        handheldItem(Suits.MK9_LEGS);
-        handheldItem(Suits.MK9_CHEST);
-        handheldItem(Suits.MK9_HELM);
+        handheldItem(Suits.MK5d_BOOTS);
+        handheldItem(Suits.MK5d_LEGS);
+        handheldItem(Suits.MK5d_CHEST);
+        handheldItem(Suits.MK5d_HELM);
     }
 
     private void trimmedArmorItem(RegistryObject<Item> itemRegistryObject) {

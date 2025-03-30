@@ -188,29 +188,29 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
                             pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK5_LEGS.get()));
                             pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK5_BOOTS.get()));
                         }
-                        case "mark6" -> {
-                            pPlayer.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Suits.MK6_HELM.get()));
-                            pPlayer.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Suits.MK6_CHEST.get()));
-                            pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK6_LEGS.get()));
-                            pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK6_BOOTS.get()));
+                        case "mark5a" -> {
+                            pPlayer.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Suits.MK5a_HELM.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Suits.MK5a_CHEST.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK5a_LEGS.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK5a_BOOTS.get()));
                         }
-                        case "mark7" -> {
-                            pPlayer.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Suits.MK7_HELM.get()));
-                            pPlayer.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Suits.MK7_CHEST.get()));
-                            pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK7_LEGS.get()));
-                            pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK7_BOOTS.get()));
+                        case "mark5b" -> {
+                            pPlayer.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Suits.MK5b_HELM.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Suits.MK5b_CHEST.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK5b_LEGS.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK5b_BOOTS.get()));
                         }
-                        case "mark8" -> {
-                            pPlayer.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Suits.MK8_HELM.get()));
-                            pPlayer.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Suits.MK8_CHEST.get()));
-                            pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK8_LEGS.get()));
-                            pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK8_BOOTS.get()));
+                        case "mark5c" -> {
+                            pPlayer.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Suits.MK5c_HELM.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Suits.MK5c_CHEST.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK5c_LEGS.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK5c_BOOTS.get()));
                         }
-                        case "mark9" -> {
-                            pPlayer.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Suits.MK9_HELM.get()));
-                            pPlayer.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Suits.MK9_CHEST.get()));
-                            pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK9_LEGS.get()));
-                            pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK9_BOOTS.get()));
+                        case "mark5d" -> {
+                            pPlayer.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Suits.MK5d_HELM.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Suits.MK5d_CHEST.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Suits.MK5d_LEGS.get()));
+                            pPlayer.setItemSlot(EquipmentSlot.FEET, new ItemStack(Suits.MK5d_BOOTS.get()));
                         }
                     }
 
