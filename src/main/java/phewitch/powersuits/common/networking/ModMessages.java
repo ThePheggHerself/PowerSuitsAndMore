@@ -8,6 +8,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import phewitch.powersuits.PowerSuits;
 import phewitch.powersuits.common.networking.packets.client2server.*;
+import phewitch.powersuits.common.networking.packets.server2client.S2CSuitEnergySync;
 import phewitch.powersuits.common.networking.packets.server2client.S2CSyncOSS;
 
 public class ModMessages {
@@ -49,6 +50,12 @@ public class ModMessages {
                 .decoder(S2CSyncOSS::new)
                 .encoder(S2CSyncOSS::toBytes)
                 .consumerMainThread(S2CSyncOSS::handle)
+                .add();
+
+        net.messageBuilder(S2CSuitEnergySync.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(S2CSuitEnergySync::new)
+                .encoder(S2CSuitEnergySync::toBytes)
+                .consumerMainThread(S2CSuitEnergySync::handle)
                 .add();
     }
 

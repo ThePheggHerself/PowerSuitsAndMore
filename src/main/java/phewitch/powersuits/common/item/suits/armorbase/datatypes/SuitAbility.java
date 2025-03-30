@@ -1,4 +1,4 @@
-package phewitch.powersuits.common.item.suits.armorbase;
+package phewitch.powersuits.common.item.suits.armorbase.datatypes;
 
 import phewitch.powersuits.common.item.suits.armorbase.enums.ActiveAbilities;
 
@@ -17,14 +17,14 @@ public class SuitAbility {
     public static SuitAbility WATER_DASH_ABILITY = new SuitAbility(ActiveAbilities.WATER_DASH, 10);
 
     public ActiveAbilities AbilityType;
-    public float Cost;
+    public int Cost;
     public float Cooldown;
 
-    public SuitAbility(ActiveAbilities Type, float Cost){
+    public SuitAbility(ActiveAbilities Type, int Cost){
         AbilityType = Type;
         this.Cost = Cost;
     }
-    public SuitAbility(ActiveAbilities Type, float Cost, float Cooldown){
+    public SuitAbility(ActiveAbilities Type, int Cost, float Cooldown){
         AbilityType = Type;
         this.Cost = Cost;
         this.Cooldown = Cooldown;

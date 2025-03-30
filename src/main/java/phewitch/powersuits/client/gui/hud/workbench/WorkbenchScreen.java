@@ -10,8 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import phewitch.powersuits.PowerSuits;
-import phewitch.powersuits.common.item.suits.Suits;
-import phewitch.powersuits.common.item.suits.armorbase.SuitFeatures;
+import phewitch.powersuits.common.item.suits.armorbase.datatypes.SuitFeatures;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +99,7 @@ public class WorkbenchScreen extends AbstractContainerScreen<WorkbenchMenu> {
             pGuiGraphics.drawString(this.font, "Name: " + currentSuit.DisplayName(), x + 62, y - 10, ChatFormatting.WHITE.getColor());
             pGuiGraphics.drawString(this.font, "Power: " + currentSuit.maxPower, x + 62, y, ChatFormatting.WHITE.getColor());
             pGuiGraphics.drawString(this.font, "Charge Type: " + currentSuit.chargeType, x + 62, y  + 10, ChatFormatting.WHITE.getColor());
-            pGuiGraphics.drawString(this.font, "Recharge: " + currentSuit.pRechargePS + "/s", x + 62, y  + 20, ChatFormatting.WHITE.getColor());
+            pGuiGraphics.drawString(this.font, "Recharge: " + currentSuit.recharge + "/s", x + 62, y  + 20, ChatFormatting.WHITE.getColor());
             //pGuiGraphics.drawString(this.font, "Name: " + currentSuit.name, x + 62, y  + 30, ChatFormatting.WHITE.getColor());
         }
 

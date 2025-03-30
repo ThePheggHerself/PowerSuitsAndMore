@@ -1,9 +1,10 @@
-package phewitch.powersuits.common.item.suits.armorbase;
+package phewitch.powersuits.common.item.suits.armorbase.pieces;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
@@ -18,13 +19,13 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.EnderManAngerEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.Event;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import phewitch.powersuits.client.gui.GUIManager;
 import phewitch.powersuits.client.gui.IHUDItem;
+import phewitch.powersuits.common.item.suits.armorbase.SuitArmourRenderer;
+import phewitch.powersuits.common.item.suits.armorbase.datatypes.SuitFeatures;
 import phewitch.powersuits.common.item.suits.armorbase.enums.ChargeType;
 import phewitch.powersuits.common.item.suits.armorbase.enums.PassiveAbilities;
 import phewitch.powersuits.common.item.suits.armorbase.enums.Weakness;
@@ -34,6 +35,7 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
+
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -57,39 +59,67 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         return null;
     }
 
-    public Boolean hasBoots(Player player) {
-        if (player == null)
-            return false;
+    public static @Nullable SuitArmourHelmet getHelmet(Player player) {
+        if(player != null && (player.getInventory().getArmor(3).getItem() instanceof SuitArmourHelmet ai))
+            return ai;
 
-        return (player.getInventory().getArmor(0).getItem() instanceof ArmorItem ai) && ai.getMaterial() == material;
+        return null;
     }
-    public Boolean hasLegs(Player player) {
-        if (player == null)
-            return false;
+    public static @Nullable SuitArmourChest getChestplate(Player player){
+        if(player != null && (player.getInventory().getArmor(2).getItem() instanceof SuitArmourChest ai))
+            return ai;
 
-        return (player.getInventory().getArmor(1).getItem() instanceof ArmorItem ai) && ai.getMaterial() == material;
+        return null;
     }
-    public Boolean hasChestplate(Player player) {
-        if (player == null)
-            return false;
+    public static @Nullable SuitArmourLegs getLeggings(Player player){
+        if(player != null && (player.getInventory().getArmor(1).getItem() instanceof SuitArmourLegs ai))
+            return ai;
 
-        return (player.getInventory().getArmor(2).getItem() instanceof ArmorItem ai) && ai.getMaterial() == material;
+        return null;
     }
-    public Boolean hasHelmet(Player player) {
-        if (player == null)
-            return false;
+    public static @Nullable SuitArmourBoots getBoots(Player player){
+        if(player != null && (player.getInventory().getArmor(0).getItem() instanceof SuitArmourBoots ai))
+            return ai;
 
-        return (player.getInventory().getArmor(3).getItem() instanceof ArmorItem ai) && ai.getMaterial() == material;
+        return null;
     }
-    public Boolean hasFullSet(Player player) {
+    public static @Nullable SuitArmourBase getAny(Player player){
+        SuitArmourBase sAB = getHelmet(player);
+        if(sAB != null)
+            return sAB;
+
+        sAB = (SuitArmourBase) getChestplate(player);
+        if(sAB != null)
+            return sAB;
+
+        sAB = (SuitArmourBase) getLeggings(player);
+        if(sAB != null)
+            return sAB;
+
+        sAB = (SuitArmourBase) getBoots(player);
+        if(sAB != null)
+            return sAB;
+
+        return null;
+    }
+
+    public static Boolean hasHelmet(Player player) { return getHelmet(player) != null; }
+    public static Boolean hasChestplate(Player player) { return getChestplate(player) != null; }
+    public static Boolean hasLegs(Player player) { return getLeggings(player) != null; }
+    public static Boolean hasBoots(Player player) { return getBoots(player) != null; }
+    public static boolean hasAny(Player player) { return getAny(player) != null; }
+
+    public static Boolean hasFullSet(Player player) {
         if (player == null)
             return false;
 
         return hasBoots(player) && hasLegs(player) && hasChestplate(player) && hasHelmet(player);
     }
-    public boolean hasBootsOrChestplate(Player player) {
+    public static boolean hasBootsOrChestplate(Player player) {
         return hasBoots(player) || hasChestplate(player);
     }
+
+
     public Boolean isWeak(LivingHurtEvent ev){
         var type = ev.getSource();
 
@@ -113,7 +143,6 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
             if (hasFullSet(ev.player)) {
                 doLimitedFlight(ev);
                 doFullFlight(ev);
-                tryChargeArmour(ev);
 
                 if(features.projCooldown > 0)
                     features.projCooldown -= 1;
@@ -124,7 +153,10 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         }
 
         if(!ev.player.level().isClientSide){
-            doEffects(ev);
+            if(hasFullSet(ev.player)) {
+                tryChargeArmour(ev);
+                doEffects(ev);
+            }
             if(features.passiveA.contains(PassiveAbilities.WATER_CONDUIT)){
                 if(ev.player.getAirSupply() != ev.player.getMaxAirSupply())
                     ev.player.setAirSupply(ev.player.getMaxAirSupply());
@@ -134,59 +166,48 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
     public void handleWearerHurt(LivingHurtEvent ev) {
         var damage = ev.getAmount();
         var type = ev.getSource();
+        var player = (ServerPlayer) ev.getEntity();
+        var chestplate = getChestplate(player);
 
-        if(!isWeak(ev)) {
-            if (features.currentPower > damage * 2) {
-                features.removePower(damage * 2);
+        if(chestplate != null && !isWeak(ev)) {
+            if (chestplate.getEnergy(player) > damage * 2) {
+                chestplate.dischargeArmor((int)(damage * 10), player);
                 ev.setAmount(0);
-            } else {
-                ev.setAmount(damage - (features.currentPower / 2));
-                features.setPower(0);
             }
         }
     }
     public void handleDamagedEntity(LivingHurtEvent ev){
-        if(features.chargeType == ChargeType.LIFE_DRAIN)
-            features.addPower(ev.getAmount() * features.pRechargePS);
-    }
-    public void handleFallDamage(LivingFallEvent ev) {
+        var player = (ServerPlayer) ev.getEntity();
+        var chestplate = getChestplate(player);
 
-        if (ev.getDistance() > features.fallDmgCancDist)
-            ev.setDistance(ev.getDistance() - features.fallDmgCancDist);
-        else
-            ev.setDistance(0);
-
-        ev.setDamageMultiplier(features.fallDmgMult);
-    }
-    public void handleEndermanAnger(EnderManAngerEvent ev){
-        if(features.passiveA.contains(PassiveAbilities.BLOCK_ENDERMAN_LOOK)) {
-            ev.setResult(Event.Result.DENY);
-            ev.setCanceled(true);
-        }
+        if(chestplate != null && features.chargeType == ChargeType.LIFE_DRAIN)
+            chestplate.chargeArmor((int)(ev.getAmount() * features.recharge), player);
     }
 
     public void tryChargeArmour(TickEvent.PlayerTickEvent ev){
-        switch (features.chargeType){
-            case ON_GROUND: {
-                if(ev.player.onGround()){
-                    if (features.currentPower != features.maxPower) {
-                        features.addPower(features.pRechargePS / 20);
+        if(this instanceof SuitArmourChest sAC){
+            switch (features.chargeType) {
+                case ON_GROUND: {
+                    if (ev.player.onGround()) {
+                        if (features.currentPower != features.maxPower) {
+                            sAC.chargeArmor(features.recharge, (ServerPlayer) ev.player);
+                        }
                     }
                 }
-            }
-            case IN_FIRE:
-            case IN_FIRE_OR_LAVA: {
-                if(ev.player.isOnFire() || ev.player.isInLava()){
-                    if (features.currentPower != features.maxPower) {
-                        features.addPower(features.pRechargePS / 20);
+                case IN_FIRE:
+                case IN_FIRE_OR_LAVA: {
+                    if (ev.player.isOnFire() || ev.player.isInLava()) {
+                        if (features.currentPower != features.maxPower) {
+                            sAC.chargeArmor(features.recharge, (ServerPlayer) ev.player);
+                        }
                     }
                 }
-            }
 
-            case IN_WATER:{
-                if(ev.player.isUnderWater() || (ev.player.isInWaterOrRain() && ev.player.onGround())){
-                    if (features.currentPower != features.maxPower) {
-                        features.addPower(features.pRechargePS / 20);
+                case IN_WATER: {
+                    if (ev.player.isUnderWater() || (ev.player.isInWaterOrRain() && ev.player.onGround())) {
+                        if (features.currentPower != features.maxPower) {
+                            sAC.chargeArmor(features.recharge, (ServerPlayer) ev.player);
+                        }
                     }
                 }
             }
@@ -223,7 +244,6 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
             }
         }
     }
-
 
     @Override
     public boolean canElytraFly(ItemStack stack, LivingEntity entity) {
@@ -292,8 +312,6 @@ public class SuitArmourBase extends ArmorItem implements GeoItem, IHUDItem {
         return cache;
     }
     public void waterDash(Level lvl, Player plr){
-        features.removePower(30);
-
         float f7 = plr.getYRot();
         float f = plr.getXRot();
         float f1 = -Mth.sin(f7 * ((float)Math.PI / 180F)) * Mth.cos(f * ((float)Math.PI / 180F));

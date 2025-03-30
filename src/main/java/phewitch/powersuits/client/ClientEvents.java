@@ -3,39 +3,35 @@ package phewitch.powersuits.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.world.entity.player.Abilities;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import phewitch.powersuits.client.data.ClientData;
 import phewitch.powersuits.client.gui.GUIManager;
 import phewitch.powersuits.client.gui.hud.oss.OSSScreen;
 import phewitch.powersuits.client.gui.hud.suit.SuitOverlay;
 import phewitch.powersuits.client.gui.hud.workbench.WorkbenchScreen;
 import phewitch.powersuits.common.entity.EntityManager;
-import phewitch.powersuits.common.entity.mobs.SuitSentry;
 import phewitch.powersuits.common.entity.mobs.SentryRenderer;
 import phewitch.powersuits.common.entity.projectiles.ChestLaserProjectileRenderer;
 import phewitch.powersuits.common.entity.projectiles.LaserProjectileRenderer;
 import phewitch.powersuits.common.item.suits.armorbase.SuitAbilitiesManager;
-import phewitch.powersuits.common.item.suits.armorbase.SuitAbility;
-import phewitch.powersuits.common.item.suits.armorbase.SuitArmourBase;
+import phewitch.powersuits.common.item.suits.armorbase.datatypes.SuitAbility;
 import phewitch.powersuits.PowerSuits;
-import phewitch.powersuits.common.item.suits.armorbase.SuitFeatures;
 import phewitch.powersuits.common.item.suits.armorbase.enums.ActiveAbilities;
+import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourBase;
+import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourChest;
 import phewitch.powersuits.common.networking.ModMessages;
 import phewitch.powersuits.common.networking.packets.client2server.C2SSuitAbility;
 
-import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Map;
 
 public class ClientEvents {
@@ -92,46 +88,42 @@ public class ClientEvents {
             if (instance == null || instance.isPaused() || player == null || player.level() == null)
                 return;
 
-            var sAB = SuitAbilitiesManager.getSuitArmourBase(player);
-            if(sAB != null && sAB.hasFullSet(player)){
-                    if(KeyBinding.ABILITY_1.consumeClick() && 0 < sAB.features.activeA.size()){
+            var sAB = SuitArmourChest.getChestplate(player);
+            if(sAB != null && SuitArmourBase.hasFullSet(player)){
+                    if(KeyBinding.ABILITY_1.consumeClick() && !sAB.features.activeA.isEmpty()){
                         var ability = sAB.features.activeA.get(0);
-                        if(!sAB.features.hasPower(ability.Cost) || isOnCooldown(ability))
+                        if(isOnCooldown(ability))
                             return;
 
                         System.out.println("ABILITY KEY 1 PRESSED");
-                        sAB.features.removePower(ability.Cost);
-                        ModMessages.sendToServer(new C2SSuitAbility(0, ability.AbilityType.getValue()));
+                        ModMessages.sendToServer(new C2SSuitAbility(ability.Cost, ability.AbilityType.getValue()));
                         return;
                     }
                     if(KeyBinding.ABILITY_2.consumeClick() && 1 < sAB.features.activeA.size()){
                         var ability = sAB.features.activeA.get(1);
-                        if(!sAB.features.hasPower(ability.Cost) || isOnCooldown(ability))
+                        if(isOnCooldown(ability))
                             return;
 
                         System.out.println("ABILITY KEY 2 PRESSED");
-                        sAB.features.removePower(ability.Cost);
-                        ModMessages.sendToServer(new C2SSuitAbility(1, ability.AbilityType.getValue()));
+                        ModMessages.sendToServer(new C2SSuitAbility(ability.Cost, ability.AbilityType.getValue()));
                         return;
                     }
                     if(KeyBinding.ABILITY_3.consumeClick() && 2 < sAB.features.activeA.size()){
                         var ability = sAB.features.activeA.get(2);
-                        if(!sAB.features.hasPower(ability.Cost) || isOnCooldown(ability))
+                        if(isOnCooldown(ability))
                             return;
 
                         System.out.println("ABILITY KEY 3 PRESSED");
-                        sAB.features.removePower(ability.Cost);
-                        ModMessages.sendToServer(new C2SSuitAbility(2, ability.AbilityType.getValue()));
+                        ModMessages.sendToServer(new C2SSuitAbility(ability.Cost, ability.AbilityType.getValue()));
                         return;
                     }
                     if(KeyBinding.ABILITY_4.consumeClick() && 3 < sAB.features.activeA.size()){
                         var ability = sAB.features.activeA.get(3);
-                        if(!sAB.features.hasPower(ability.Cost) || isOnCooldown(ability))
+                        if(isOnCooldown(ability))
                             return;
 
                         System.out.println("ABILITY KEY 4 PRESSED");
-                        sAB.features.removePower(ability.Cost);
-                        ModMessages.sendToServer(new C2SSuitAbility(3, ability.AbilityType.getValue()));
+                        ModMessages.sendToServer(new C2SSuitAbility(ability.Cost, ability.AbilityType.getValue()));
                         return;
                     }
             }

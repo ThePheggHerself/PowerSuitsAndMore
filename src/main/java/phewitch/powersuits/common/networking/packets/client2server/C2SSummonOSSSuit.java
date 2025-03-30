@@ -2,8 +2,8 @@ package phewitch.powersuits.common.networking.packets.client2server;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
-import phewitch.powersuits.common.OSS.PlayerOSSProvider;
 import phewitch.powersuits.common.OSS.OSSManager;
+import phewitch.powersuits.common.capabilities.Capabilities;
 
 import java.nio.charset.StandardCharsets;
 import java.util.function.Supplier;
@@ -28,7 +28,7 @@ public class C2SSummonOSSSuit {
         context.enqueueWork(() -> {
             var plr = context.getSender();
 
-            plr.getCapability(PlayerOSSProvider.PLAYER_OSS).ifPresent(playerOSS -> {
+            plr.getCapability(Capabilities.PLAYER_OSS).ifPresent(playerOSS -> {
                 if(playerOSS.getSuits().contains(suit)){
                     OSSManager.RemoveSuitFromPlayer(suit, plr);
                     OSSManager.ServerSummonSentry(plr, suit);

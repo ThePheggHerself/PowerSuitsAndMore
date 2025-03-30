@@ -19,6 +19,8 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import phewitch.powersuits.common.CommonCore;
 import phewitch.powersuits.common.OSS.OSSManager;
+import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourBase;
+import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourChest;
 import phewitch.powersuits.common.sound.ModSounds;
 
 import java.math.BigDecimal;
@@ -27,14 +29,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SuitAbilitiesManager {
-
-    public static SuitArmourBase getSuitArmourBase(Player player){
-        if(player.getInventory().getArmor(0).getItem() instanceof SuitArmourBase sAB){
-            return sAB;
-        }
-        else return null;
-    }
-
     public static void shootProjectile(Level lvl, ServerPlayer plr, SuitArmourBase sAB, Projectile proj, int powerDrain){
         shootProjectile(lvl, plr, sAB, proj, powerDrain, null, 0);
     }
@@ -74,19 +68,20 @@ public class SuitAbilitiesManager {
         if(lvl.isClientSide)
             return;
 
+        var chestplate = SuitArmourChest.getChestplate(plr);
+        if(chestplate == null)
+            return;
+
         var block = plr.pick(50, 1, false);
         if(block.getType() == HitResult.Type.BLOCK){
             var cost = new BigDecimal(block.getLocation().distanceTo(plr.position())).setScale(2, RoundingMode.UP).floatValue() * 3;
             plr.displayClientMessage(Component.literal("EEEE " + cost + " E "), false);
 
-            if(sAB.features.hasPower(cost))
+            if(chestplate.tryDischargeArmor((int)cost, plr))
             {
                 plr.teleportTo(block.getLocation().x, block.getLocation().y, block.getLocation().z);
             }
         }
-
-
-
     }
     public static void sonicBoom(Level lvl, ServerPlayer plr, SuitArmourBase sAB){
         if(lvl.isClientSide)

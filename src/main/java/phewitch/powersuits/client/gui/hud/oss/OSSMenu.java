@@ -4,10 +4,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import phewitch.powersuits.client.data.ClientData;
 import phewitch.powersuits.client.gui.GUIManager;
-import phewitch.powersuits.common.OSS.PlayerOSSProvider;
-import phewitch.powersuits.common.OSS.OSSManager;
 
 public class OSSMenu extends AbstractContainerMenu {
 

@@ -3,8 +3,7 @@ package phewitch.powersuits.common.networking.packets.client2server;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
-import phewitch.powersuits.client.data.ClientData;
-import phewitch.powersuits.common.item.suits.armorbase.SuitArmourBase;
+import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourBase;
 
 import java.util.function.Supplier;
 

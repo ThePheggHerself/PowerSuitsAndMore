@@ -6,18 +6,23 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegistryObject;
 import phewitch.powersuits.common.item.ItemsManager;
 import phewitch.powersuits.common.item.suits.armor.*;
+import phewitch.powersuits.common.item.suits.armor.mark1.Mark1ArmorBoots;
+import phewitch.powersuits.common.item.suits.armor.mark1.Mark1ArmorChest;
+import phewitch.powersuits.common.item.suits.armor.mark1.Mark1ArmorHelmet;
+import phewitch.powersuits.common.item.suits.armor.mark1.Mark1ArmorLegs;
+import phewitch.powersuits.common.item.suits.armor.mark5.*;
 
 public class Suits {
     public static void register(IEventBus eventBus){ }
 
     public static final RegistryObject<Item> MK1_BOOTS = ItemsManager.ITEMS.register("mark1_boots", () ->
-            new Mark1Armor(ArmorItem.Type.BOOTS, new Item.Properties()));
+            new Mark1ArmorBoots(ArmorItem.Type.BOOTS, new Item.Properties()));
     public static final RegistryObject<Item> MK1_LEGS = ItemsManager.ITEMS.register("mark1_leggings", () ->
-            new Mark1Armor(ArmorItem.Type.LEGGINGS, new Item.Properties()));
+            new Mark1ArmorLegs(ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> MK1_CHEST = ItemsManager.ITEMS.register("mark1_chestplate", () ->
-            new Mark1Armor(ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+            new Mark1ArmorChest(ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> MK1_HELM = ItemsManager.ITEMS.register("mark1_helmet", () ->
-            new Mark1Armor(ArmorItem.Type.HELMET, new Item.Properties()));
+            new Mark1ArmorHelmet(ArmorItem.Type.HELMET, new Item.Properties()));
 
     public static final RegistryObject<Item> MK2_BOOTS = ItemsManager.ITEMS.register("mark2_boots", () ->
             new Mark2Armor(ArmorItem.Type.BOOTS, new Item.Properties()));
@@ -47,13 +52,14 @@ public class Suits {
             new Mark4Armor(ArmorItem.Type.HELMET, new Item.Properties()));
 
     public static final RegistryObject<Item> MK5_BOOTS = ItemsManager.ITEMS.register("mark5_boots", () ->
-            new Mark5Armor(ArmorItem.Type.BOOTS, new Item.Properties()));
+            new Mark5ArmorBoots(ArmorItem.Type.BOOTS, new Item.Properties()));
     public static final RegistryObject<Item> MK5_LEGS = ItemsManager.ITEMS.register("mark5_leggings", () ->
-            new Mark5Armor(ArmorItem.Type.LEGGINGS, new Item.Properties()));
+            new Mark5ArmorLegs(ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> MK5_CHEST = ItemsManager.ITEMS.register("mark5_chestplate", () ->
-            new Mark5Armor(ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+            new Mark5ArmorChest(ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> MK5_HELM = ItemsManager.ITEMS.register("mark5_helmet", () ->
-            new Mark5Armor(ArmorItem.Type.HELMET, new Item.Properties()));
+            new Mark5ArmorHelmet(ArmorItem.Type.HELMET, new Item.Properties()));
+
     public static final RegistryObject<Item> MK6_BOOTS = ItemsManager.ITEMS.register("mark6_boots", () ->
             new Mark6Armor(ArmorItem.Type.BOOTS, new Item.Properties()));
     public static final RegistryObject<Item> MK6_LEGS = ItemsManager.ITEMS.register("mark6_leggings", () ->

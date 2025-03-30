@@ -29,12 +29,12 @@ import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.NetworkHooks;
 import phewitch.powersuits.PowerSuits;
 import phewitch.powersuits.common.CommonCore;
-import phewitch.powersuits.common.OSS.PlayerOSSProvider;
 import phewitch.powersuits.common.OSS.OSSManager;
+import phewitch.powersuits.common.capabilities.Capabilities;
 import phewitch.powersuits.common.entity.goals.FollowSuitOwnerGoal;
 import phewitch.powersuits.common.entity.goals.OwnerAttackedGoal;
 import phewitch.powersuits.common.item.ItemsManager;
-import phewitch.powersuits.common.item.suits.armorbase.SuitArmourBase;
+import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourBase;
 import phewitch.powersuits.common.item.suits.Suits;
 import phewitch.powersuits.utils.PlayerMessenger;
 import phewitch.powersuits.utils.PowerSuitsLogger;
@@ -147,7 +147,7 @@ public class SuitSentry extends PathfinderMob implements GeoEntity, IEntityAddit
                 if(item.getItem() == ItemsManager.OSS_REMOTE.get()){
                     InteractionResult result = InteractionResult.FAIL;
 
-                    pPlayer.getCapability(PlayerOSSProvider.PLAYER_OSS).ifPresent(oss -> {
+                    pPlayer.getCapability(Capabilities.PLAYER_OSS).ifPresent(oss -> {
                         if(pPlayer.isCrouching()) {
                             if (oss.getSuits().contains(name)) {
 

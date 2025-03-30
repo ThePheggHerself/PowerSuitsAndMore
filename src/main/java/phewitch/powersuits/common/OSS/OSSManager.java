@@ -1,21 +1,17 @@
 package phewitch.powersuits.common.OSS;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import phewitch.powersuits.PowerSuits;
 import phewitch.powersuits.client.data.ClientData;
+import phewitch.powersuits.common.capabilities.Capabilities;
 import phewitch.powersuits.common.entity.EntityManager;
 import phewitch.powersuits.common.entity.mobs.SuitSentry;
 import phewitch.powersuits.common.networking.ModMessages;
 import phewitch.powersuits.common.networking.packets.client2server.C2SSummonOSSSuit;
 import phewitch.powersuits.common.networking.packets.server2client.S2CSyncOSS;
-import phewitch.powersuits.utils.PlayerMessenger;
-
-import java.util.List;
 
 public class OSSManager {
     public static String OSSMenuDisplayName() {
@@ -64,7 +60,7 @@ public class OSSManager {
     }
 
     public static void AddSuitToPlayer(String SuitName, ServerPlayer Player) {
-        Player.getCapability(PlayerOSSProvider.PLAYER_OSS).ifPresent(playerOSS -> {
+        Player.getCapability(Capabilities.PLAYER_OSS).ifPresent(playerOSS -> {
             if (!playerOSS.getSuits().contains(SuitName)) {
                 playerOSS.addSuit(SuitName);
                 ModMessages.sendToClient(new S2CSyncOSS(playerOSS.getSuits()), Player);
@@ -73,7 +69,7 @@ public class OSSManager {
     }
 
     public static void RemoveSuitFromPlayer(String SuitName, ServerPlayer Player) {
-        Player.getCapability(PlayerOSSProvider.PLAYER_OSS).ifPresent(playerOSS -> {
+        Player.getCapability(Capabilities.PLAYER_OSS).ifPresent(playerOSS -> {
             if (playerOSS.getSuits().contains(SuitName)) {
                 playerOSS.removeSuit(SuitName);
                 ModMessages.sendToClient(new S2CSyncOSS(playerOSS.getSuits()), Player);

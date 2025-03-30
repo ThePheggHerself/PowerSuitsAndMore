@@ -14,25 +14,27 @@ import phewitch.powersuits.common.entity.projectiles.ChestLaserProjectile;
 import phewitch.powersuits.common.entity.projectiles.LaserProjectile;
 import phewitch.powersuits.common.item.suits.armorbase.SuitAbilitiesManager;
 import phewitch.powersuits.common.item.suits.armorbase.enums.ActiveAbilities;
+import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourBase;
+import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourChest;
 
 import java.util.function.Supplier;
 
 public class C2SSuitAbility {
-    private int abilityKey;
+    private int abilityCost;
     private int abilityType;
 
-    public C2SSuitAbility(int key, int type) {
-        abilityKey = key;
+    public C2SSuitAbility(int cost, int type) {
+        abilityCost = cost;
         abilityType = type;
     }
 
     public C2SSuitAbility(FriendlyByteBuf buf) {
-        abilityKey = buf.readInt();
+        abilityCost = buf.readInt();
         abilityType = buf.readInt();
     }
 
     public void toBytes(FriendlyByteBuf buf) {
-        buf.writeInt(abilityKey);
+        buf.writeInt(abilityCost);
         buf.writeInt(abilityType);
     }
 
@@ -41,19 +43,19 @@ public class C2SSuitAbility {
 
         context.enqueueWork(() -> {
             var plr = context.getSender();
-            var lvl = plr.level();
-            var inv = plr.getInventory();
 
-
-
-            var sAB = SuitAbilitiesManager.getSuitArmourBase(plr);
-            if (sAB != null) {
-                var ability = ActiveAbilities.valueOf(abilityType);
+            if (SuitArmourBase.hasFullSet(plr)) {
+                var lvl = plr.level();
+                var inv = plr.getInventory();
                 var target = plr.getForward();
-
-                System.out.println("SUIT ABILITY TRIGGERED! " + ability);
+                var sAB = SuitArmourChest.getChestplate(plr);
+                var ability = ActiveAbilities.valueOf(abilityType);
 
                 try {
+                    sAB.dischargeArmor(abilityCost, plr);
+
+                    System.out.println(sAB.getEnergy(plr));
+
                     switch (ability) {
                         default -> {
                             if (inv.contains(new ItemStack(Items.ARROW))) {
@@ -99,6 +101,8 @@ public class C2SSuitAbility {
 
                         }
                     }
+
+
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
