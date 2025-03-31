@@ -12,6 +12,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import phewitch.powersuits.client.data.ClientData;
 import phewitch.powersuits.client.gui.GUIManager;
 import phewitch.powersuits.client.gui.hud.oss.OSSScreen;
 import phewitch.powersuits.client.gui.hud.suit.SuitOverlay;
@@ -68,12 +69,7 @@ public class ClientEvents {
 
     @Mod.EventBusSubscriber(modid = PowerSuits.MODID, value = Dist.CLIENT)
     public static class ClientForgeEvents{
-
-        public static Map<ActiveAbilities, Integer> CooldownList = new HashMap<>();
-
-        public static boolean isOnCooldown(SuitAbility ability){
-            return CooldownList.containsKey(ability.AbilityType) && (System.currentTimeMillis() - CooldownList.get(ability.AbilityType)) < ability.Cooldown;
-        }
+        private static int abilityCooldownTicks = 10;
 
         @SubscribeEvent
         public static void ClientTickEvent(TickEvent.ClientTickEvent ev){
@@ -84,39 +80,28 @@ public class ClientEvents {
                 return;
 
             var sAB = SuitArmourChest.getChestplate(player);
-            if(sAB != null && SuitArmourBase.hasFullSet(player)){
-                    if(KeyBinding.ABILITY_1.consumeClick() && !sAB.features.activeA.isEmpty()){
-                        var ability = sAB.features.activeA.get(0);
-                        if(isOnCooldown(ability))
-                            return;
+            if(sAB == null || !SuitArmourBase.hasFullSet(player))
+                return;
 
-                        ModMessages.sendToServer(new C2SSuitAbility(ability.Cost, ability.AbilityType.getValue()));
-                        return;
-                    }
-                    if(KeyBinding.ABILITY_2.consumeClick() && 1 < sAB.features.activeA.size()){
-                        var ability = sAB.features.activeA.get(1);
-                        if(isOnCooldown(ability))
-                            return;
+            SuitAbility ability = null;
 
-                        ModMessages.sendToServer(new C2SSuitAbility(ability.Cost, ability.AbilityType.getValue()));
-                        return;
-                    }
-                    if(KeyBinding.ABILITY_3.consumeClick() && 2 < sAB.features.activeA.size()){
-                        var ability = sAB.features.activeA.get(2);
-                        if(isOnCooldown(ability))
-                            return;
+            if(KeyBinding.ABILITY_1.consumeClick() && !sAB.features.activeA.isEmpty() )
+                ability = sAB.features.activeA.get(0);
+            if(KeyBinding.ABILITY_2.consumeClick() && 1 < sAB.features.activeA.size())
+                ability = sAB.features.activeA.get(1);
+            if(KeyBinding.ABILITY_3.consumeClick() && 2 < sAB.features.activeA.size())
+                ability = sAB.features.activeA.get(2);
+            if(KeyBinding.ABILITY_4.consumeClick() && 3 < sAB.features.activeA.size())
+                ability = sAB.features.activeA.get(3);
 
-                        ModMessages.sendToServer(new C2SSuitAbility(ability.Cost, ability.AbilityType.getValue()));
-                        return;
-                    }
-                    if(KeyBinding.ABILITY_4.consumeClick() && 3 < sAB.features.activeA.size()){
-                        var ability = sAB.features.activeA.get(3);
-                        if(isOnCooldown(ability))
-                            return;
-
-                        ModMessages.sendToServer(new C2SSuitAbility(ability.Cost, ability.AbilityType.getValue()));
-                    }
+            if(ability == null && abilityCooldownTicks > 0){
+                abilityCooldownTicks -= 1;
             }
+
+            if(ability == null || ClientData.suitPower < ability.Cost || abilityCooldownTicks > 0)
+                return;
+
+            ModMessages.sendToServer(new C2SSuitAbility(ability.Cost, ability.AbilityType.getValue()));
         }
     }
 }

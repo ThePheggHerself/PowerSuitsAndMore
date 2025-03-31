@@ -43,7 +43,7 @@ public class FeatureList {
 
     public static SuitFeatures MARK3 = new SuitFeatures(
             1200,
-            10,
+            9,
             0.0f,
             9f,
             0.1f,
@@ -58,7 +58,7 @@ public class FeatureList {
 
     public static SuitFeatures MARK4 = new SuitFeatures(
             2400,
-            30,
+            20,
             0.0f,
             9f,
             0.1f,
@@ -73,7 +73,7 @@ public class FeatureList {
 
     public static SuitFeatures MARK5 = new SuitFeatures(
             4000,
-            80,
+            45,
             0.0f,
             9f,
             0.25f,
@@ -87,8 +87,8 @@ public class FeatureList {
     );
 
     public static SuitFeatures MARK5a = new SuitFeatures(
-            4000,
-            80,
+            3500,
+            40,
             0.0f,
             9f,
             0.25f,
@@ -102,8 +102,8 @@ public class FeatureList {
     );
 
     public static SuitFeatures MARK5b = new SuitFeatures(
-            4000,
-            80,
+            3500,
+            40,
             0.0f,
             9f,
             0.25f,
@@ -117,8 +117,8 @@ public class FeatureList {
     );
 
     public static SuitFeatures MARK5c = new SuitFeatures(
-            4000,
-            80,
+            3500,
+            40,
             0.0f,
             9f,
             0.25f,
@@ -132,8 +132,8 @@ public class FeatureList {
     );
 
     public static SuitFeatures MARK5d = new SuitFeatures(
-            4000,
-            80,
+            3500,
+            40,
             0.0f,
             9f,
             0.25f,

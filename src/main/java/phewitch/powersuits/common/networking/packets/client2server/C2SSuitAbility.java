@@ -53,8 +53,7 @@ public class C2SSuitAbility {
 
                 try {
                     sAB.dischargeArmor(abilityCost, plr);
-
-                    System.out.println(sAB.getEnergy(plr));
+                    sAB.cooldown = 20;
 
                     switch (ability) {
                         default -> {

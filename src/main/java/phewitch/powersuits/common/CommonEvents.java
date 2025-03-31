@@ -118,6 +118,7 @@ public class CommonEvents {
             if (sAB != null)
                 sAB.handleWearerHurt(ev);
         }
+
         if (ev.getSource().getEntity() instanceof Player plr) {
             var sAB = SuitArmourBase.getAny(plr);
             if (sAB != null)
@@ -149,18 +150,13 @@ public class CommonEvents {
 
     }
 
-    @SubscribeEvent
-    public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
-        event.put(EntityManager.SENTRY.get(), SuitSentry.setAttributes());
+    @Mod.EventBusSubscriber(modid = PowerSuits.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ModEvents {
+        @SubscribeEvent
+        public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
+            event.put(EntityManager.SENTRY.get(), SuitSentry.setAttributes());
+        }
     }
-
-//    @Mod.EventBusSubscriber(modid = PowerSuits.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-//    public static class ModEvents {
-//        @SubscribeEvent
-//        public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
-//            event.put(EntityManager.SENTRY.get(), SuitSentry.setAttributes());
-//        }
-//    }
 
     @SubscribeEvent
     public static void onRegisterCommands(RegisterCommandsEvent event) {

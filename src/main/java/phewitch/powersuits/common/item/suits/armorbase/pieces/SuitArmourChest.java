@@ -28,6 +28,8 @@ public class SuitArmourChest extends SuitArmourBase {
         super(materialIn, type, properties, features);
     }
 
+    public int cooldown = 20;
+
     public static Optional<SuitPowerCapability> getEnergy(ItemStack stack) {
         return stack.getCapability(Capabilities.SUIT_ENERGY).resolve();
     }
@@ -52,7 +54,12 @@ public class SuitArmourChest extends SuitArmourBase {
         }
 
         if (ev.side == LogicalSide.SERVER) {
-            tryChargeArmour(ev);
+
+            if(cooldown < 1)
+                tryChargeArmour(ev);
+            else{
+                cooldown -= 1;
+            }
 
             if(hasFullSet(ev.player)){
                 doEffects(ev);
@@ -139,17 +146,13 @@ public class SuitArmourChest extends SuitArmourBase {
             }
         });
     }
-
     public void chargeArmor(int amount, ServerPlayer player) {
         getCap(player).ifPresent(energyStorage -> energyStorage.charge(amount, player));
     }
-
     public boolean tryDischargeArmor(int amount, ServerPlayer player) {
         var canDischarge = new AtomicReference<>(false);
 
         getCap(player).ifPresent(energyStorage -> {
-            System.out.println("aaaaa " + energyStorage.getEnergyStored());
-
             if (energyStorage.getEnergyStored() > amount) {
                 energyStorage.discharge(amount, player);
                 canDischarge.set(true);
@@ -158,15 +161,12 @@ public class SuitArmourChest extends SuitArmourBase {
 
         return canDischarge.get();
     }
-
     public void dischargeArmor(int amount, ServerPlayer player) {
         getCap(player).ifPresent(energyStorage -> energyStorage.discharge(amount, player));
     }
-
     public void setEnergy(int amount, ServerPlayer player) {
         getCap(player).ifPresent(energyStorage -> energyStorage.setEnergy(amount));
     }
-
     public int getEnergy(ServerPlayer player) {
         AtomicInteger energy = new AtomicInteger();
 
@@ -174,7 +174,6 @@ public class SuitArmourChest extends SuitArmourBase {
 
         return energy.get();
     }
-
     public int getMaxEnergy(ServerPlayer player) {
         AtomicInteger energy = new AtomicInteger();
 

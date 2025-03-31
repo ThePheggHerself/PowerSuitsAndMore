@@ -24,6 +24,7 @@ import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import phewitch.powersuits.client.data.ClientData;
 import phewitch.powersuits.common.item.suits.armorbase.SuitArmourRenderer;
 import phewitch.powersuits.common.item.suits.armorbase.SuitFeatures;
 import phewitch.powersuits.common.item.suits.armorbase.enums.ChargeType;
@@ -153,7 +154,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem {
             chestplate.chargeArmor((int) (ev.getAmount() * features.recharge), player);
     }
     public void doLimitedFlight(TickEvent.PlayerTickEvent ev) {
-        if (ev.player.isFallFlying() && !ev.player.isInWater()) {
+        if (ev.player.isFallFlying() && !ev.player.isInWater() && ClientData.suitPower > 0) {
             Vec3 lAng = ev.player.getLookAngle();
             Vec3 mov = ev.player.getDeltaMovement();
 

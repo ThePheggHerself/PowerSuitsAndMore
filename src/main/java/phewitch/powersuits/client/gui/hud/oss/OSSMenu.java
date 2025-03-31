@@ -16,8 +16,6 @@ public class OSSMenu extends AbstractContainerMenu {
         super(GUIManager.OSS_MENU.get(), pContainerId);
         checkContainerSize(inv, 2);
         addPlayerInventory(inv);
-
-        System.out.println("aaaaaaaaaa");
     }
 
     @Override
