@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SBA"
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:plates/advanced_metal"
+    },
+    "B": {
+      "item": "powersuits:base_chestplate"
+    },
+    "S": {
+      "item": "minecraft:shulker_shell"
+    }
+  },
+  "result": {
+    "item": "powersuits:mark6_chestplate"
+  }
+}

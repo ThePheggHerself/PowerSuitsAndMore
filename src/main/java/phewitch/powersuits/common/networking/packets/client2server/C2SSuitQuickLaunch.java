@@ -1,17 +1,16 @@
 package phewitch.powersuits.common.networking.packets.client2server;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
-import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourBase;
+import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourChest;
 
 import java.util.function.Supplier;
 
-public class S2CSuitDash {
-    public S2CSuitDash(){
+public class C2SSuitQuickLaunch {
+    public C2SSuitQuickLaunch(){
 
     }
-    public S2CSuitDash(FriendlyByteBuf buf){
+    public C2SSuitQuickLaunch(FriendlyByteBuf buf){
     }
 
     public void toBytes(FriendlyByteBuf buf){
@@ -21,10 +20,12 @@ public class S2CSuitDash {
         NetworkEvent.Context context = supplier.get();
 
         context.enqueueWork(() -> {
-            var plr = Minecraft.getInstance().player;
-            var sAB = SuitArmourBase.hasAny(plr);
-//            if(sAB != null)
-//                sAB.waterDash(plr.level(), plr);
+            var plr = context.getSender();
+            var chest = SuitArmourChest.getChestplate(plr);
+
+            if (chest != null) {
+                chest.dischargeArmor(500, plr);
+            }
         });
 
         return true;

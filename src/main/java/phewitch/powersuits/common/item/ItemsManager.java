@@ -77,6 +77,15 @@ public class ItemsManager {
     public static final RegistryObject<ModItem> STEEL_PLATE = ITEMS.register("steel_plate", () ->
             new ModItem("steel", ModTags.Items.PLATES, new Item.Properties()));
 
+    public static final RegistryObject<ModItem> BASE_HELMET = ITEMS.register("base_helmet", () ->
+            new ModItem("helmet", ModTags.Items.COMP_BASE, new Item.Properties()));
+    public static final RegistryObject<ModItem> BASE_CHESTPLATE = ITEMS.register("base_chestplate", () ->
+            new ModItem("chestplate", ModTags.Items.COMP_BASE, new Item.Properties()));
+    public static final RegistryObject<ModItem> BASE_LEGGINGS = ITEMS.register("base_leggings", () ->
+            new ModItem("leggings", ModTags.Items.COMP_BASE, new Item.Properties()));
+    public static final RegistryObject<ModItem> BASE_BOOTS = ITEMS.register("base_boots", () ->
+            new ModItem("boots", ModTags.Items.COMP_BASE, new Item.Properties()));
+
     public static final RegistryObject<OSSRemote> OSS_REMOTE = ITEMS.register("oss_remote", () ->
             new OSSRemote(new Item.Properties()));
 }

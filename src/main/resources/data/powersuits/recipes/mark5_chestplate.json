@@ -1,25 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "MCM",
-    "TPT",
-    "AAA"
+    " A ",
+    "ABA",
+    " A "
   ],
   "key": {
     "A": {
       "tag": "forge:plates/advanced_metal"
     },
-    "T": {
-      "item": "powersuits:thruster"
-    },
-    "C": {
-      "item": "powersuits:advanced_circuit"
-    },
-    "P": {
-      "item": "powersuits:advanced_palladium_power_core"
-    },
-    "M": {
-      "item": "powersuits:micro_cannon"
+    "B": {
+      "item": "powersuits:base_chestplate"
     }
   },
   "result": {

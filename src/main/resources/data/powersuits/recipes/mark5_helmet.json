@@ -1,18 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ACA",
-    "AGA"
+    " A ",
+    "ABA",
+    " A "
   ],
   "key": {
     "A": {
       "tag": "forge:plates/advanced_metal"
     },
-    "C": {
-      "item": "powersuits:advanced_circuit"
-    },
-    "G": {
-      "tag": "forge:glass"
+    "B": {
+      "item": "powersuits:base_helmet"
     }
   },
   "result": {

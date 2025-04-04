@@ -18,7 +18,6 @@ public class SuitArmourBoots extends SuitArmourBase {
     }
 
     public void handleFallDamage(LivingFallEvent ev) {
-
         if (ev.getDistance() > features.fallDmgCancDist)
             ev.setDistance(ev.getDistance() - features.fallDmgCancDist);
         else

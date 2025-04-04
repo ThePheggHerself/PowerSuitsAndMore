@@ -8,6 +8,7 @@ import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.entity.projectile.WitherSkull;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkEvent;
 import phewitch.powersuits.common.entity.EntityManager;
 import phewitch.powersuits.common.entity.projectiles.ChestLaserProjectile;

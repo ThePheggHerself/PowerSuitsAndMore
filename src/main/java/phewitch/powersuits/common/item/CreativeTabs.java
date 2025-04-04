@@ -4,6 +4,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
@@ -61,7 +62,10 @@ public class CreativeTabs {
                         pOutput.accept(ArmorManager.TITANIUM_LEGGINGS.get());
                         pOutput.accept(ArmorManager.TITANIUM_BOOTS.get());
 
-
+                        pOutput.accept(ItemsManager.BASE_BOOTS.get());
+                        pOutput.accept(ItemsManager.BASE_LEGGINGS.get());
+                        pOutput.accept(ItemsManager.BASE_CHESTPLATE.get());
+                        pOutput.accept(ItemsManager.BASE_HELMET.get());
 
                         pOutput.accept(Suits.MK1_BOOTS.get());
                         pOutput.accept(Suits.MK1_LEGS.get());
@@ -108,6 +112,15 @@ public class CreativeTabs {
                         pOutput.accept(Suits.MK5d_CHEST.get());
                         pOutput.accept(Suits.MK5d_HELM.get());
 
+                        pOutput.accept(Suits.MK6_BOOTS.get());
+                        pOutput.accept(Suits.MK6_LEGS.get());
+                        pOutput.accept(Suits.MK6_CHEST.get());
+                        pOutput.accept(Suits.MK6_HELM.get());
+
+                        pOutput.accept(Suits.MK7_BOOTS.get());
+                        pOutput.accept(Suits.MK7_LEGS.get());
+                        pOutput.accept(Suits.MK7_CHEST.get());
+                        pOutput.accept(Suits.MK7_HELM.get());
                     })
                     .build());
 

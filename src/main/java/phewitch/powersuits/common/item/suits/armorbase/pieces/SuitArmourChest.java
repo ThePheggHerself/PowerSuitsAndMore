@@ -48,13 +48,14 @@ public class SuitArmourChest extends SuitArmourBase {
             if (hasBoots(ev.player)) {
                 doLimitedFlight(ev);
             } else {
-                if (features.passiveA.contains(PassiveAbilities.FULL_FLIGHT))
+                if (features.passiveA.contains(PassiveAbilities.FULL_FLIGHT)) {
                     ev.player.getAbilities().mayfly = false;
+                    ev.player.onUpdateAbilities();
+                }
             }
         }
 
         if (ev.side == LogicalSide.SERVER) {
-
             if(cooldown < 1)
                 tryChargeArmour(ev);
             else{
@@ -99,17 +100,6 @@ public class SuitArmourChest extends SuitArmourBase {
             entity.gameEvent(GameEvent.ELYTRA_GLIDE);
 
         return true;
-    }
-
-    @Override
-    public boolean isBarVisible(@NotNull ItemStack pStack) {
-        return true;
-    }
-
-    @Override
-    public int getBarWidth(@NotNull ItemStack pStack) {
-        var energy = getEnergy(pStack);
-        return energy.map(suitPowerCapability -> Math.max(0, (suitPowerCapability.getEnergyStored() * 5) / (suitPowerCapability.getMaxEnergyStored() * 5))).orElse(10);
     }
 
     @Override

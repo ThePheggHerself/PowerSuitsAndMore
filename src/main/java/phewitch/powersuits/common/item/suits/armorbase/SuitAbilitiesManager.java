@@ -38,9 +38,8 @@ public class SuitAbilitiesManager {
         try {
             if(lvl.isClientSide)
                 return;
-
+            var plrLook = plr.getLookAngle();
             proj.shootFromRotation(plr, plr.getXRot(), plr.getYRot(), 0.0F, 1.5F, 1.0F);
-            proj.tickCount = 50;
             lvl.addFreshEntity(proj);
             lvl.playSound(null, plr.getX(), plr.getY(), plr.getZ(), ModSounds.LASER_PEW.get(), SoundSource.PLAYERS, 3.0f, 1.0f);
             if(removalItem != null)

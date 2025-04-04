@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CLC",
+    "AGA",
+    "C C"
+  ],
+  "key": {
+    "C": {
+      "item": "powersuits:advanced_circuit"
+    },
+    "G": {
+      "tag": "forge:glass"
+    },
+    "A": {
+      "tag": "forge:plates/advanced_metal"
+    },
+    "L": {
+      "item": "minecraft:leather_helmet"
+    }
+  },
+  "result": {
+    "item": "powersuits:base_helmet"
+  }
+}

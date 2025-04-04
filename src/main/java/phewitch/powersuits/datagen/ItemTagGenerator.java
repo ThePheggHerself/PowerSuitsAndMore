@@ -37,7 +37,11 @@ public class ItemTagGenerator extends ItemTagsProvider {
                 ItemsManager.PALLADIUM_INGOT,
                 ItemsManager.RAW_TITANIUM,
                 ItemsManager.TITANIUM_INGOT,
-                ItemsManager.TITANIUM_PLATE
+                ItemsManager.TITANIUM_PLATE,
+                ItemsManager.BASE_HELMET,
+                ItemsManager.BASE_CHESTPLATE,
+                ItemsManager.BASE_LEGGINGS,
+                ItemsManager.BASE_BOOTS,
         });
 
         addToTag(new RegistryObject[]{

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "ALA",
+    "C C"
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:plates/advanced_metal"
+    },
+    "C": {
+      "item": "powersuits:advanced_circuit"
+    },
+    "L": {
+      "item": "minecraft:leather_leggings"
+    }
+  },
+  "result": {
+    "item": "powersuits:base_leggings"
+  }
+}

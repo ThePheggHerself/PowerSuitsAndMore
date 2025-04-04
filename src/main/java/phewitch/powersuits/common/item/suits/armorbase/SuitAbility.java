@@ -5,6 +5,7 @@ import phewitch.powersuits.common.item.suits.armorbase.enums.ActiveAbilities;
 public class SuitAbility {
 
     public static SuitAbility SHOOT_ARROWS_ABILITY = new SuitAbility(ActiveAbilities.SHOOT_ARROWS, 0);
+    public static SuitAbility SHOOT_ARROWS_ABILITY_FREE = new SuitAbility(ActiveAbilities.SHOOT_ARROWS_FREE, 100);
     public static SuitAbility SHOOT_LASERS_ABILITY = new SuitAbility(ActiveAbilities.SHOOT_LASERS, 200);
     public static SuitAbility SHOOT_CHEST_LASER_ABILITY = new SuitAbility(ActiveAbilities.SHOOT_CHEST_LASER, 1000);
     public static SuitAbility SENTRY_MODE_ABILITY = new SuitAbility(ActiveAbilities.SENTRY_MODE, 250);
@@ -15,6 +16,7 @@ public class SuitAbility {
     public static SuitAbility SHOOT_WITHER_SKULLS_ABILITY = new SuitAbility(ActiveAbilities.SHOOT_WITHER_SKULLS, 950);
     public static SuitAbility SONIC_BOOM_ABILITY = new SuitAbility(ActiveAbilities.SONIC_BOOM, 1000);
     public static SuitAbility WATER_DASH_ABILITY = new SuitAbility(ActiveAbilities.WATER_DASH, 10);
+    public static SuitAbility COMPACT_ABILITY = new SuitAbility(ActiveAbilities.COMPACT, 0);
 
     public ActiveAbilities AbilityType;
     public int Cost;

@@ -109,6 +109,20 @@
   "item.powersuits.mark5d_leggings": "Power Suit Leggings",
   "item.powersuits.mark5d_boots": "Power Suit Boots",
 
+  "tooltip.powersuits.mark6.identifier": "Mark VI",
+  "tooltip.powersuits.mark6.extra": "Codename: Holiday",
+  "item.powersuits.mark6_helmet": "Power Suit Helmet",
+  "item.powersuits.mark6_chestplate": "Power Suit Chestplate",
+  "item.powersuits.mark6_leggings": "Power Suit Leggings",
+  "item.powersuits.mark6_boots": "Power Suit Boots",
+
+  "tooltip.powersuits.mark7.identifier": "Mark VII",
+  "tooltip.powersuits.mark7.extra": "Codename: Shadow",
+  "item.powersuits.mark7_helmet": "Power Suit Helmet",
+  "item.powersuits.mark7_chestplate": "Power Suit Chestplate",
+  "item.powersuits.mark7_leggings": "Power Suit Leggings",
+  "item.powersuits.mark7_boots": "Power Suit Boots",
+
   "item.powersuits.suit.ability1": "Suit Ability 1",
   "item.powersuits.suit.ability2": "Suit Ability 2",
   "item.powersuits.suit.ability3": "Suit Ability 3",

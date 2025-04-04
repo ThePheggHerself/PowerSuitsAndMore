@@ -11,7 +11,10 @@ public enum ActiveAbilities {
     TELEPORT(8),
     SHOOT_WITHER_SKULLS(9),
     SONIC_BOOM(10),
-    WATER_DASH(11);
+    WATER_DASH(11),
+    COMPACT(12),
+    SHOOT_ARROWS_FREE(13);
+
     private final int value;
 
     ActiveAbilities(int value) {

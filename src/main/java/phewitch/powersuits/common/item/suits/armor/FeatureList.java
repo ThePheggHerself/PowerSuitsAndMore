@@ -73,7 +73,7 @@ public class FeatureList {
 
     public static SuitFeatures MARK5 = new SuitFeatures(
             4000,
-            45,
+            50,
             0.0f,
             9f,
             0.25f,
@@ -144,5 +144,35 @@ public class FeatureList {
             new ArrayList<>(List.of(Weakness.FIRE)),
             new ArrayList<>(List.of(MobEffects.NIGHT_VISION, MobEffects.CONDUIT_POWER, MobEffects.DOLPHINS_GRACE, MobEffects.WATER_BREATHING)),
             "Mark 5d"
+    );
+
+    public static SuitFeatures MARK6 = new SuitFeatures(
+            3000,
+            40,
+            0.0f,
+            9f,
+            0.4f,
+            0,
+            new ArrayList<>(List.of(SuitAbility.SHOOT_ARROWS_ABILITY, SuitAbility.SHOOT_LASERS_ABILITY, SuitAbility.COMPACT_ABILITY)),
+            new ArrayList<>(List.of(PassiveAbilities.LIMITED_FLIGHT, PassiveAbilities.FULL_FLIGHT)),
+            ChargeType.ON_GROUND,
+            new ArrayList<>(List.of(Weakness.FIRE)),
+            new ArrayList<>(List.of(MobEffects.NIGHT_VISION, MobEffects.WATER_BREATHING, MobEffects.MOVEMENT_SPEED)),
+            "Mark 6"
+    );
+
+    public static SuitFeatures MARK7 = new SuitFeatures(
+            5000,
+            100,
+            0.0f,
+            9f,
+            0.5f,
+            0,
+            new ArrayList<>(List.of(SuitAbility.SHOOT_ARROWS_ABILITY_FREE, SuitAbility.SHOOT_LASERS_ABILITY, SuitAbility.SENTRY_MODE_ABILITY, SuitAbility.COMPACT_ABILITY)),
+            new ArrayList<>(List.of(PassiveAbilities.LIMITED_FLIGHT, PassiveAbilities.FULL_FLIGHT)),
+            ChargeType.ON_GROUND,
+            new ArrayList<>(List.of(Weakness.FIRE)),
+            new ArrayList<>(List.of(MobEffects.NIGHT_VISION, MobEffects.WATER_BREATHING, MobEffects.MOVEMENT_SPEED)),
+            "Mark 7"
     );
 }

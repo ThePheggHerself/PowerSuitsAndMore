@@ -65,4 +65,12 @@ public class LaserProjectile extends AbstractArrow {
     protected SoundEvent getDefaultHitGroundSoundEvent() {
         return SoundType.EMPTY.getHitSound();
     }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if(this.tickCount > 200)
+            this.remove(RemovalReason.DISCARDED);
+    }
 }

@@ -29,6 +29,8 @@ import phewitch.powersuits.common.item.suits.armorbase.SuitArmourRenderer;
 import phewitch.powersuits.common.item.suits.armorbase.SuitFeatures;
 import phewitch.powersuits.common.item.suits.armorbase.enums.ChargeType;
 import phewitch.powersuits.common.item.suits.armorbase.enums.Weakness;
+import phewitch.powersuits.common.networking.ModMessages;
+import phewitch.powersuits.common.networking.packets.client2server.C2SSuitQuickLaunch;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
@@ -101,7 +103,7 @@ public class SuitArmourBase extends ArmorItem implements GeoItem {
     public static Boolean hasBoots(Player player) {
         return getBoots(player) != null;
     }
-    public static boolean hasAny(Player player) {
+    public static Boolean hasAny(Player player) {
         return getAny(player) != null;
     }
     public static Boolean hasFullSet(Player player) {
@@ -133,7 +135,8 @@ public class SuitArmourBase extends ArmorItem implements GeoItem {
         Optional.ofNullable(getBoots(ev.player)).ifPresent( boots -> boots.onArmorPieceTick(ev));
     }
 
-
+    int sprintTicks = 30;
+    float extraVelocity = 0;
     public void handleWearerHurt(LivingHurtEvent ev) {
         var damage = ev.getAmount();
         var player = (ServerPlayer) ev.getEntity();
@@ -147,21 +150,57 @@ public class SuitArmourBase extends ArmorItem implements GeoItem {
         }
     }
     public void handleDamagedEntity(LivingHurtEvent ev) {
-        var player = (ServerPlayer) ev.getEntity();
+        var player = (ServerPlayer) ev.getSource().getEntity();
         var chestplate = getChestplate(player);
 
         if (chestplate != null && features.chargeType == ChargeType.LIFE_DRAIN)
             chestplate.chargeArmor((int) (ev.getAmount() * features.recharge), player);
     }
     public void doLimitedFlight(TickEvent.PlayerTickEvent ev) {
+        System.out.println(sprintTicks);
+
         if (ev.player.isFallFlying() && !ev.player.isInWater() && ClientData.suitPower > 0) {
             Vec3 lAng = ev.player.getLookAngle();
             Vec3 mov = ev.player.getDeltaMovement();
 
-            ev.player.setDeltaMovement(
-                    lAng.x * features.flightVelocity + (lAng.x * 1.5D - mov.x) * 0.8D,
-                    lAng.y * features.flightVelocity + (lAng.y * 1.5D - mov.y) * 0.8D,
-                    lAng.z * features.flightVelocity + (lAng.z * 1.5D - mov.z) * 0.8D);
+            if(ev.player.isSprinting())
+            {
+                if(sprintTicks == 30){
+                    if(ClientData.suitPower > 500) {
+                        ModMessages.sendToServer(new C2SSuitQuickLaunch());
+                        extraVelocity = 5;
+                    }
+                    else {
+                        sprintTicks = 0;
+                    }
+                }
+
+                ev.player.setDeltaMovement(
+                        lAng.x * features.flightVelocity * Math.min(extraVelocity, 1) + (lAng.x * 1.5D - mov.x) * 0.8D,
+                        lAng.y * features.flightVelocity * Math.min(extraVelocity, 1) + (lAng.y * 1.5D - mov.y) * 0.8D,
+                        lAng.z * features.flightVelocity * Math.min(extraVelocity, 1) + (lAng.z * 1.5D - mov.z) * 0.8D);
+
+                if(sprintTicks > 0) {
+                    sprintTicks--;
+                }
+                else if(extraVelocity > 1){
+                    extraVelocity -= 0.1f;
+                }
+                else {
+                    ev.player.setSprinting(false);
+                }
+            }
+            else {
+                ev.player.setDeltaMovement(
+                        lAng.x * features.flightVelocity + (lAng.x * 1.5D - mov.x) * 0.8D,
+                        lAng.y * features.flightVelocity + (lAng.y * 1.5D - mov.y) * 0.8D,
+                        lAng.z * features.flightVelocity + (lAng.z * 1.5D - mov.z) * 0.8D);
+            }
+        }
+
+        else {
+            if(sprintTicks < 30 && ev.player.onGround())
+                sprintTicks = Math.min(sprintTicks+1, 30);
         }
     }
     public void doEffects(TickEvent.PlayerTickEvent ev) {

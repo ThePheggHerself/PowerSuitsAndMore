@@ -46,6 +46,12 @@ public class ModMessages {
                 .consumerMainThread(C2SGetOSSSuits::handle)
                 .add();
 
+        net.messageBuilder(C2SSuitQuickLaunch.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(C2SSuitQuickLaunch::new)
+                .encoder(C2SSuitQuickLaunch::toBytes)
+                .consumerMainThread(C2SSuitQuickLaunch::handle)
+                .add();
+
         net.messageBuilder(S2CSyncOSS.class, id(), NetworkDirection.PLAY_TO_CLIENT)
                 .decoder(S2CSyncOSS::new)
                 .encoder(S2CSyncOSS::toBytes)

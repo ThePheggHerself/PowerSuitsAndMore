@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C C",
+    "ALA",
+    "TCT"
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:plates/advanced_metal"
+    },
+    "C": {
+      "item": "powersuits:advanced_circuit"
+    },
+    "T": {
+      "item": "powersuits:thruster"
+    },
+    "L": {
+      "item": "minecraft:leather_boots"
+    }
+  },
+  "result": {
+    "item": "powersuits:base_boots"
+  }
+}

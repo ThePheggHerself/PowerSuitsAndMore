@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MLM",
+    "TPT",
+    "ACA"
+  ],
+  "key": {
+    "T": {
+      "item": "powersuits:thruster"
+    },
+    "C": {
+      "item": "powersuits:advanced_circuit"
+    },
+    "P": {
+      "item": "powersuits:advanced_palladium_power_core"
+    },
+    "A": {
+      "tag": "forge:plates/advanced_metal"
+    },
+    "M": {
+      "item": "powersuits:micro_cannon"
+    },
+    "L": {
+      "item": "minecraft:leather_chestplate"
+    }
+  },
+  "result": {
+    "item": "powersuits:base_chestplate"
+  }
+}

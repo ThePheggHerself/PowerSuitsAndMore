@@ -26,6 +26,7 @@ public class ModTags {
         public static final TagKey<Item> COMP_WEAPONS = tag("components/weapons");
         public static final TagKey<Item> COMP_FLIGHT = tag("components/flight");
         public static final TagKey<Item> COMP_POWER = tag("components/power");
+        public static final TagKey<Item> COMP_BASE = tag("components/base");
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(PowerSuits.MODID, name));
