@@ -28,8 +28,6 @@ public class S2CSyncOSS {
 
         context.enqueueWork(() -> {
             ClientData.setOSSSuits(suits);
-
-            System.out.println("Syncing Suit Data: " + suits.size());
         });
 
         return true;

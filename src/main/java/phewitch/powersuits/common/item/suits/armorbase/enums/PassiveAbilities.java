@@ -9,7 +9,8 @@ public enum PassiveAbilities {
     WATER_SPEED(5),
     SILENT_SUIT(6),
     BLOCK_ENDERMAN_LOOK(7),
-    WALK_POWDERED_SNOW(8);
+    WALK_POWDERED_SNOW(8),
+    QUICK_LAUNCH(9);
 
     private final int value;
 

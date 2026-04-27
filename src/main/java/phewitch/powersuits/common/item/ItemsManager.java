@@ -6,6 +6,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import phewitch.powersuits.common.item.items.Mark6Puck;
 import phewitch.powersuits.common.item.items.OSSRemote;
 import phewitch.powersuits.common.item.suits.Suits;
 import phewitch.powersuits.PowerSuits;
@@ -88,4 +89,7 @@ public class ItemsManager {
 
     public static final RegistryObject<OSSRemote> OSS_REMOTE = ITEMS.register("oss_remote", () ->
             new OSSRemote(new Item.Properties()));
+
+    public static final RegistryObject<Mark6Puck> MARK6_PUCK = ITEMS.register("mark6_puck", () ->
+            new Mark6Puck(new Item.Properties()));
 }

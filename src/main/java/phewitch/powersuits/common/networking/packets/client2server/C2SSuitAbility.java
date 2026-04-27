@@ -13,11 +13,14 @@ import net.minecraftforge.network.NetworkEvent;
 import phewitch.powersuits.common.entity.EntityManager;
 import phewitch.powersuits.common.entity.projectiles.ChestLaserProjectile;
 import phewitch.powersuits.common.entity.projectiles.LaserProjectile;
+import phewitch.powersuits.common.item.ItemsManager;
+import phewitch.powersuits.common.item.items.Mark6Puck;
 import phewitch.powersuits.common.item.suits.armorbase.SuitAbilitiesManager;
 import phewitch.powersuits.common.item.suits.armorbase.enums.ActiveAbilities;
 import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourBase;
 import phewitch.powersuits.common.item.suits.armorbase.pieces.SuitArmourChest;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class C2SSuitAbility {
@@ -99,6 +102,12 @@ public class C2SSuitAbility {
                         case SONIC_BOOM -> {
                             SuitAbilitiesManager.sonicBoom(lvl, plr, sAB);
 
+                        }
+                        case COMPACT -> {
+                            if(Objects.equals(sAB.features.getModelName(), "mark6")){
+                                plr.getInventory().armor.clear();
+                                plr.getInventory().add(new ItemStack(ItemsManager.MARK6_PUCK.get()));
+                            }
                         }
                     }
 

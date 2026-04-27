@@ -11,9 +11,15 @@ import phewitch.powersuits.PowerSuits;
 public class ModTags {
     public static class Blocks {
         public static final TagKey<Block> ORE = tag("ore");
+        public static final TagKey<Block> ORE_TITANIUM = commonTag("ores/titanium");
+        public static final TagKey<Block> ORE_PALLADIUM = commonTag("ores/palladium");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(PowerSuits.MODID, name));
+        }
+
+        public static TagKey<Block> commonTag(String name) {
+            return BlockTags.create(new ResourceLocation("forge", name));
         }
     }
 

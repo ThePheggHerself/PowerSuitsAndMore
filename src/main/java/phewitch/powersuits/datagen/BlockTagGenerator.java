@@ -4,11 +4,11 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.Nullable;
 import phewitch.powersuits.common.item.BlocksManager;
 import phewitch.powersuits.PowerSuits;
@@ -27,10 +27,10 @@ public class BlockTagGenerator extends BlockTagsProvider
     protected void addTags(HolderLookup.Provider provider) {
         addToTag(
                 new ModBlock[] { BlocksManager.STONE_PALLADIUM_ORE.get(), BlocksManager.DEEPSLATE_PALLADIUM_ORE.get()},
-                new TagKey[] { BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL });
+                new TagKey[] { BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, ModTags.Blocks.ORE_PALLADIUM });
 
         addToTag(new ModBlock[] { BlocksManager.STONE_TITANIUM_ORE.get(), BlocksManager.DEEPSLATE_TITANIUM_ORE.get()},
-                new TagKey[] { BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL });
+                new TagKey[] { BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, ModTags.Blocks.ORE_TITANIUM});
     }
 
     private void addCoreTag(ModBlock item) {

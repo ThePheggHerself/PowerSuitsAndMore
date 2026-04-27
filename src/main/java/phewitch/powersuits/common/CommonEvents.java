@@ -21,7 +21,9 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.checkerframework.checker.units.qual.Prefix;
 import phewitch.powersuits.PowerSuits;
+import phewitch.powersuits.common.OSS.OSSManager;
 import phewitch.powersuits.common.capabilities.Capabilities;
 import phewitch.powersuits.common.capabilities.data.PlayerOSSCapabilityData;
 import phewitch.powersuits.common.capabilities.data.SuitPowerCapability;
@@ -39,6 +41,7 @@ import phewitch.powersuits.common.networking.packets.server2client.S2CSuitEnergy
 import phewitch.powersuits.common.networking.packets.server2client.S2CSyncOSS;
 import phewitch.powersuits.common.sound.ModSounds;
 import phewitch.powersuits.utils.CommandManager;
+import phewitch.powersuits.utils.PlayerMessenger;
 
 import java.util.Optional;
 
@@ -115,8 +118,20 @@ public class CommonEvents {
     public void EntityHurtEvent(LivingHurtEvent ev) {
         if (ev.getEntity() instanceof Player plr) {
             var sAB = SuitArmourBase.getAny(plr);
-            if (sAB != null)
+            if (sAB != null) {
                 sAB.handleWearerHurt(ev);
+            }
+            else {
+                var newHealth = plr.getHealth() - ev.getAmount();
+                if(newHealth < 6 && newHealth > 0) {
+                    plr.getCapability(Capabilities.PLAYER_OSS).ifPresent(cap -> {
+                        if (cap.getSuits().contains("mark7") && cap.getAutoDeployMark7()) {
+                            PlayerMessenger.sendPlayerMessage(plr, PowerSuits.OSS_PREFIX, "&e Mark 7 deployed");
+                            OSSManager.ServerSummonSentry(plr, "mark7");
+                        }
+                    });
+                }
+            }
         }
 
         if (ev.getSource().getEntity() instanceof Player plr) {

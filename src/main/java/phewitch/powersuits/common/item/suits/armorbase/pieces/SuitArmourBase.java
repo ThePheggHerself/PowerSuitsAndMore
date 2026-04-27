@@ -157,8 +157,6 @@ public class SuitArmourBase extends ArmorItem implements GeoItem {
             chestplate.chargeArmor((int) (ev.getAmount() * features.recharge), player);
     }
     public void doLimitedFlight(TickEvent.PlayerTickEvent ev) {
-        System.out.println(sprintTicks);
-
         if (ev.player.isFallFlying() && !ev.player.isInWater() && ClientData.suitPower > 0) {
             Vec3 lAng = ev.player.getLookAngle();
             Vec3 mov = ev.player.getDeltaMovement();
